@@ -8,7 +8,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 import android.widget.TextView;
 
-import com.sep.tmsdemo.R;
+import com.sep.UniTrips.R;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -21,13 +21,19 @@ public class MainActivity extends AppCompatActivity {
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
             switch (item.getItemId()) {
                 case R.id.navigation_home:
-                    mTextMessage.setText(R.string.title_home);
+                    HomeFragment homeFragment = new HomeFragment();
+                    FragmentTransaction homeFragmentTransaction = getSupportFragmentManager().beginTransaction();
+                    homeFragmentTransaction.replace(R.id.fragment_container,homeFragment,"HomeFragment");
+                    homeFragmentTransaction.commit();
                     return true;
                 case R.id.navigation_dashboard:
                     mTextMessage.setText(R.string.title_dashboard);
                     return true;
                 case R.id.navigation_setting:
-                    mTextMessage.setText(R.string.title_setting);
+                    SettingFragment settingFragment = new SettingFragment();
+                    FragmentTransaction settingFragmentTransaction = getSupportFragmentManager().beginTransaction();
+                    settingFragmentTransaction.replace(R.id.fragment_container,settingFragment,"HomeFragment");
+                    settingFragmentTransaction.commit();
                     return true;
             }
             return false;

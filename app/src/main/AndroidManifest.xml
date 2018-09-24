@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.sep.tmsdemo">
+    package="com.sep.UniTrips">
 
     <!-- To auto-complete the email text field in the login form with the user's emails -->
     <uses-permission android:name="android.permission.GET_ACCOUNTS" />
     <uses-permission android:name="android.permission.READ_PROFILE" />
     <uses-permission android:name="android.permission.READ_CONTACTS" />
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:allowBackup="true"
@@ -15,7 +16,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name="com.sep.UniTrips.view.WelcomeActivity"
+            android:name=".view.WelcomeActivity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -24,16 +25,21 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="com.sep.UniTrips.view.SignInActivity"
-            android:parentActivityName="com.sep.UniTrips.view.WelcomeActivity"
+            android:name=".view.SignInActivity"
+            android:parentActivityName=".view.WelcomeActivity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
         <activity
-            android:name="com.sep.UniTrips.view.SignUpActivity"
-            android:parentActivityName="com.sep.UniTrips.view.WelcomeActivity"
+            android:name=".view.SignUpActivity"
+            android:parentActivityName=".view.WelcomeActivity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
         <activity
-            android:name="com.sep.UniTrips.view.MainActivity"
-            android:label="@string/title_activity_main"></activity>
+            android:name=".view.MainActivity"
+            android:label="@string/title_activity_main" />
+        <activity android:name=".view.Database_tester" />
+        <activity android:name=".view.ImportCalendarActivity"
+            android:parentActivityName=".view.MainActivity">
+
+        </activity>
     </application>
 
 </manifest>

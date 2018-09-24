@@ -8,7 +8,7 @@ import android.widget.Button;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.sep.tmsdemo.R;
+import com.sep.UniTrips.R;
 
 public class WelcomeActivity extends AppCompatActivity {
 

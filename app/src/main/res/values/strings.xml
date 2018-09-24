@@ -14,7 +14,7 @@
     <string name="action_register">Create account</string>
     <string name="action_sign_in_short">Sign in</string>
     <string name="error_invalid_email">Invalid email address!</string>
-    <string name="error_invalid_password">Invalid password! Password should be at least 6 digital.</string>
+    <string name="error_invalid_password">Invalid password! Password should be at least 6 characters.</string>
     <string name="error_incorrect_password">This password is incorrect</string>
     <string name="confirmedPassword">Confirm Password</string>
     <string name="title_email">Email</string>
@@ -25,8 +25,22 @@
     <string name="title_dashboard">Dashboard</string>
     <string name="title_setting">setting</string>
 
+    <string name="confirmPassword_error">Password and confirm password do not match!</string>
     <string name="sign_fail_message">Authentication failed. Please double check your login detail.</string>
-    <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="transport_setting">Transport Setting</string>
+    <string name="import_calendar">Add calendar</string>
+    <string name="import_description">From UTS myTimetable</string>
+    <string name="prompt_StudentId">Student ID </string>
+    <string name="prompt_password">Password</string>
+    <string name="action_Import">Import</string>
+    <string name="action_log_out">Logout</string>
+    <string name="action_Sign_in">Sign in</string>
+    <string name="action_Sign_up">Sign up</string>
+    <string name="logout_warning">Are you sure you want to logout?</string>
+    <string name="action_cancel">Cancel</string>
+    <string name="existEmailError">You input email address has been used. Please try again!</string>
+    <string name="fail_connection">Fail to connect the server! Please check your Internet connection!</string>
+    <string name="no_response">server not response! Please try again!</string>
 
 </resources>
