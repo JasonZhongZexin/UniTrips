@@ -36,10 +36,10 @@
             android:name=".view.MainActivity"
             android:label="@string/title_activity_main" />
         <activity android:name=".view.Database_tester" />
-        <activity android:name=".view.ImportCalendarActivity"
-            android:parentActivityName=".view.MainActivity">
-
-        </activity>
+        <activity
+            android:name=".view.ImportCalendarActivity"
+            android:parentActivityName=".view.MainActivity"></activity>
+        <activity android:name=".view.ResetPasswordActivity"></activity>
     </application>
 
 </manifest>

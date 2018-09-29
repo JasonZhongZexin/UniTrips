@@ -4,18 +4,12 @@
     <string name="title_activity_welcome">WelcomeActivity</string>
     <string name="title_activity_sign_in">Sign in</string>
 
-    <!-- Strings related to login -->
+    <!-- Strings related to UI -->
     <string name="title_username">Username</string>
     <string name="title_password">Password</string>
-    <string name="error_field_required">This field is required</string>
     <string name="title_activity_sign_up">Sign in</string>
-
-    <!-- Strings related to login -->
     <string name="action_register">Create account</string>
     <string name="action_sign_in_short">Sign in</string>
-    <string name="error_invalid_email">Invalid email address!</string>
-    <string name="error_invalid_password">Invalid password! Password should be at least 6 characters.</string>
-    <string name="error_incorrect_password">This password is incorrect</string>
     <string name="confirmedPassword">Confirm Password</string>
     <string name="title_email">Email</string>
     <string name="createAccount">Create UniTripS \n account</string>
@@ -24,10 +18,6 @@
     <string name="title_home">Home</string>
     <string name="title_dashboard">Dashboard</string>
     <string name="title_setting">setting</string>
-
-    <string name="confirmPassword_error">Password and confirm password do not match!</string>
-    <string name="sign_fail_message">Authentication failed. Please double check your login detail.</string>
-    <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="transport_setting">Transport Setting</string>
     <string name="import_calendar">Add calendar</string>
     <string name="import_description">From UTS myTimetable</string>
@@ -39,8 +29,31 @@
     <string name="action_Sign_up">Sign up</string>
     <string name="logout_warning">Are you sure you want to logout?</string>
     <string name="action_cancel">Cancel</string>
-    <string name="existEmailError">You input email address has been used. Please try again!</string>
+    <string name="title_resetPassword">Reset Your Password</string>
+    <string name="hint_resetPassword">Enter the email address you used to sign up</string>
+    <string name="resetPasswordSend">A reset password link has been sent to your email address! Please check your email!</string>
+    <string name="hint_restPasswordEmailEt">Enter your email address...</string>
+    <string name="button_submit">Submit</string>
+
+    <!-- Strings related to error message -->
+    <string name="error_invalid_email">Invalid email address!</string>
+    <string name="error_field_required">This field is required</string>
+    <string name="error_invalid_password">Invalid password! Password should be at least 6 characters.</string>
+    <string name="confirmPassword_error">Password and confirm password do not match!</string>
+    <string name="sign_fail_message">Authentication failed. Please double check your login detail.</string>
+    <string name="resetPassword_Error">Fail to send the reset password link! Please try again!</string>
+
+
+    <!-- Strings related to UTS myTimeTable server -->
     <string name="fail_connection">Fail to connect the server! Please check your Internet connection!</string>
     <string name="no_response">server not response! Please try again!</string>
+    <string name="storedSuccess">Import calendar successful!</string>
+    <string name="incorrect_login_Detail">Incorrect student ID or password!</string>
+
+    <!-- Strings related to firebase -->
+    <string name="firebase_invalidEmail_exception">The input email address does not exist! Please try again...</string>
+    <string name="existEmailError">You input email address has been used. Please try again...</string>
+    <string name="firebase_password_incorrect_exception">The input email and password do not match! Please try again...</string>
+
 
 </resources>

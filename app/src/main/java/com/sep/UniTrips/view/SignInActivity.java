@@ -1,14 +1,24 @@
+/**
+ * Copyright (c) 2018. [Zexin Zhong]
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *  Unless required by applicable law or agreed to in writing,
+ *  software distributed under the License is distributed on an "AS IS" BASIS,
+ *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *  See the License for the specific language governing permissions an limitations under the License.
+ */
+
+
 package com.sep.UniTrips.view;
 
 import android.content.Intent;
-import android.support.annotation.NonNull;
 import android.support.annotation.RequiresApi;
 import android.support.v7.app.AppCompatActivity;
 
 import android.os.Build;
 import android.os.Bundle;
-import android.text.TextUtils;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -20,36 +30,17 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.sep.UniTrips.R;
+import com.sep.UniTrips.model.SignInModel.LoginInterface;
+import com.sep.UniTrips.presenter.LoginPresenter;
 
 /**
  * A login screen that offers login via username and password.
  */
-public class SignInActivity extends AppCompatActivity{
+public class SignInActivity extends AppCompatActivity implements LoginInterface.view{
 
-//    /**
-//     * Id to identity READ_CONTACTS permission request.
-//     */
-//    private static final int REQUEST_READ_CONTACTS = 0;
-//
-//
-//    /**
-//     * A dummy authentication store containing known user names and passwords.
-//     * TODO: remove after connecting to a real authentication system.
-//     */
-//    private static final String[] DUMMY_CREDENTIALS = new String[]{
-//            "foo@example.com:hello", "bar@example.com:world"
-//    };
-//    /**
-//     * Keep track of the login task to ensure we can cancel it if requested.
-//     */
-//    private UserLoginTask mAuthTask = null;
-//
     // UI references.
     private AutoCompleteTextView mEmailEt;
     private EditText mPasswordEt;
@@ -58,6 +49,9 @@ public class SignInActivity extends AppCompatActivity{
     private TextView mForgetPasswordTv;
     private Button mSignInBtn;
     private FirebaseAuth mAuth;
+    private View mFocusView;
+
+    private LoginPresenter mPresenter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,6 +63,7 @@ public class SignInActivity extends AppCompatActivity{
         setContentView(R.layout.activity_sign_in);
          //Set up the login form.
         mAuth = FirebaseAuth.getInstance();
+        mPresenter = new LoginPresenter(this,this);
         mEmailEt = (AutoCompleteTextView) findViewById(R.id.email);
         mPasswordEt=findViewById(R.id.password);
         mBackBtn = findViewById(R.id.backBtn);
@@ -80,11 +75,11 @@ public class SignInActivity extends AppCompatActivity{
             }
         });
         mForgetPasswordTv = findViewById(R.id.passwordRestTv);
-        mForgetPasswordTv.setOnClickListener(new OnClickListener() {
-            @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
+        mForgetPasswordTv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(getParentActivityIntent());
+                Intent intent = new Intent(SignInActivity.this,ResetPasswordActivity.class);
+                startActivity(intent);
             }
         });
         mSignInBtn = findViewById(R.id.sign_in_button);
@@ -93,88 +88,73 @@ public class SignInActivity extends AppCompatActivity{
             @Override
             public boolean onEditorAction(TextView textView, int id, KeyEvent keyEvent) {
                 if (id == EditorInfo.IME_ACTION_DONE || id == EditorInfo.IME_NULL) {
-                    attemptLogin();
+                    String email = mEmailEt.getText().toString();
+                    String password = mPasswordEt.getText().toString();
+                    mPresenter.attemptLogin(email,password);
                     return true;
                 }
                 return false;
             }
         });
-
         mLoginFormView = findViewById(R.id.signUp_form);
         mSignInBtn.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                attemptLogin();
+                String email = mEmailEt.getText().toString();
+                String password = mPasswordEt.getText().toString();
+                mPresenter.attemptLogin(email,password);
             }
         });
     }
 
-    /**
-     * Attempts to sign in or register the account specified by the login form.
-     * If there are form errors (invalid email, missing fields, etc.), the
-     * errors are presented and no actual login attempt is made.
-     */
-    private void attemptLogin() {
-//        if (mAuthTask != null) {
-//            return;
-//        }
+    @Override
+    public void onStart() {
+        super.onStart();
+        //check if user is signed in (non-null) and update UI accordingly.
+        FirebaseUser currentUser = mAuth.getCurrentUser();
+        updateUI(currentUser);
+    }
 
-        // Reset errors.
+    //UpdateUI according to the current user
+    @Override
+    public void updateUI(FirebaseUser currentUser){
+        //check if user is signed in (non-null)
+        if(currentUser!=null){
+            Intent intent = new Intent(SignInActivity.this,MainActivity.class);
+            startActivity(intent);
+        }
+    }
+
+    @Override
+    public void showSignInError(String errorMessage) {
+        Toast.makeText(this,errorMessage,Toast.LENGTH_LONG).show();
+    }
+
+    @Override
+    public void restError() {
         mEmailEt.setError(null);
         mPasswordEt.setError(null);
-
-        // Store values at the time of the login attempt.
-        String email = mEmailEt.getText().toString();
-        String password = mPasswordEt.getText().toString();
-
-        boolean cancel = false;
-        View focusView = null;
-
-        if (TextUtils.isEmpty(password)) {
-            mPasswordEt.setError(getString(R.string.error_field_required));
-            focusView = mPasswordEt;
-            cancel = true;
-        }
-        // Check for a valid password, if the user entered one.
-        if (!TextUtils.isEmpty(password) && !isPasswordValid(password)) {
-            mPasswordEt.setError(getString(R.string.error_invalid_password));
-            focusView = mPasswordEt;
-            cancel = true;
-        }
-
-        // Check for a valid email address.
-        if (TextUtils.isEmpty(email)) {
-            mEmailEt.setError(getString(R.string.error_field_required));
-            focusView = mEmailEt;
-            cancel = true;
-        } else if (!isEmailValid(email)) {
-            mEmailEt.setError(getString(R.string.error_invalid_email));
-            focusView = mEmailEt;
-            cancel = true;
-        }
-
-        if (cancel) {
-            // There was an error; don't attempt login and focus the first
-            // form field with an error.
-            focusView.requestFocus();
-        } else {
-            // Show a progress spinner, and kick off a background task to
-            // perform the user login attempt.
-//            showProgress(true);
-//            mAuthTask = new UserLoginTask(email, password);
-//            mAuthTask.execute((Void) null);
-            signIn();
-        }
     }
 
-    private boolean isEmailValid(String email) {
-        return email.contains("@");
+    @Override
+    public void setEmailError(String errorMessage) {
+        mEmailEt.setError(errorMessage);
+        mFocusView = mEmailEt;
     }
 
-    private boolean isPasswordValid(String password) {
-        return password.length() > 5;
+    @Override
+    public void setPasswordError(String errorMessage) {
+        mPasswordEt.setError(errorMessage);
+        mFocusView = mPasswordEt;
     }
 
+    @Override
+    public void focusView() {
+        if(mFocusView!=null){
+            mFocusView.requestFocus();
+        }
+    }
+}
     //the following code is the login progress async task and this part should be in the model base on the UI design.
 //    /**
 //     * Shows the progress UI and hides the login form.
@@ -323,44 +303,4 @@ public class SignInActivity extends AppCompatActivity{
 //        }
 //    }
 
-    @Override
-    public void onStart() {
-        super.onStart();
-        //check if user is signed in (non-null) and update UI accordingly.
-        FirebaseUser currentUser = mAuth.getCurrentUser();
-        updateUI(currentUser);
-    }
-
-    //UpdateUI according to the current user
-    private void updateUI(FirebaseUser currentUser){
-        //check if user is signed in (non-null)
-        if(currentUser!=null){
-//            Intent intent = new Intent(SignInActivity.this,MainActivity.class);
-//            startActivity(intent);
-            Intent intent = new Intent(SignInActivity.this,Database_tester.class);
-            startActivity(intent);
-        }
-    }
-    private void signIn(){
-
-        mAuth.signInWithEmailAndPassword(mEmailEt.getText().toString(),mPasswordEt.getText().toString()).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-            @Override
-            public void onComplete(@NonNull Task<AuthResult> task) {
-
-                if(!task.isSuccessful()){
-                    //login fail. feedback the user the error message
-                    Toast.makeText(SignInActivity.this, R.string.sign_fail_message,Toast.LENGTH_LONG).show();
-                    updateUI(null);
-                }else{
-                    //login success, update the ui with the signed-in user's information
-                    Toast.makeText(SignInActivity.this, "Login successful",Toast.LENGTH_LONG).show();
-                    Log.d("LOGIN SUCCEFFUL","login successful");
-                    FirebaseUser user = mAuth.getCurrentUser();
-                    updateUI(user);
-                }
-            }
-        });
-
-    }
-}
 

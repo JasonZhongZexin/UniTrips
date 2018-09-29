@@ -1,11 +1,17 @@
 /**
- * Copyright (c) 2018. [ Zexin Zhong ]
- *
+ * Copyright (c) 2018. [Zexin Zhong]
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *  Unless required by applicable law or agreed to in writing,
+ *  software distributed under the License is distributed on an "AS IS" BASIS,
+ *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *  See the License for the specific language governing permissions an limitations under the License.
  */
 
 package com.sep.UniTrips.model.ImportCalendar;
 
-import android.arch.persistence.room.Room;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
@@ -29,7 +35,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 
-public class ImportCalendarModel {
+public class ImportCalendarTaskManager {
     private Context mContext;
     private String mStudentId;
     private String mPassword;
@@ -38,6 +44,7 @@ public class ImportCalendarModel {
     private ImportCalendarPresneter mPresenter;
     private String mJsonData;
     private String mYear;
+    private ArrayList<Course> courses;
 
 
     /**
@@ -47,11 +54,13 @@ public class ImportCalendarModel {
      * @param password
      * @param presenter
      */
-    public ImportCalendarModel(Context context,String studentid,String password,ImportCalendarPresneter presenter) {
+    public ImportCalendarTaskManager(Context context, String studentid, String password, ImportCalendarPresneter presenter, String year) {
         this.mContext = context;
         this.mStudentId = studentid;
         this.mPassword = password;
         this.mPresenter = presenter;
+        this.mYear = year;
+        courses = new ArrayList<Course>();
     }
 
     /**
@@ -88,10 +97,13 @@ public class ImportCalendarModel {
                     mToken = response.body().getToken();
                     if(mToken==null){
                         //feedback the user when the login detail is wrong
-//                        mPresenter.showToast(mContext.getString(R.string.incorrect_login_Detail));
+                        mPresenter.showToast(mContext.getString(R.string.incorrect_login_Detail));
                     }else {
                         //load and stored the timetable data
-                        importCalendar();
+                        loadCalendar();
+                        for(Course course:courses){
+                            Log.d("courser",course.getSubject_description());
+                        }
                     }
                 }else{
                     //feedback the user when the login detail is wrong
@@ -109,11 +121,9 @@ public class ImportCalendarModel {
     /**
      * This method will get the timetable data from the server and stored it to the database.
      */
-    public void importCalendar(){
+    public void loadCalendar(){
         SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(mContext);
         String cookie = sp.getString("cookie","");
-//        mCourseDb = Room.databaseBuilder(mContext,CoursesDb.class,"coursesdb").allowMainThreadQueries().build();
-//        mCourseDb.dataAccessObject().refreshTable();
         //Execution of the call
         Call<ResponseBody> call = sClient.getResponseBody(mYear,mToken,cookie);
         call.enqueue(new Callback<ResponseBody>() {
@@ -140,19 +150,8 @@ public class ImportCalendarModel {
                                 String[] jsonData=scriptArray[i].split("=");
                                 String[] jsonString = jsonData[1].split(";");
                                 mJsonData = jsonString[0];
-
-
-                                Log.e("json data",mJsonData);
-
-
-
                                 i = scriptArray.length;
                                 String allocatedCourses = ((mJsonData.split("allocated")[1]).split("student_enrolment"))[0];
-
-
-                                Log.e("allocated acourses",allocatedCourses);
-
-
                                 String[] allocatedCoursesArray = allocatedCourses.split("\\},");
                                 for(String courseString: allocatedCoursesArray){
                                     String[] courseStringArray = courseString.split(",");
@@ -180,24 +179,24 @@ public class ImportCalendarModel {
                                             courseDetailArrayList.add(courseDetail);
                                         }
                                     }
-                                    //stored the course data to the database
+                                    //add course to courses list
                                     if(courseDetailArrayList.size()>1) {
-//                                        Course course = new Course();
-//                                        course.setSubject_description(courseDetailArrayList.get(0).toString());
-//                                        course.setSubject_code(courseDetailArrayList.get(1).toString());
-//                                        course.setActivity_group_code(courseDetailArrayList.get(2).toString());
-//                                        course.setActivity_code(courseDetailArrayList.get(3).toString());
-//                                        course.setDay_of_week(courseDetailArrayList.get(4).toString());
-//                                        course.setStart_time(courseDetailArrayList.get(5).toString());
-//                                        course.setLocation(courseDetailArrayList.get(6).toString());
-//                                        course.setDuration(courseDetailArrayList.get(7).toString());
-//                                        course.setWeek_pattern(courseDetailArrayList.get(8).toString());
-//                                        mCourseDb.dataAccessObject().addCourse(course);
+                                        Course course = new Course();
+                                        course.setSubject_description(courseDetailArrayList.get(0).toString());
+                                        course.setSubject_code(courseDetailArrayList.get(1).toString());
+                                        course.setActivity_group_code(courseDetailArrayList.get(2).toString());
+                                        course.setActivity_code(courseDetailArrayList.get(3).toString());
+                                        course.setDay_of_week(courseDetailArrayList.get(4).toString());
+                                        course.setStart_time(courseDetailArrayList.get(5).toString());
+                                        course.setLocation(courseDetailArrayList.get(6).toString());
+                                        course.setDuration(courseDetailArrayList.get(7).toString());
+                                        course.setWeek_pattern(courseDetailArrayList.get(8).toString());
+                                        courses.add(course);
                                     }
                                 }
                             }
                         }
-//                        mPresenter.showToast(mContext.getString(R.string.storedSuccess));
+                        mPresenter.showToast(mContext.getString(R.string.storedSuccess));
                         mPresenter.finishActivity();
                     } catch (IOException e) {
                         Log.e("IOException",e.toString());
