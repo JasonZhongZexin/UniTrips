@@ -34,6 +34,8 @@
     <string name="resetPasswordSend">A reset password link has been sent to your email address! Please check your email!</string>
     <string name="hint_restPasswordEmailEt">Enter your email address...</string>
     <string name="button_submit">Submit</string>
+    <string name="hint_calendarName">Set a name for your new calendar</string>
+    <string name="title_calendarName">Calendar Name</string>
 
     <!-- Strings related to error message -->
     <string name="error_invalid_email">Invalid email address!</string>
@@ -54,6 +56,7 @@
     <string name="firebase_invalidEmail_exception">The input email address does not exist! Please try again...</string>
     <string name="existEmailError">You input email address has been used. Please try again...</string>
     <string name="firebase_password_incorrect_exception">The input email and password do not match! Please try again...</string>
-
+    <string name="firebase_Timetable_upload_successful">Timetable upload successful!</string>
+    <string name="firebase_Timetable_upload_fail">Fail to store your calendar to firebase. Please try again!</string>
 
 </resources>

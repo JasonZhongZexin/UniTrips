@@ -93,12 +93,12 @@ public class SignUpTaskManager {
         }
 
         if (cancel) {
-            // There was an error; don't attempt login and focus the first
+            // There was an error; don't attempt loginToUTS and focus the first
             // form field with an error.
             mPresenter.focusVies();
         } else {
 //            // Show a progress spinner, and kick off a background task to
-//            // perform the user login attempt.
+//            // perform the user loginToUTS attempt.
 //            showProgress(true);
 //            mAuthTask = new UserLoginTask(email, password);
 //            mAuthTask.execute((Void) null);
@@ -117,7 +117,7 @@ public class SignUpTaskManager {
             public void onComplete(@NonNull Task<AuthResult> task) {
 
                 if(!task.isSuccessful()){
-                    //login fail. feedback the user the error message
+                    //loginToUTS fail. feedback the user the error message
                     //Toast.makeText(SignInActivity.this, R.string.sign_fail_message,Toast.LENGTH_LONG).show();
                     try{
                         mPresenter.updateUI(null);
@@ -132,7 +132,7 @@ public class SignUpTaskManager {
                         Log.e("sign up exception", "onComplete: " + e.getMessage());
                     }
                 }else{
-                    //login success, update the ui with the signed-in user's information
+                    //loginToUTS success, update the ui with the signed-in user's information
                     //Toast.makeText(SignInActivity.this, "Login successful",Toast.LENGTH_LONG).show();
                     //Log.d("create account success","CREATE ACCOUNT SUCCESSFUL");
                     FirebaseUser user = mAuth.getCurrentUser();
