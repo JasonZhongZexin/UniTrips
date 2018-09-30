@@ -36,6 +36,15 @@
     <string name="button_submit">Submit</string>
     <string name="hint_calendarName">Set a name for your new calendar</string>
     <string name="title_calendarName">Calendar Name</string>
+    <string name="title_event_title">Title</string>
+    <string name="hint_addEventTitle">Title of your event</string>
+    <string name="title_timePicker">Event time</string>
+    <string name="hint_event_start_time">Event start time</string>
+    <string name="hint_event_end_time">Event end time</string>
+    <string name="title_eventLocation">Event Location</string>
+    <string name="hint_event_location">Add a location for you event</string>
+    <string name="hint_notification_time">Notification time</string>
+    <string name="text_addEvent_save_btn">Save Event</string>
 
     <!-- Strings related to error message -->
     <string name="error_invalid_email">Invalid email address!</string>

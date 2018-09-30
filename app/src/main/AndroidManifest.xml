@@ -38,8 +38,9 @@
         <activity android:name=".view.Database_tester" />
         <activity
             android:name=".view.ImportCalendarActivity"
-            android:parentActivityName=".view.MainActivity"></activity>
-        <activity android:name=".view.ResetPasswordActivity"></activity>
+            android:parentActivityName=".view.MainActivity" />
+        <activity android:name=".view.ResetPasswordActivity" />
+        <activity android:name=".view.AddEventActivity"></activity>
     </application>
 
 </manifest>
