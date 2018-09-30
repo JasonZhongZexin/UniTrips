@@ -15,8 +15,17 @@ package com.sep.UniTrips.model.ImportCalendar;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
+import android.support.annotation.NonNull;
+import android.text.TextUtils;
 import android.util.Log;
+import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.sep.UniTrips.R;
 import com.sep.UniTrips.presenter.ImportCalendarPresneter;
 
@@ -44,31 +53,100 @@ public class ImportCalendarTaskManager {
     private ImportCalendarPresneter mPresenter;
     private String mJsonData;
     private String mYear;
-    private ArrayList<Course> courses;
-
+    private ArrayList<Course> mCourses;
+    private FirebaseAuth mAuth;
+    private DatabaseReference mDatabase;
+    private String mCalendarName;
 
     /**
      * This is the constructor of the class.
      * @param context
-     * @param studentid
-     * @param password
-     * @param presenter
+     * @param presenter the
      */
-    public ImportCalendarTaskManager(Context context, String studentid, String password, ImportCalendarPresneter presenter, String year) {
-        this.mContext = context;
-        this.mStudentId = studentid;
-        this.mPassword = password;
+    public ImportCalendarTaskManager(Context context, ImportCalendarPresneter presenter) {
+        this.mContext = context;;
         this.mPresenter = presenter;
-        this.mYear = year;
-        courses = new ArrayList<Course>();
+        mCourses = new ArrayList<Course>();
+        mAuth = FirebaseAuth.getInstance();
+        mDatabase = FirebaseDatabase.getInstance().getReference();
     }
 
     /**
-     * This method will login to UTS timetable web sever and load the data from the server. Then
-     * stored it into the database.
+     * This is the student ID validator
+     * @param studentID the input student id by the user
+     * @return true if the length of the input id is 6 or 8
      */
-    public void login(){
-        // perform the user login attempt.
+    public Boolean isStudentId(String studentID){
+        return studentID.length()==8|| studentID.length()==6;
+    }
+
+    /**
+     * This is the password validator
+     * @param password the input password by the user
+     * @return true if the length of the password greater then 6
+     */
+    public Boolean isPasswordValid(String password){
+        return password.length()>6;
+
+    }
+
+    /**
+     *
+     */
+    public void attemptGetCalendar(String studentID,String password,String year,String calendarName){
+        this.mStudentId = studentID;
+        this.mPassword = password;
+        this.mYear = year;
+        this.mCalendarName =calendarName;
+        boolean cancel = false;
+
+        //reset errors.
+        mPresenter.resetError();
+
+        //check if password is empty.
+        // set cancel to true if any error happen.
+        if(TextUtils.isEmpty(mPassword)){
+            mPresenter.setPasswordError(mContext.getString(R.string.error_field_required));
+            cancel = true;
+        }
+
+        //check for a valid password(length>6), if the user entered one.
+        // set cancel to true if any error happen.
+        if (!TextUtils.isEmpty(password) && !isPasswordValid(password)) {
+            mPresenter.setPasswordError(mContext.getString(R.string.error_invalid_password));
+            cancel = true;
+        }
+
+        //check for valid student ID. set cancel to true if any error happen.
+        if (TextUtils.isEmpty(mStudentId)) {
+            mPresenter.setIDError(mContext.getString(R.string.error_field_required));
+            cancel = true;
+        } else if (!isStudentId(mStudentId)) {
+            mPresenter.setIDError(mContext.getString(R.string.error_invalid_email));
+            cancel = true;
+        }
+        //check for valid calendar name
+        if(TextUtils.isEmpty(calendarName)){
+            mPresenter.setCalendarNameError(mContext.getString(R.string.error_field_required));
+            cancel = true;
+        }
+
+        //if cancel, focus the error view else loginToUTS to UTS myTimetable server, get and store the timetable
+        //data to firebase database
+        if(cancel){
+            mPresenter.focusView();
+        }else{
+            loginToUTS();
+        }
+
+    }
+    /**
+     * This method use the user's input student ID and password login the user to UTS myTimetable
+     * server and get the token and cookie if login successful. Then call the stored calendar method
+     * to stored the user timetable data.
+     */
+    public void loginToUTS(){
+        // perform the user loginToUTS attempt.
         //create retrofit instance
         Retrofit retrofit = UTSTimetableServicesClient.getClient(mContext);
         //get client & call object for the request
@@ -81,7 +159,7 @@ public class ImportCalendarTaskManager {
                 if(response.isSuccessful()){
                     Headers headerResponse = response.headers();
                     Map<String,List<String>> headerMapList = headerResponse.toMultimap();
-                    List<String> allCookies = headerMapList.get("Set-Cookie");
+                    List<String> allCookies = headerMapList.get("set-cookie");
                     String cookiesValue = "";
                     for(String cookies:allCookies){
                         cookiesValue = cookiesValue+cookies + ";";
@@ -96,17 +174,14 @@ public class ImportCalendarTaskManager {
                     eitor.apply();
                     mToken = response.body().getToken();
                     if(mToken==null){
-                        //feedback the user when the login detail is wrong
+                        //feedback user when fail to login with the user's input student ID and password
                         mPresenter.showToast(mContext.getString(R.string.incorrect_login_Detail));
                     }else {
-                        //load and stored the timetable data
-                        loadCalendar();
-                        for(Course course:courses){
-                            Log.d("courser",course.getSubject_description());
-                        }
+                        //stored the calendar to firebase
+                        storedCalendar();
                     }
                 }else{
-                    //feedback the user when the login detail is wrong
+                    //feedback user when fail to connect to the server
                     mPresenter.showToast(mContext.getString(R.string.fail_connection));
                 }
             }
@@ -119,9 +194,10 @@ public class ImportCalendarTaskManager {
     }
 
     /**
-     * This method will get the timetable data from the server and stored it to the database.
+     * get the response body from UTS myTimetable web server. get the courses detail from the response body
+     * and stored the calendar to firebase.
      */
-    public void loadCalendar(){
+    public void storedCalendar(){
         SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(mContext);
         String cookie = sp.getString("cookie","");
         //Execution of the call
@@ -144,6 +220,7 @@ public class ImportCalendarTaskManager {
                         String [] htmlArray = html.split("<script>");
                         String [] scriptArray = htmlArray[4].split(";");
 
+                        //clean and get the courses detail string
                         for(int i = 0;i<scriptArray.length;i++){
                             //check if the string contains the icalUrl
                             if(scriptArray[i].matches(".*attend_type.*")){
@@ -191,25 +268,41 @@ public class ImportCalendarTaskManager {
                                         course.setLocation(courseDetailArrayList.get(6).toString());
                                         course.setDuration(courseDetailArrayList.get(7).toString());
                                         course.setWeek_pattern(courseDetailArrayList.get(8).toString());
-                                        courses.add(course);
+                                        mCourses.add(course);
                                     }
                                 }
                             }
                         }
-                        mPresenter.showToast(mContext.getString(R.string.storedSuccess));
-                        mPresenter.finishActivity();
+//                        mPresenter.showToast(mContext.getString(R.string.storedSuccess));
+//                        mPresenter.finishActivity();
+                        if(mCourses.size()>0){
+                            Calendar calendar = new Calendar(mCourses,mCalendarName);
+                            final FirebaseUser currentUser = mAuth.getCurrentUser();
+                            mDatabase.child("users").child(currentUser.getUid()).child(calendar.getCalendarName()).setValue(calendar).addOnSuccessListener(new OnSuccessListener<Void>() {
+                                @Override
+                                public void onSuccess(Void aVoid) {
+                                    mPresenter.updateUI();
+                                    mPresenter.showToast(mContext.getString(R.string.firebase_Timetable_upload_successful));
+                                }
+                            }).addOnFailureListener(new OnFailureListener() {
+                                @Override
+                                public void onFailure(@NonNull Exception e) {
+                                    mPresenter.showToast(mContext.getString(R.string.firebase_Timetable_upload_fail));
+                                }
+                            });
+                        }
                     } catch (IOException e) {
                         Log.e("IOException",e.toString());
                     }
                 }else{
-                    //feedback the user with the error message
+                    //feedback the user with the error message when fail to get the server response
                     mPresenter.showToast(mContext.getString(R.string.no_response));
                 }
             }
 
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
-                //feedback the user with the error message
+                //feedback the user with the error message when fail to connect to the web server
                 mPresenter.showToast(mContext.getString(R.string.fail_connection));
             }
         });

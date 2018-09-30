@@ -32,7 +32,7 @@ import com.sep.UniTrips.presenter.SignUpPresenter;
 import com.sep.UniTrips.R;
 
 /**
- * A login screen that offers login via email/password.
+ * A loginToUTS screen that offers loginToUTS via email/password.
  */
 public class SignUpActivity extends AppCompatActivity  implements SignUpInterface.view{
 
