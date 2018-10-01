@@ -37,6 +37,10 @@ public class LoginTaskManager {
     private LoginPresenter mPresenter;
     private Context mContext;
 
+    public LoginTaskManager() {
+        // for testing basic functionality not requiring context or other classes
+    }
+
     public LoginTaskManager(Context context, LoginPresenter presenter) {
         this.mAuth = FirebaseAuth.getInstance();
         this.mPresenter = presenter;
@@ -93,6 +97,28 @@ public class LoginTaskManager {
 //            mAuthTask.execute((Void) null);
             signIn(email, password);
         }
+    }
+
+    public boolean attemptLoginLogic(String email, String password) {
+
+        boolean cancel = false;
+
+        if (TextUtils.isEmpty(password)) {
+            cancel = true;
+        }
+        // Check for a valid password, if the user entered one.
+        if (!TextUtils.isEmpty(password) && !isPasswordValid(password)) {
+            cancel = true;
+        }
+
+        // Check for a valid email address.
+        if (TextUtils.isEmpty(email)) {
+            cancel = true;
+        } else if (!isEmailValid(email)) {
+            cancel = true;
+        }
+
+        return !cancel;
     }
 
     private void signIn(String email, String password) {

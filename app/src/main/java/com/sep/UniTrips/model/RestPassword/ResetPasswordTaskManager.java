@@ -34,6 +34,10 @@ public class ResetPasswordTaskManager {
     private ResetPasswordPresenter mPresenter;
     private Context mContext;
 
+    public ResetPasswordTaskManager() {
+        // for testing logic
+    }
+
     public ResetPasswordTaskManager(ResetPasswordPresenter mPresenter, Context mContext) {
         this.mAuth = FirebaseAuth.getInstance();
         this.mPresenter = mPresenter;
@@ -66,6 +70,21 @@ public class ResetPasswordTaskManager {
             sendResetPasswordEmail(email);
         }
     }
+
+    public boolean attemptRequestPasswordLogic(String email){
+
+        boolean cancel = false;
+
+        //validate email input
+        if(TextUtils.isEmpty(email)){
+            cancel = true;
+        }else if(!isEmailValid(email)){
+            cancel = true;
+        }
+
+        return !cancel;
+    }
+
 
     public void sendResetPasswordEmail(String email){
         mAuth.sendPasswordResetEmail(email)
