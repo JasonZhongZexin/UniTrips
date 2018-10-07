@@ -33,6 +33,11 @@ public class SignUpTaskManager {
     private Context mContext;
     private FirebaseAuth mAuth;
 
+    public SignUpTaskManager() {
+        // for testing logic
+    }
+
+
     public SignUpTaskManager(Context context,SignUpPresenter presenter){
         this.mContext = context;
         this.mPresenter = presenter;
@@ -105,6 +110,37 @@ public class SignUpTaskManager {
             createUser(email,password);
         }
     }
+
+    public boolean attemptCreateAccountLogic(String email,String password,String confirmPassword) {
+
+        boolean cancel = false;
+
+        //Check if any field is empty.
+        if(TextUtils.isEmpty(email)){
+            cancel = true;
+        }else if(TextUtils.isEmpty(password)){
+            cancel = true;
+        }else if(TextUtils.isEmpty(confirmPassword)){
+            cancel = true;
+        }
+        // Check for a valid email address.
+        if (TextUtils.isEmpty(email)) {
+            cancel = true;
+        } else if (!isEmailValid(email)) {
+            cancel = true;
+        }
+        // Check for a valid password, if the user entered one.
+        if (!TextUtils.isEmpty(password) && !isPasswordValid(password)) {
+            cancel = true;
+        }
+        //Check if the confirm password same with the password
+        if(!isConfirmPassword(password,confirmPassword)){
+            cancel = true;
+        }
+
+        return !cancel;
+    }
+
 
     /**
      * Create an account via using the firebase createUserWithEmailAndPasswordMethod and

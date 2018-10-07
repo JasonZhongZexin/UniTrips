@@ -121,6 +121,28 @@ public class LoginTaskManager {
         return !cancel;
     }
 
+    public boolean attemptLoginErrorMessaging(String email, String password) {
+
+        boolean cancel = false;
+
+        if (TextUtils.isEmpty(password)) {
+            cancel = true;
+        }
+        // Check for a valid password, if the user entered one.
+        if (!TextUtils.isEmpty(password) && !isPasswordValid(password)) {
+            cancel = true;
+        }
+
+        // Check for a valid email address.
+        if (TextUtils.isEmpty(email)) {
+            cancel = true;
+        } else if (!isEmailValid(email)) {
+            cancel = true;
+        }
+
+        return !cancel;
+    }
+
     private void signIn(String email, String password) {
 
         mAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
