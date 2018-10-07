@@ -55,5 +55,5 @@
     <string name="existEmailError">You input email address has been used. Please try again...</string>
     <string name="firebase_password_incorrect_exception">The input email and password do not match! Please try again...</string>
 
-
+    <string name="str_btn_draw">Draw Route</string>
 </resources>
