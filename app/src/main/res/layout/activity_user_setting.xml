@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".view.UserSettingActivity"
+    android:orientation="vertical"
+    android:background="@color/colorPrimary">
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginLeft="25dp">
+                <TextView
+                    android:layout_height="wrap_content"
+                    android:layout_width="wrap_content"
+                    android:text="@string/title_default_transport_option"
+                    android:textSize="20dp"
+                    android:textColor="@color/textBlack"/>
+                <Spinner
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize = "20dp"
+                    android:id="@+id/transportSettingSpinner"
+                    android:entries="@array/Transport_setting_spinnerWidget_item"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="15dp"
+                android:layout_marginLeft="25dp">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="20dp"
+                    android:textColor="@color/textBlack"
+                    android:text="@string/title_notificationTime_setting"/>
+                <Spinner
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize = "20dp"
+                    android:id="@+id/notification_Time_hours_spinner"
+                    android:entries="@array/NotificationTime_setting_spinnerWidget_Hours_item"/>
+                <Spinner
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize = "20dp"
+                    android:id="@+id/notification_time_min_spinner"
+                    android:entries="@array/NotificationTime_setting_spinnerWidget_Min_item"/>
+            </LinearLayout>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="25dp"
+                android:text="@string/hint_notification_time_description"/>
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="15dp"
+                android:layout_marginLeft="25dp">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="20dp"
+                    android:textColor="@color/textBlack"
+                    android:text="@string/title_preferred_arrival_time"/>
+                <Spinner
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize = "20dp"
+                    android:id="@+id/arrival_Time_hours_spinner"
+                    android:entries="@array/NotificationTime_setting_spinnerWidget_Hours_item"/>
+                <Spinner
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize = "20dp"
+                    android:id="@+id/arrival_time_min_spinner"
+                    android:entries="@array/NotificationTime_setting_spinnerWidget_Min_item"/>
+            </LinearLayout>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginLeft="25dp"
+                android:layout_marginRight="25dp"
+                android:text="@string/hint_arrival_time_description"/>
+        </LinearLayout>
+    </ScrollView>
+    <Button
+        android:layout_width="match_parent"
+        android:layout_margin="25dp"
+        android:id="@+id/saveEvent_btn"
+        android:text="@string/text_addUserProfile_save_btn"
+        android:textSize="25dp"
+        android:textColor="@color/textColorWhite"
+        android:background="@drawable/sign_up_btn_selector"
+        android:layout_height="wrap_content" />
+
+</LinearLayout>

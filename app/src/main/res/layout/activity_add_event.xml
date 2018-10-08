@@ -120,5 +120,4 @@
         android:background="@drawable/sign_up_btn_selector"
         android:layout_height="wrap_content" />
 
-
 </LinearLayout>

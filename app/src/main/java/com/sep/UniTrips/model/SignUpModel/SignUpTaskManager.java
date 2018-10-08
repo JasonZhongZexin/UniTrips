@@ -24,6 +24,10 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseAuthUserCollisionException;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.sep.UniTrips.model.UserSetting.User;
+import com.sep.UniTrips.model.UserSetting.UserProfile;
 import com.sep.UniTrips.presenter.SignUpPresenter;
 import com.sep.UniTrips.R;
 
@@ -32,11 +36,13 @@ public class SignUpTaskManager {
     private SignUpPresenter mPresenter;
     private Context mContext;
     private FirebaseAuth mAuth;
+    private DatabaseReference mDatabase;
 
     public SignUpTaskManager(Context context,SignUpPresenter presenter){
         this.mContext = context;
         this.mPresenter = presenter;
         this.mAuth = FirebaseAuth.getInstance();
+        mDatabase = FirebaseDatabase.getInstance().getReference();
     }
 
     private boolean isEmailValid(String email) {
@@ -137,6 +143,9 @@ public class SignUpTaskManager {
                     //Log.d("create account success","CREATE ACCOUNT SUCCESSFUL");
                     FirebaseUser user = mAuth.getCurrentUser();
                     mPresenter.updateUI(user);
+                    //initial user setting
+                    UserProfile userProfile = new UserProfile();
+                    mDatabase.child("users").child(user.getUid()).child("User Profile").setValue(userProfile);
                 }
             }
         });

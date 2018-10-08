@@ -101,7 +101,7 @@ public class AddEventActivity extends AppCompatActivity {
                 String location = mLocationEt.getText().toString();
                 Event event = new Event(title,startTime,endTime,location,notificationTime);
                 final FirebaseUser currentUser = mAuth.getCurrentUser();
-                mDatabase.child("users").child(currentUser.getUid()).child("My Event").setValue(event).addOnSuccessListener(new OnSuccessListener<Void>() {
+                mDatabase.child("users").child(currentUser.getUid()).child("Calendars").child("My Event").setValue(event).addOnSuccessListener(new OnSuccessListener<Void>() {
                     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
                     @Override
                     public void onSuccess(Void aVoid) {

@@ -280,7 +280,7 @@ public class ImportCalendarTaskManager {
                         if(mCourses.size()>0){
                             Calendar calendar = new Calendar(mCourses,mCalendarName);
                             final FirebaseUser currentUser = mAuth.getCurrentUser();
-                            mDatabase.child("users").child(currentUser.getUid()).child(calendar.getCalendarName()).setValue(calendar).addOnSuccessListener(new OnSuccessListener<Void>() {
+                            mDatabase.child("users").child(currentUser.getUid()).child("Calendars").child(calendar.getCalendarName()).setValue(calendar).addOnSuccessListener(new OnSuccessListener<Void>() {
                                 @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
                                 @Override
                                 public void onSuccess(Void aVoid) {
