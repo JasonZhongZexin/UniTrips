@@ -14,8 +14,10 @@ package com.sep.UniTrips.model.ImportCalendar;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.os.Build;
 import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
+import android.support.annotation.RequiresApi;
 import android.text.TextUtils;
 import android.util.Log;
 import android.widget.Toast;
@@ -278,7 +280,8 @@ public class ImportCalendarTaskManager {
                         if(mCourses.size()>0){
                             Calendar calendar = new Calendar(mCourses,mCalendarName);
                             final FirebaseUser currentUser = mAuth.getCurrentUser();
-                            mDatabase.child("users").child(currentUser.getUid()).child(calendar.getCalendarName()).setValue(calendar).addOnSuccessListener(new OnSuccessListener<Void>() {
+                            mDatabase.child("users").child(currentUser.getUid()).child("Calendars").child(calendar.getCalendarName()).setValue(calendar).addOnSuccessListener(new OnSuccessListener<Void>() {
+                                @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
                                 @Override
                                 public void onSuccess(Void aVoid) {
                                     mPresenter.updateUI();
