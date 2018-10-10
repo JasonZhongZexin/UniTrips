@@ -1,4 +1,4 @@
-package com.sep.UniTrips.model;
+package com.sep.UniTrips.model.UserSetting;
 
 import android.arch.persistence.room.*;
 import android.support.annotation.*;

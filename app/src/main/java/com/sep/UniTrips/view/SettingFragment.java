@@ -37,7 +37,7 @@ import com.sep.UniTrips.R;
 // */
 public class SettingFragment extends Fragment {
 
-    private TextView mTransportSettingTextView;
+    private TextView mUserPreferenceTv;
     private TextView mAddCalendarTextView;
     private TextView mAboutTimeBoxesTextView;
     private View mView;
@@ -59,6 +59,14 @@ public class SettingFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getActivity(),ImportCalendarActivity.class);
+                startActivity(intent);
+            }
+        });
+        mUserPreferenceTv = mView.findViewById(R.id.userPreference_textView);
+        mUserPreferenceTv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(),UserSettingActivity.class);
                 startActivity(intent);
             }
         });
