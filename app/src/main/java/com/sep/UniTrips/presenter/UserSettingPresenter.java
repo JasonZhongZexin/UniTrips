@@ -32,7 +32,11 @@ public class UserSettingPresenter implements UserSettingInterface.presenter{
     }
 
     @Override
-    public UserProfile getUserProfile() {
-        return mTaskManager.getUserProfile();
+    public void getUserProfile() {
+        mTaskManager.getUserProfile();
+    }
+
+    public void initialView(UserProfile userProfile){
+        mUserSettingActivity.initialView(userProfile);
     }
 }
