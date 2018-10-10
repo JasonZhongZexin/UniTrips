@@ -20,4 +20,7 @@
         <item name="android:background">@color/black_overlay</item>
     </style>
 
+    <style name="TransportSpinner" parent="Widget.AppCompat.DropDownItem.Spinner">
+        <item name="android:textColor">@color/spinnerTextColor</item>
+    </style>
 </resources>

@@ -37,7 +37,7 @@ import com.sep.UniTrips.model.SignInModel.LoginInterface;
 import com.sep.UniTrips.presenter.LoginPresenter;
 
 /**
- * A login screen that offers login via username and password.
+ * A loginToUTS screen that offers loginToUTS via username and password.
  */
 public class SignInActivity extends AppCompatActivity implements LoginInterface.view{
 
@@ -61,11 +61,12 @@ public class SignInActivity extends AppCompatActivity implements LoginInterface.
 //        //Remove the status bar of the activity
 //        getWindow().setFlags(WindowManager.LayoutParams. FLAG_FULLSCREEN , WindowManager.LayoutParams. FLAG_FULLSCREEN);
         setContentView(R.layout.activity_sign_in);
-         //Set up the login form.
+         //Set up the loginToUTS form.
         mAuth = FirebaseAuth.getInstance();
         mPresenter = new LoginPresenter(this,this);
         mEmailEt = (AutoCompleteTextView) findViewById(R.id.email);
         mPasswordEt=findViewById(R.id.password);
+
         mBackBtn = findViewById(R.id.backBtn);
         mBackBtn.setOnClickListener(new OnClickListener() {
             @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
@@ -74,6 +75,7 @@ public class SignInActivity extends AppCompatActivity implements LoginInterface.
                 startActivity(getParentActivityIntent());
             }
         });
+
         mForgetPasswordTv = findViewById(R.id.passwordRestTv);
         mForgetPasswordTv.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -82,7 +84,7 @@ public class SignInActivity extends AppCompatActivity implements LoginInterface.
                 startActivity(intent);
             }
         });
-        mSignInBtn = findViewById(R.id.sign_in_button);
+
         mPasswordEt = (EditText) findViewById(R.id.password);
         mPasswordEt.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
@@ -96,7 +98,9 @@ public class SignInActivity extends AppCompatActivity implements LoginInterface.
                 return false;
             }
         });
+
         mLoginFormView = findViewById(R.id.signUp_form);
+        mSignInBtn = findViewById(R.id.sign_in_button);
         mSignInBtn.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -155,9 +159,9 @@ public class SignInActivity extends AppCompatActivity implements LoginInterface.
         }
     }
 }
-    //the following code is the login progress async task and this part should be in the model base on the UI design.
+    //the following code is the loginToUTS progress async task and this part should be in the model base on the UI design.
 //    /**
-//     * Shows the progress UI and hides the login form.
+//     * Shows the progress UI and hides the loginToUTS form.
 //     */
 //    @TargetApi(Build.VERSION_CODES.HONEYCOMB_MR2)
 //    private void showProgress(final boolean show) {
@@ -247,7 +251,7 @@ public class SignInActivity extends AppCompatActivity implements LoginInterface.
 //    }
 //
 //    /**
-//     * Represents an asynchronous login/registration task used to authenticate
+//     * Represents an asynchronous loginToUTS/registration task used to authenticate
 //     * the user.
 //     */
 //    public class UserLoginTask extends AsyncTask<Void, Void, Boolean> {

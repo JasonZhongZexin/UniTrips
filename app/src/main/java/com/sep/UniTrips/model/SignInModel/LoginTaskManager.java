@@ -52,9 +52,9 @@ public class LoginTaskManager {
     }
 
     /**
-     * Attempts to sign in or register the account specified by the login form.
+     * Attempts to sign in or register the account specified by the loginToUTS form.
      * If there are form errors (invalid email, missing fields, etc.), the
-     * errors are presented and no actual login attempt is made.
+     * errors are presented and no actual loginToUTS attempt is made.
      */
     public void attemptLogin(String email, String password) {
         // Reset errors.
@@ -82,12 +82,12 @@ public class LoginTaskManager {
         }
 
         if (cancel) {
-            // There was an error; don't attempt login and focus the first
+            // There was an error; don't attempt loginToUTS and focus the first
             // form field with an error.
             mPresenter.focusView();
         } else {
             // Show a progress spinner, and kick off a background task to
-            // perform the user login attempt.
+            // perform the user loginToUTS attempt.
 //            showProgress(true);
 //            mAuthTask = new UserLoginTask(email, password);
 //            mAuthTask.execute((Void) null);
@@ -102,7 +102,7 @@ public class LoginTaskManager {
             public void onComplete(@NonNull Task<AuthResult> task) {
 
                 if (!task.isSuccessful()) {
-                    //login fail. feedback the user the error message
+                    //loginToUTS fail. feedback the user the error message
                     try{
                         throw task.getException();
                     }
@@ -118,7 +118,7 @@ public class LoginTaskManager {
                     }
                     mPresenter.updateUI(null);
                 } else {
-                    //login success, update the ui with the signed-in user's information
+                    //loginToUTS success, update the ui with the signed-in user's information
                     //Toast.makeText(SignInActivity.this, "Login successful", Toast.LENGTH_LONG).show();
                     FirebaseUser user = mAuth.getCurrentUser();
                     mPresenter.updateUI(user);
