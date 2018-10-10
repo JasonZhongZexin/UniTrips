@@ -11,7 +11,17 @@
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="550dp"
-        android:id="@+id/fragment_container"/>
+        android:id="@+id/fragment_container">
+    </FrameLayout>
+    <!--<android.support.design.widget.FloatingActionButton-->
+        <!--android:id="@+id/addEventBtn"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:clickable="true"-->
+        <!--app:layout_constraintRight_toRightOf="parent"-->
+        <!--android:layout_margin="15dp"-->
+        <!--app:layout_constraintBottom_toTopOf="@id/navigation"-->
+        <!--app:srcCompat="@android:drawable/ic_input_add" />-->
     <android.support.design.widget.BottomNavigationView
         android:id="@+id/navigation"
         android:layout_width="0dp"
