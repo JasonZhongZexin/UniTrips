@@ -8,6 +8,7 @@ package com.sep.UniTrips.model.UserSetting;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
+import android.util.Log;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -33,13 +34,13 @@ public class UserSettingTaskManager {
         mDatabase = FirebaseDatabase.getInstance().getReference();
     }
 
-    public UserProfile getUserProfile() {
+    public void getUserProfile() {
         FirebaseUser currentUser = mAuth.getCurrentUser();
         DatabaseReference ref = mDatabase.child("users").child(currentUser.getUid()).child("User Profile");
         ref.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                mUserProfile = dataSnapshot.getValue(UserProfile.class);
+                mPresenter.initialView(dataSnapshot.getValue(UserProfile.class));
             }
 
             @Override
@@ -47,12 +48,30 @@ public class UserSettingTaskManager {
 
             }
         });
-        return mUserProfile;
     }
 
     public void setUserProfile(UserProfile userProfile){
         FirebaseUser currentUser = mAuth.getCurrentUser();
-        DatabaseReference ref = mDatabase.child("users").child(currentUser.getUid()).child("User profile");
+        DatabaseReference ref = mDatabase.child("users").child(currentUser.getUid()).child("User Profile");
         ref.setValue(userProfile);
     }
+
+//    public void readDataOnce(final OnGetDataListener listener){
+//        listener.onStart();
+//        FirebaseUser currentUser = mAuth.getCurrentUser();
+//        DatabaseReference ref = mDatabase.child("users").child(currentUser.getUid()).child("User Profile");
+//        ref.addListenerForSingleValueEvent(new ValueEventListener() {
+//            @Override
+//            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+//                listener.onSuccess(dataSnapshot);
+//                mUserProfile = dataSnapshot.getValue(UserProfile.class);
+//                Log.d("userProfile data",mUserProfile.getPreferredTransport());
+//            }
+//
+//            @Override
+//            public void onCancelled(@NonNull DatabaseError databaseError) {
+//
+//            }
+//        });
+//    }
 }
