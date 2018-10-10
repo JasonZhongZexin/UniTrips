@@ -29,7 +29,6 @@ public class UserSettingActivity extends AppCompatActivity implements UserSettin
     private Spinner mArrivalTimeMSpinner;
     private Button mSaveBtn;
     private UserSettingPresenter mPresenter;
-    private UserProfile mUserProfile;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,9 +40,8 @@ public class UserSettingActivity extends AppCompatActivity implements UserSettin
         mNotificatationTimeMSpinner = findViewById(R.id.notification_time_min_spinner);
         mArrivalTimeHSpinner = findViewById(R.id.arrival_Time_hours_spinner);
         mArrivalTimeMSpinner = findViewById(R.id.arrival_time_min_spinner);
-        mUserProfile = mPresenter.getUserProfile();
         mSaveBtn = findViewById(R.id.saveSettingBtn);
-        initialView();
+        mPresenter.getUserProfile();
         mSaveBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -59,10 +57,10 @@ public class UserSettingActivity extends AppCompatActivity implements UserSettin
 
 
     @Override
-    public void initialView() {
-        if(mUserProfile!=null) {
+    public void initialView(UserProfile userProfile) {
+        if(userProfile!=null) {
             int pos = 0;
-            switch(mUserProfile.getPreferredTransport()){
+            switch(userProfile.getPreferredTransport()){
                 case "Train": pos=0;
                     break;
                 case "":pos=0;
@@ -75,13 +73,13 @@ public class UserSettingActivity extends AppCompatActivity implements UserSettin
                     break;
             }
             mTranportSettingSpinner.setSelection(pos);
-            pos = mUserProfile.getNotificationTimeH()+1;
+            pos = userProfile.getNotificationTimeH()+1;
             mNotificatationTimeHSpinner.setSelection(pos);
-            pos = mUserProfile.getNotificationTimeM()/10+1;
+            pos = userProfile.getNotificationTimeM()/10+1;
             mNotificatationTimeMSpinner.setSelection(pos);
-            pos = mUserProfile.getArrivalTimeH()+1;
+            pos = userProfile.getArrivalTimeH()+1;
             mArrivalTimeHSpinner.setSelection(pos);
-            pos = mUserProfile.getArrivalTimeM()/10+1;
+            pos = userProfile.getArrivalTimeM()/10+1;
             mArrivalTimeMSpinner.setSelection(pos);
         }
     }
