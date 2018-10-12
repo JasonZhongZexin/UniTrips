@@ -12,20 +12,91 @@
 
 package com.sep.UniTrips.view;
 
+import android.content.Intent;
+import android.os.Build;
+import android.support.annotation.RequiresApi;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.Toast;
 
 import com.sep.UniTrips.R;
+import com.sep.UniTrips.model.ImportCalendar.ImportCalendarInterface;
 import com.sep.UniTrips.presenter.ImportCalendarPresneter;
 
-public class ImportCalendarActivity extends AppCompatActivity {
+import java.util.Calendar;
+
+public class ImportCalendarActivity extends AppCompatActivity implements ImportCalendarInterface.View{
 
     private ImportCalendarPresneter mPresenter;
+    private View mFocusView;
+    private EditText mStudentIDEt;
+    private EditText mPasswordEt;
+    private Button mImportBtn;
+    private EditText mCalendarName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_import_calendar);
         mPresenter = new ImportCalendarPresneter(this,this);
+        mStudentIDEt = findViewById(R.id.studentIDEt);
+        mPasswordEt = findViewById(R.id.passwordEt);
+        mCalendarName = findViewById(R.id.calendar_nameEt);
+        mImportBtn = findViewById(R.id.importBtn);
+        mImportBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String ID = mStudentIDEt.getText().toString();
+                String password = mPasswordEt.getText().toString();
+                String year = Integer.toString(Calendar.getInstance().get(Calendar.YEAR));
+                String calendarName = mCalendarName.getText().toString();
+                mPresenter.attemptGetCalendar(ID,password,year,calendarName);
+            }
+        });
+    }
+
+    @Override
+    public void resetError() {
+        mStudentIDEt.setError(null);
+        mPasswordEt.setError(null);
+    }
+
+    @Override
+    public void setPasswordError(String errorMessage) {
+        mPasswordEt.setError(errorMessage);
+        mFocusView = mPasswordEt;
+    }
+
+    @Override
+    public void setIDError(String errorMessage) {
+        mStudentIDEt.setError(errorMessage);
+        mFocusView = mStudentIDEt;
+    }
+
+    @Override
+    public void focusView() {
+        if(mFocusView!=null){
+            mFocusView.requestFocus();
+        }
+    }
+
+    @Override
+    public void showToast(String message) {
+        Toast.makeText(this, message,Toast.LENGTH_LONG).show();
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
+    @Override
+    public void updateUI() {
+        startActivity(getParentActivityIntent());
+    }
+
+    @Override
+    public void setCalendarNameError(String errorMessage) {
+        mCalendarName.setError(errorMessage);
+        mFocusView = mCalendarName;
     }
 }

@@ -25,14 +25,14 @@ import retrofit2.http.Query;
 public interface UTSTimeTableServicesInterface {
 
     @FormUrlEncoded
-    @POST("/{year}/rest/student/login")
-    Call<LoginBeans> login (
+    @POST("/aplus{year}/rest/student/login")
+    Call<LoginBeans> login(
             @Path("year") String year,
-            @Field("username")String username,
-            @Field("password")String password
+            @Field("username") String username,
+            @Field("password") String password
     );
 
-    @GET("/{year}/student")
+    @GET("/aplus{year}/student")
     Call<ResponseBody> getResponseBody(
             @Path("year") String year,
             @Query("ss") String token,

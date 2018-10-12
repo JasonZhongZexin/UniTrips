@@ -14,61 +14,67 @@
 package com.sep.UniTrips.presenter;
 
 import android.content.Context;
+import android.os.Build;
+import android.support.annotation.RequiresApi;
 import android.view.View;
 
+import com.sep.UniTrips.model.ImportCalendar.Course;
 import com.sep.UniTrips.model.ImportCalendar.ImportCalendarInterface;
 import com.sep.UniTrips.model.ImportCalendar.ImportCalendarTaskManager;
 import com.sep.UniTrips.view.ImportCalendarActivity;
 
+import java.util.ArrayList;
+
 public class ImportCalendarPresneter implements ImportCalendarInterface.Presenter {
 
-    private String mToken = null;
     private ImportCalendarTaskManager mImportCalendarTaskManager;
-    private String mStudentId;
-    private String mPassword;
     private Context mContext;
     private ImportCalendarActivity mImportCalendarView;
-    private View mFocusView;
-    private Boolean mCancel = false;
 
     public ImportCalendarPresneter(Context context,ImportCalendarActivity importCalendarView) {
         this.mContext = context;
         this.mImportCalendarView = importCalendarView;
-//        this.mImportCalendarTaskManager = new ImportCalendarTaskManager();
+       this.mImportCalendarTaskManager = new ImportCalendarTaskManager(mContext,this);
     }
 
     @Override
-    public void login(String year, String id, String password) {
-
+    public void attemptGetCalendar(String id, String password, String year,String calendarName) {
+        mImportCalendarTaskManager.attemptGetCalendar(id,password,year,calendarName);
     }
 
     @Override
-    public Boolean isStudentId(String studentId) {
-        return null;
+    public void showToast(String message) {
+        mImportCalendarView.showToast(message);
     }
 
     @Override
-    public Boolean isPasswordValid(String password) {
-        return null;
+    public void resetError() {
+        mImportCalendarView.resetError();
     }
 
     @Override
-    public void checkId_password() {
-
+    public void setPasswordError(String errorMessage) {
+        mImportCalendarView.setPasswordError(errorMessage);
     }
 
     @Override
-    public void showSnackBar(String errorMessage) {
-
+    public void setIDError(String errorMessage) {
+        mImportCalendarView.setIDError(errorMessage);
     }
 
     @Override
-    public void showToast(String errorMessage) {
+    public void focusView() {
+        mImportCalendarView.focusView();
+    }
 
+    @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
+    @Override
+    public void updateUI() {
+        mImportCalendarView.updateUI();
     }
 
     @Override
-    public void finishActivity() {
-
+    public void setCalendarNameError(String errorMessage) {
+        mImportCalendarView.setCalendarNameError(errorMessage);
     }
 }
