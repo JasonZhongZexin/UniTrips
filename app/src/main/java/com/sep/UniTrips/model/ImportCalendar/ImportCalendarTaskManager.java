@@ -29,6 +29,7 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.sep.UniTrips.R;
+import com.sep.UniTrips.model.TestingStructs;
 import com.sep.UniTrips.presenter.ImportCalendarPresneter;
 
 import java.io.BufferedReader;
@@ -60,6 +61,12 @@ public class ImportCalendarTaskManager {
     private DatabaseReference mDatabase;
     private String mCalendarName;
 
+    public ImportCalendarTaskManager(Context context) {
+        // constructor for testing
+        this.mContext = context;
+        mCourses = new ArrayList<Course>();
+    }
+
     /**
      * This is the constructor of the class.
      * @param context
@@ -78,7 +85,7 @@ public class ImportCalendarTaskManager {
      * @param studentID the input student id by the user
      * @return true if the length of the input id is 6 or 8
      */
-    public Boolean isStudentId(String studentID){
+    private Boolean isStudentId(String studentID){
         return studentID.length()==8|| studentID.length()==6;
     }
 
@@ -87,7 +94,7 @@ public class ImportCalendarTaskManager {
      * @param password the input password by the user
      * @return true if the length of the password greater then 6
      */
-    public Boolean isPasswordValid(String password){
+    private Boolean isPasswordValid(String password){
         return password.length()>6;
 
     }
@@ -142,6 +149,48 @@ public class ImportCalendarTaskManager {
         }
 
     }
+
+    public TestingStructs.AttemptGetCalendarLogicErrors attemptGetCalendarLogic(String studentID,String password,String year,String calendarName){
+        this.mStudentId = studentID;
+        this.mPassword = password;
+        this.mYear = year;
+        this.mCalendarName =calendarName;
+
+        TestingStructs.AttemptGetCalendarLogicErrors attemptGetCalendarLogicErrors =
+                new TestingStructs.AttemptGetCalendarLogicErrors();
+
+        //check if password is empty.
+        // set cancel to true if any error happen.
+        if(TextUtils.isEmpty(mPassword)){
+            attemptGetCalendarLogicErrors.passwordError = (mContext.getString(R.string.error_field_required));
+            attemptGetCalendarLogicErrors.cancel = true;
+        }
+
+        //check for a valid password(length>6), if the user entered one.
+        // set cancel to true if any error happen.
+        if (!TextUtils.isEmpty(password) && !isPasswordValid(password)) {
+            attemptGetCalendarLogicErrors.passwordError = (mContext.getString(R.string.error_invalid_password));
+            attemptGetCalendarLogicErrors.cancel = true;
+        }
+
+        //check for valid student ID. set cancel to true if any error happen.
+        if (TextUtils.isEmpty(mStudentId)) {
+            attemptGetCalendarLogicErrors.iDError = (mContext.getString(R.string.error_field_required));
+            attemptGetCalendarLogicErrors.cancel = true;
+        } else if (!isStudentId(mStudentId)) {
+            attemptGetCalendarLogicErrors.iDError = (mContext.getString(R.string.error_invalid_email));
+            attemptGetCalendarLogicErrors.cancel = true;
+        }
+        //check for valid calendar name
+        if(TextUtils.isEmpty(calendarName)){
+            attemptGetCalendarLogicErrors.calendarNameError = (mContext.getString(R.string.error_field_required));
+            attemptGetCalendarLogicErrors.cancel = true;
+        }
+
+        return attemptGetCalendarLogicErrors;
+
+    }
+
     /**
      * This method use the user's input student ID and password login the user to UTS myTimetable
      * server and get the token and cookie if login successful. Then call the stored calendar method
