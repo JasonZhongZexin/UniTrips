@@ -8,10 +8,9 @@ package com.sep.UniTrips.model.UserSetting;
 
 public interface UserSettingInterface {
     interface presenter{
-        void setUserProfile(UserProfile userProfile);
-        void getUserProfile();
+        UserProfile getUserProfile();
     }
     interface view{
-        void initialView(UserProfile userProfile);
+        void initialView();
     }
 }

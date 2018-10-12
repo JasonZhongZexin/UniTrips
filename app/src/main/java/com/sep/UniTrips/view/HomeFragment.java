@@ -13,15 +13,27 @@
 
 package com.sep.UniTrips.view;
 
+import android.app.Activity;
 import android.content.Intent;
+import android.location.Location;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Spinner;
+import android.widget.TextView;
+import android.widget.Toast;
 
+import com.sep.UniTrips.presenter.FindPathToSchool;
+import com.sep.UniTrips.presenter.Records;
 import com.sep.UniTrips.R;
+
+import java.util.List;
+import java.util.Map;
 
 
 public class HomeFragment extends Fragment {
@@ -35,8 +47,22 @@ public class HomeFragment extends Fragment {
 //    private String mParam2;
 //
 //    private OnFragmentInteractionListener mListener;
+
+    // this is used for update trip information in a new thread
+    private static final int UPDATE_TRIP_INFORMATION = 1;
+    private Handler handler = null;
+
+
     private View mView;
     private FloatingActionButton mAddEventFbtn;
+
+    // here we define another button for refresh the current location
+    private FloatingActionButton mRefreshLocationFbtn;
+    private TextView mStationText;
+
+    private String userTransport = "Train";
+    private Location location = null;
+
     public HomeFragment() {
         // Required empty public constructor
     }
@@ -73,13 +99,94 @@ public class HomeFragment extends Fragment {
                 startActivity(intent);
             }
         });
-//        mHomeFragmentPresenter = new HomeFragmentPresenter(getActivity(),this);
-//        //get and show the course data
-//        mHomeFragmentPresenter.getCourseData();
-//        //get and show the transport information
-//        mHomeFragmentPresenter.getTransportInfo();
+
+
+        // the setting's transportation information
+        // the station information which is to show in the form of "station platform time-time"
+        mStationText = mView.findViewById(R.id.station_textview);
+        // used for new thread communication
+        handler = new Handler() {
+            @Override
+            public void handleMessage(Message msg) {
+                switch (msg.what) {
+                    case UPDATE_TRIP_INFORMATION:
+                        Records trip_information = (Records) msg.obj;
+                        mStationText.setText(trip_information.station_info);
+                        ((MainActivity) getActivity()).setCoords_double(trip_information.coords_double);
+                        break;
+                }
+            }
+        };
+
+        location = ((MainActivity) getActivity()).getLocation();
+        if (location == null) {
+            Toast toast=Toast.makeText(this.getActivity(), "Please enable location usage", Toast.LENGTH_SHORT);
+            toast.show();
+            return mView;
+        }
+
+        // debug
+        System.out.println("[Debug in HomeFragement.onCreateView] " + "************** location (" + location.getLatitude() + "," + location.getLongitude() + ")**************");
+
+        // initialize the trip information with transportation manner of userTransport
+        userTransport = ((MainActivity) getActivity()).getUserTransport();
+        if (userTransport == null) {
+            userTransport = "Train";
+        }
+        // debug
+        System.out.println("[Debug in HomeFragement.onCreateView]: " + "************** transport " + userTransport + "**************");
+        Thread thread = new UpdateTripInformationThread(location, userTransport);
+        thread.start();
+
+        mStationText.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), FindTripMapsActivity.class);
+                List<double []> coords_double = ((MainActivity) getActivity()).getCoords_double();
+                //System.out.println("records string" + Records.coords_double_to_string(coords_double));
+                intent.putExtra("coords_string", Records.coords_double_to_string(coords_double));
+
+                startActivity(intent);
+            }
+        });
+
         return mView;
     }
+
+    /**
+     * The thread used to update trip information
+     */
+    class UpdateTripInformationThread extends Thread {
+
+        private String transportation = "Train";
+        private Location location = null;
+        private double [] location_double = new double[2];
+
+        public UpdateTripInformationThread (Location location, String transportation) {
+
+            this.transportation = transportation;
+            this.location = location;
+            this.location_double[0] = location.getLatitude();
+            this.location_double[1] = location.getLongitude();
+        }
+
+        @Override
+        public void run() {
+
+            Records trip_infomation = FindPathToSchool.getTripInformation(location_double, transportation);
+
+            Message msg = new Message();
+            msg.what = UPDATE_TRIP_INFORMATION;
+            msg.obj = trip_infomation;
+
+            handler.sendMessage(msg);
+        }
+    }
+
+    public void setUserTransport (String userTransport) {
+        this.userTransport = userTransport;
+    }
+
 
 //    // TODO: Rename method, update argument and hook method into UI event
 //    public void onButtonPressed(Uri uri) {
@@ -104,6 +211,7 @@ public class HomeFragment extends Fragment {
 //        super.onDetach();
 //        mListener = null;
 //    }
+
 
     /**
      * This interface must be implemented by activities that contain this

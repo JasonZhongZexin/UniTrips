@@ -44,6 +44,8 @@ public class SettingFragment extends Fragment {
     private Button mLogoutBtn;
     private AlertDialog mDialog;
 
+    String userTransport = null;
+
     public SettingFragment() {
         // Required empty public constructor
     }
@@ -67,7 +69,7 @@ public class SettingFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getActivity(),UserSettingActivity.class);
-                startActivity(intent);
+                startActivityForResult(intent, 0); // 此处设置了用于返回参数的intent
             }
         });
         mLogoutBtn = mView.findViewById(R.id.logoutBtn);
@@ -215,4 +217,15 @@ public class SettingFragment extends Fragment {
 //        // TODO: Update argument type and name
 //        void onFragmentInteraction(Uri uri);
 //    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(requestCode == 0){
+            if(resultCode == 1) { // 获取用户的transportation
+                userTransport = data.getStringExtra("userPrefernceTransport");
+                ((MainActivity) getActivity()).setUserTransport(userTransport);
+            }
+        }
+    }
 }
