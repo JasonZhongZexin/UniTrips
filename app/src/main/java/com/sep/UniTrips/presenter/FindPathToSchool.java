@@ -18,6 +18,7 @@ import org.json.JSONArray;
 import java.util.Date;
 import java.text.SimpleDateFormat;
 import java.util.Map;
+import java.util.TimeZone;
 
 public class FindPathToSchool {
 
@@ -81,7 +82,7 @@ public class FindPathToSchool {
 
             String date = dateAndTime.split(" ")[0];
             String time = dateAndTime.split(" ")[1];
-            System.out.println("[Debug in FindPathToSchool.findTrips]: " + "date: " + date + " time: " + time);
+            //System.out.println("[Debug in FindPathToSchool.findTrips]: " + "date: " + date + " time: " + time);
 
             /*
             'outputFormat' => 'rapidJSON', 'coordOutputFormat' => 'EPSG:4326', 'depArrMacro' => 'dep',
@@ -234,15 +235,19 @@ public class FindPathToSchool {
                 // the departs time
                 String departsTime = departsLeg.getJSONObject("origin").getString("departureTimePlanned");
                 String [] departMinSec = departsTime.split("T")[1].split(":");
-                String departsTimeInfo = departMinSec[0] + ":" + departMinSec[1];
+                int departMinSec_syd = Integer.parseInt(departMinSec[0]) + 11;
+                String departMinSec_syds = Integer.toString(departMinSec_syd);
+                String departsTimeInfo = departMinSec_syds + ":" + departMinSec[1];
 
                 // the arrive time
                 String arriveTime = arriveLeg.getJSONObject("destination").getString("arrivalTimeEstimated");
                 String [] arriveMinSec = arriveTime.split("T")[1].split(":");
-                String arriveTimeInfo = arriveMinSec[0] + ":" + arriveMinSec[1];
+                int arriveMinSec_syd = Integer.parseInt(arriveMinSec[0]) + 11;
+                String arriveMinSec_syds = Integer.toString(arriveMinSec_syd);
+                String arriveTimeInfo = arriveMinSec_syds + ":" + arriveMinSec[1];
 
                 String result_str = departsInfo + " " + departsTimeInfo + "-" + arriveTimeInfo;
-//                System.out.println(result_str); // for debug
+                System.out.println(result_str);
 
                 // get the coords of positions from starting point to station
                 JSONArray coords = firstLeg.getJSONArray("coords");
@@ -278,6 +283,7 @@ public class FindPathToSchool {
 
 
 
+
     private Records filterTrip() {
 
         if (map.isEmpty()) { // no trips found
@@ -299,7 +305,6 @@ public class FindPathToSchool {
             return records;
         } else {
             return trips.get(0); //the trips is not empty, just return the first record
-
         }
 
     }
