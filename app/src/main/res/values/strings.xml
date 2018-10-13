@@ -16,8 +16,8 @@
     <string name="forgotPassword">Forgot your password?</string>
     <string name="title_activity_main">MainActivity</string>
     <string name="title_home">Home</string>
-    <string name="title_dashboard">Dashboard</string>
-    <string name="title_setting">setting</string>
+    <string name="title_Timetable">Timetable</string>
+    <string name="title_setting">Setting</string>
 
     <string name="title_logout">Logout</string>
     <string name="title_userInfo">User Information</string>

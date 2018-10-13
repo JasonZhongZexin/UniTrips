@@ -709,7 +709,6 @@
     <Botton
 
 </LinearLayout>
-====
         android:layout_height="match_parent"
         android:orientation="vertical">
         <LinearLayout
@@ -3018,4 +3017,3 @@
         android:src="@android:drawable/ic_input_add" />
 
 </RelativeLayout>
->>>>>>> 9158ca00288b4c32f97a327d1cdf34216b0b128f
