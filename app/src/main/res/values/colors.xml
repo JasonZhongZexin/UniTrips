@@ -10,4 +10,8 @@
     <color name="black_overlay">#66000000</color>
     <color name="textBlack">#000000</color>
     <color name="spinnerTextColor">#42b3f4</color>
+    <color name="trainColor">#FF5722</color>
+    <color name="busColor">#4268f4</color>
+    <color name="ferrycolor">#039619</color>
+    <color name="raillightColor">#db1515</color>
 </resources>

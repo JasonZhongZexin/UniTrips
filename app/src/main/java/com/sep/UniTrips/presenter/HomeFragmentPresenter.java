@@ -8,7 +8,6 @@ package com.sep.UniTrips.presenter;
 
 import android.content.Context;
 import android.graphics.Color;
-import android.util.Log;
 
 import com.sep.UniTrips.model.HomeFragmentModel.HomeFragmentInterface;
 import com.sep.UniTrips.model.HomeFragmentModel.HomeFragmentTaskManager;
@@ -35,14 +34,14 @@ public class HomeFragmentPresenter implements HomeFragmentInterface.Presenter{
 
     @Override
     public void showCourseData() {
-        mTaskManager.readCalendars(new HomeFragmentInterface.DataCallBack() {
+        mTaskManager.readCalendars(new HomeFragmentInterface.CalendarDataCallBack() {
             @Override
             public void onCalendarCallBack(Calendar calendar) {
                 if(calendar!=null){
                     java.util.Calendar androidCalendar = java.util.Calendar.getInstance();
                     int currentWeekNumber = androidCalendar.get(java.util.Calendar.WEEK_OF_YEAR);
                     for(Course course:calendar.getCourses()){
-                        if((course.getWeek_pattern().charAt(currentWeekNumber))=='1')
+                        if((course.getWeek_pattern().charAt((currentWeekNumber)-1))=='1')
                             weeklyCourse.add(course);
                     }
                     for(int i=0;i<weeklyCourse.size();i++) {
@@ -72,4 +71,13 @@ public class HomeFragmentPresenter implements HomeFragmentInterface.Presenter{
         });
     }
 
+    @Override
+    public void showTransportDetail(String station, String platform, String departureTime, String arrivalTime,String preferredTransport) {
+        mHomeFragmentView.showTransportDetail(station,platform,departureTime,arrivalTime,preferredTransport);
+    }
+
+    @Override
+    public void getRealTimeTransportInfo() {
+        mTaskManager.getTripDetail();
+    }
 }

@@ -21,8 +21,9 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.sep.UniTrips.R;
 import com.sep.UniTrips.model.HomeFragmentModel.HomeFragmentInterface;
@@ -50,15 +51,17 @@ public class HomeFragment extends Fragment implements HomeFragmentInterface.View
         mAddEventFbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getActivity(), AddEventActivity.class);
-                startActivity(intent);
+//                Intent intent = new Intent(getActivity(), AddEventActivity.class);
+//                startActivity(intent);
+                mPresenter.getRealTimeTransportInfo();
             }
         });
         mPresenter = new HomeFragmentPresenter(getActivity(),this);
         //get and show the course data
         mPresenter.showCourseData();
 //        //get and show the transport information
-//        mHomeFragmentPresenter.getTransportInfo();
+//        mPresenter.getRealTimeTransportInfo();
+
         return mView;
     }
 
@@ -82,6 +85,40 @@ public class HomeFragment extends Fragment implements HomeFragmentInterface.View
         textView_location.setTextColor(getResources().getColor(R.color.textColorWhite));
         textView_location.setText(location);
         textView_location.setTypeface(null, Typeface.BOLD);
+    }
+
+    @Override
+    public void showTransportDetail(String station, String platform, String departureTime, String arrivalTime, String preferredTransport) {
+        ImageView iconView = mView.findViewById(R.id.transport_icon_imageView);
+        TextView stationTv = mView.findViewById(R.id.station_textview);
+        TextView platFormTv = mView.findViewById(R.id.platform_textview);
+        TextView timeTv = mView.findViewById(R.id.time_textView);
+        LinearLayout transportLayout =mView.findViewById(R.id.transport_layout);
+        stationTv.setText(station);
+        platFormTv.setText(platform);
+        timeTv.setText(departureTime+"-"+arrivalTime);
+        switch(preferredTransport){
+            case "":
+                iconView.setImageResource(R.drawable.train_icon);
+                transportLayout.setBackgroundColor(getResources().getColor(R.color.trainColor));
+                break;
+            case "Train":
+                iconView.setImageResource(R.drawable.train_icon);
+                transportLayout.setBackgroundColor(getResources().getColor(R.color.trainColor));
+                break;
+            case"Bus":
+                iconView.setImageResource(R.drawable.ic_bus_24dp);
+                transportLayout.setBackgroundColor(getResources().getColor(R.color.busColor));
+                break;
+            case"Ferry":
+                iconView.setImageResource(R.drawable.ic_ferry_24dp);
+                transportLayout.setBackgroundColor(getResources().getColor(R.color.ferrycolor));
+                break;
+            case"Light Rail":
+                iconView.setImageResource(R.drawable.ic_light_rail_24dp);
+                transportLayout.setBackgroundColor(getResources().getColor(R.color.raillightColor));
+                break;
+        }
     }
 
     public void setOnClickListener(String viewTag, final Course course) {
