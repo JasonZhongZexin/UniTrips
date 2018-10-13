@@ -340,9 +340,7 @@ public class FindPathToSchool {
         // here is an example
         double [] currentLocation = new double [] {-33.9661649,151.1030075};
         getTripInformation(currentLocation,"Train");
-
     }
-
 }
 
 
