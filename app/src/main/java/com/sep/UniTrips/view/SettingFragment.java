@@ -1,6 +1,13 @@
 /**
- * Copyright (c) 2018. [ Zexin Zhong ]
- *
+ * Copyright (c) 2018. [Zexin Zhong]
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *  Unless required by applicable law or agreed to in writing,
+ *  software distributed under the License is distributed on an "AS IS" BASIS,
+ *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *  See the License for the specific language governing permissions an limitations under the License.
  */
 
 package com.sep.UniTrips.view;
@@ -30,7 +37,7 @@ import com.sep.UniTrips.R;
 // */
 public class SettingFragment extends Fragment {
 
-    private TextView mTransportSettingTextView;
+    private TextView mUserPreferenceTv;
     private TextView mAddCalendarTextView;
     private TextView mAboutTimeBoxesTextView;
     private View mView;
@@ -52,6 +59,14 @@ public class SettingFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getActivity(),ImportCalendarActivity.class);
+                startActivity(intent);
+            }
+        });
+        mUserPreferenceTv = mView.findViewById(R.id.userPreference_textView);
+        mUserPreferenceTv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(),UserSettingActivity.class);
                 startActivity(intent);
             }
         });

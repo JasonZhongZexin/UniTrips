@@ -10,20 +10,23 @@
  *  See the License for the specific language governing permissions an limitations under the License.
  */
 
-package com.sep.UniTrips.model.ImportCalendar;
+package com.sep.UniTrips.model.RestPassword;
 
-import android.content.Context;
-
-import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
-
-public class UTSTimetableServicesClient {
-
-    private static Retrofit mRetrofit = null;
-    private static final String HOST_URL = "https://mytimetable.uts.edu.au";
-
-    public static  Retrofit getClient(final Context context){
-        mRetrofit = new Retrofit.Builder().baseUrl(HOST_URL).addConverterFactory(GsonConverterFactory.create()).build();
-        return mRetrofit;
+public interface ResetPasswordInterface {
+    interface Presenter{
+        void requestEmail(String email);
+        void showErrorMessage(String errorMessage);
+        void restError();
+        void setEmailError(String errorMessage);
+        void focusView();
+        void updateUI(Boolean result);
+    }
+    interface view{
+        void showErrorMessage(String errorMessage);
+        void restError();
+        void setEmailError(String errorMessage);
+        void focusView();
+        void updateUI(Boolean result);
     }
 }
+

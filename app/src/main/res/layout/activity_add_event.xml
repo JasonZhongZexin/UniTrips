@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright (c) 2018. Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License. You may obtain a copy of the License at
+  ~      http://www.apache.org/licenses/LICENSE-2.0
+  ~  Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the specific language governing permissions an limitations under the License.
+  -->
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".view.AddEventActivity"
+    android:orientation="vertical"
+    android:background="@color/colorPrimaryDark">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_margin="5dp"
+        android:textSize="28dp"
+        android:textStyle="bold"
+        android:textColor="@color/textColorWhite"
+        android:text="@string/New_Event"/>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+    <android.support.design.widget.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp">
+
+        <EditText
+            android:id="@+id/eventTitle_et"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginBottom="5dp"
+            android:hint="@string/hint_addEventTitle"
+            android:imeActionId="6"
+            android:imeOptions="actionUnspecified"
+            android:inputType="text"
+            android:maxLines="1"
+            android:textSize="17dp"
+            android:singleLine="true" />
+    </android.support.design.widget.TextInputLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="3dp"
+        android:layout_marginBottom="3dp"
+        android:background="@color/black_overlay"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_margin="5dp"
+        android:textSize="20dp"
+        android:textStyle="bold"
+        android:textColor="@color/ColorSecondaryBtn"
+        android:text="@string/title_timePicker"/>
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:textSize="17dp"
+        android:id="@+id/eventStartTime_et"
+        android:hint="@string/hint_event_start_time"/>
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginBottom="5dp"
+        android:textSize="17dp"
+        android:id="@+id/eventEndTime_et"
+        android:hint="@string/hint_event_end_time"/>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="3dp"
+        android:layout_marginBottom="3dp"
+        android:background="@color/black_overlay"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_margin="5dp"
+        android:textSize="20dp"
+        android:textStyle="bold"
+        android:textColor="@color/ColorSecondaryBtn"
+        android:text="@string/title_eventLocation"/>
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginBottom="5dp"
+        android:textSize="17dp"
+        android:id="@+id/eventLocation_et"
+        android:hint="@string/hint_event_location"/>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="3dp"
+        android:layout_marginBottom="3dp"
+        android:background="@color/black_overlay"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_margin="5dp"
+            android:textSize="20dp"
+            android:textStyle="bold"
+            android:textColor="@color/ColorSecondaryBtn"
+            android:text="@string/NotificationTime"/>
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/hint_notification_time"
+        android:layout_marginRight="20dp"
+        android:layout_marginBottom="5dp"
+        android:textSize="17dp"
+        android:id="@+id/eventNotification_et"
+        android:layout_marginLeft="20dp"/>
+
+    </LinearLayout>
+    </ScrollView>
+    <Button
+        android:layout_width="match_parent"
+        android:layout_margin="20dp"
+        android:id="@+id/saveEvent_btn"
+        android:text="@string/text_addEvent_save_btn"
+        android:textSize="23dp"
+        android:textStyle="bold"
+        android:textColor="@color/textColorWhite"
+        android:background="@drawable/sign_up_btn_selector"
+        android:layout_height="wrap_content" />
+
+</LinearLayout>

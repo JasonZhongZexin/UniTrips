@@ -1,3 +1,16 @@
+/**
+ * Copyright (c) 2018. [Zexin Zhong]
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *  Unless required by applicable law or agreed to in writing,
+ *  software distributed under the License is distributed on an "AS IS" BASIS,
+ *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *  See the License for the specific language governing permissions an limitations under the License.
+ */
+
+
 package com.sep.UniTrips.model.SignUpModel;
 
 import android.content.Context;
@@ -11,6 +24,10 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseAuthUserCollisionException;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.sep.UniTrips.model.UserSetting.User;
+import com.sep.UniTrips.model.UserSetting.UserProfile;
 import com.sep.UniTrips.presenter.SignUpPresenter;
 import com.sep.UniTrips.R;
 
@@ -19,11 +36,13 @@ public class SignUpTaskManager {
     private SignUpPresenter mPresenter;
     private Context mContext;
     private FirebaseAuth mAuth;
+    private DatabaseReference mDatabase;
 
     public SignUpTaskManager(Context context,SignUpPresenter presenter){
         this.mContext = context;
         this.mPresenter = presenter;
         this.mAuth = FirebaseAuth.getInstance();
+        mDatabase = FirebaseDatabase.getInstance().getReference();
     }
 
     private boolean isEmailValid(String email) {
@@ -46,6 +65,7 @@ public class SignUpTaskManager {
      */
     public void attemptCreateAccount(String email,String password,String confirmPassword) {
 
+        mPresenter.restError();
         boolean cancel = false;
 
         //Check if any field is empty.
@@ -79,12 +99,12 @@ public class SignUpTaskManager {
         }
 
         if (cancel) {
-            // There was an error; don't attempt login and focus the first
+            // There was an error; don't attempt loginToUTS and focus the first
             // form field with an error.
-            mPresenter.showErrorMessage();
+            mPresenter.focusVies();
         } else {
 //            // Show a progress spinner, and kick off a background task to
-//            // perform the user login attempt.
+//            // perform the user loginToUTS attempt.
 //            showProgress(true);
 //            mAuthTask = new UserLoginTask(email, password);
 //            mAuthTask.execute((Void) null);
@@ -103,11 +123,10 @@ public class SignUpTaskManager {
             public void onComplete(@NonNull Task<AuthResult> task) {
 
                 if(!task.isSuccessful()){
-                    //login fail. feedback the user the error message
+                    //loginToUTS fail. feedback the user the error message
                     //Toast.makeText(SignInActivity.this, R.string.sign_fail_message,Toast.LENGTH_LONG).show();
-                    Log.d("create account fail", "onComplete: create account fail");
-                    mPresenter.updateUI(null);
                     try{
+                        mPresenter.updateUI(null);
                         throw task.getException();
                     }
                      catch (FirebaseAuthUserCollisionException exception)
@@ -116,14 +135,17 @@ public class SignUpTaskManager {
                         mPresenter.showSignUpError(mContext.getString(R.string.existEmailError));
 
                     } catch (Exception e) {
-                        Log.d("exception", "onComplete: " + e.getMessage());
+                        Log.e("sign up exception", "onComplete: " + e.getMessage());
                     }
                 }else{
-                    //login success, update the ui with the signed-in user's information
+                    //loginToUTS success, update the ui with the signed-in user's information
                     //Toast.makeText(SignInActivity.this, "Login successful",Toast.LENGTH_LONG).show();
                     //Log.d("create account success","CREATE ACCOUNT SUCCESSFUL");
                     FirebaseUser user = mAuth.getCurrentUser();
                     mPresenter.updateUI(user);
+                    //initial user setting
+                    UserProfile userProfile = new UserProfile();
+                    mDatabase.child("users").child(user.getUid()).child("User Profile").setValue(userProfile);
                 }
             }
         });

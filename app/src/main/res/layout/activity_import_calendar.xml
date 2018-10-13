@@ -49,7 +49,7 @@
                     android:layout_height="wrap_content">
 
                     <AutoCompleteTextView
-                        android:id="@+id/studentId_TextView"
+                        android:id="@+id/studentIDEt"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:hint="@string/prompt_StudentId"
@@ -64,7 +64,7 @@
                     android:layout_height="wrap_content">
 
                     <EditText
-                        android:id="@+id/password_editView"
+                        android:id="@+id/passwordEt"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:hint="@string/prompt_password"
@@ -82,10 +82,12 @@
                     android:layout_height="wrap_content">
 
                     <EditText
-                        android:id="@+id/password_editView"
+                        android:id="@+id/calendar_nameEt"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:hint="@string/calendar_name"
+                        android:hint="@string/hint_calendarName"
+                        android:imeActionId="6"
+                        android:imeActionLabel="@string/action_sign_in_short"
                         android:imeOptions="actionUnspecified"
                         android:inputType="text"
                         android:maxLines="1"
@@ -94,15 +96,15 @@
                 </android.support.design.widget.TextInputLayout>
 
                 <Button
-                    android:id="@+id/import_button"
+                    android:id="@+id/importBtn"
                     style="?android:textAppearanceSmall"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="36dp"
                     android:layout_gravity="center_horizontal"
                     android:textColor="@color/textColorWhite"
-                    android:textSize="20dp"
-                    android:padding="15dp"
+                    android:textSize="23dp"
+                    android:padding="10dp"
                     android:background="@drawable/sign_up_btn_selector"
                     android:text="@string/action_Import"
                     android:enabled="true"

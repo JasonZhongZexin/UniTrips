@@ -4,18 +4,12 @@
     <string name="title_activity_welcome">WelcomeActivity</string>
     <string name="title_activity_sign_in">Sign in</string>
 
-    <!-- Strings related to login -->
+    <!-- Strings related to UI -->
     <string name="title_username">Username</string>
     <string name="title_password">Password</string>
-    <string name="error_field_required">This field is required</string>
     <string name="title_activity_sign_up">Sign in</string>
-
-    <!-- Strings related to login -->
     <string name="action_register">Create account</string>
     <string name="action_sign_in_short">Sign in</string>
-    <string name="error_invalid_email">Invalid email address!</string>
-    <string name="error_invalid_password">Invalid password! Password should be at least 6 characters.</string>
-    <string name="error_incorrect_password">This password is incorrect</string>
     <string name="confirmedPassword">Confirm Password</string>
     <string name="title_email">Email</string>
     <string name="createAccount">Create your UniTripS account!</string>
@@ -24,13 +18,13 @@
     <string name="title_home">Home</string>
     <string name="title_dashboard">Dashboard</string>
     <string name="title_setting">setting</string>
+
     <string name="title_logout">Logout</string>
     <string name="title_userInfo">User Information</string>
     <string name="title_timetable">My Timetable</string>
 
-    <string name="confirmPassword_error">Password and confirm password do not match!</string>
-    <string name="sign_fail_message">Authentication failed. Please double check your login detail.</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
+
     <string name="transport_setting">Transport Setting</string>
     <string name="import_calendar">Add calendar</string>
     <string name="import_description">Import From UTS myTimetable</string>
@@ -42,10 +36,108 @@
     <string name="action_Sign_up">Sign up</string>
     <string name="logout_warning">Are you sure you want to logout?</string>
     <string name="action_cancel">Cancel</string>
-    <string name="existEmailError">You input email address has been used. Please try again!</string>
+    <string name="title_resetPassword">Reset Your Password</string>
+    <string name="hint_resetPassword">Enter the email address you used to sign up</string>
+    <string name="resetPasswordSend">A reset password link has been sent to your email address! Please check your email!</string>
+    <string name="hint_restPasswordEmailEt">Enter your email address</string>
+    <string name="button_submit">Submit</string>
+    <string name="hint_calendarName">Set a name for your new calendar</string>
+    <string name="title_calendarName">Calendar Name</string>
+    <string name="title_event_title">Title</string>
+    <string name="hint_addEventTitle">Title of your event</string>
+    <string name="title_timePicker">Event time</string>
+    <string name="hint_event_start_time">Event start time</string>
+    <string name="hint_event_end_time">Event end time</string>
+    <string name="title_eventLocation">Event Location</string>
+    <string name="hint_event_location">Add a location for you event</string>
+    <string name="hint_notification_time">Notification time</string>
+    <string name="text_addEvent_save_btn">Save Event</string>
+    <string name="text_addUserProfile_save_btn">Save</string>
+    <string name="title_default_transport_option">Preferred Transport: </string>
+    <string name="user_preference">My preference</string>
+    <string name="hint_set_preference">Set your preference for transport and notification.</string>
+    <string name="title_notificationTime_setting">Notification Time: </string>
+    <string name="title_preferred_arrival_time">Arrival: </string>
+    <string name="hint_notification_time_description">UniTrips will remind you before your schedule.</string>
+    <string name="hint_preferred_transport_description">UniTripS will provide the routes by the transportation.</string>
+    <string name="hint_arrival_time_description">UniTrips will provide a public transport time that matching your preferred arrival time before your schedule time.</string>
+
+    <!-- Strings related to error message -->
+    <string name="error_invalid_email">Invalid email address!</string>
+    <string name="error_field_required">This field is required</string>
+    <string name="error_invalid_password">Invalid password! Password should be at least 6 characters.</string>
+    <string name="confirmPassword_error">Password and confirm password do not match!</string>
+    <string name="sign_fail_message">Authentication failed. Please double check your login detail.</string>
+    <string name="resetPassword_Error">Fail to send the reset password link! Please try again!</string>
+
+
+    <!-- Strings related to UTS myTimeTable server -->
     <string name="fail_connection">Fail to connect the server! Please check your Internet connection!</string>
     <string name="no_response">server not response! Please try again!</string>
     <string name="welcome">Welcome to UniTripS!</string>
     <string name="calendar_name">Calendar Name</string>
+    <string name="storedSuccess">Import calendar successful!</string>
+    <string name="incorrect_login_Detail">Incorrect student ID or password!</string>
+    <string name="New_Event">New Event</string>
+    <string name="NotificationTime">Notification Time</string>
 
+    <!-- Strings related to firebase -->
+    <string name="firebase_invalidEmail_exception">The input email address does not exist! Please try again...</string>
+    <string name="existEmailError">You input email address has been used. Please try again...</string>
+    <string name="firebase_password_incorrect_exception">The input email and password do not match! Please try again...</string>
+    <string name="firebase_Timetable_upload_successful">Timetable upload successful!</string>
+    <string name="firebase_Timetable_upload_fail">Fail to store your calendar to firebase. Please try again!</string>
+
+    <!-- Strings related to spinners -->
+    <string-array name="Transport_setting_spinnerWidget_item">
+        <item>Train</item>
+        <item>Bus</item>
+        <item>Ferry</item>
+        <item>Light Rail</item>
+    </string-array>
+    <string-array name="NotificationTime_setting_spinnerWidget_Hours_item">
+        <item>HH</item>
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+        <item>6</item>
+        <item>7</item>
+        <item>8</item>
+        <item>9</item>
+        <item>10</item>
+        <item>11</item>
+        <item>12</item>
+        <item>13</item>
+        <item>14</item>
+        <item>15</item>
+        <item>16</item>
+        <item>17</item>
+        <item>18</item>
+        <item>19</item>
+        <item>12</item>
+        <item>13</item>
+        <item>14</item>
+        <item>15</item>
+        <item>16</item>
+        <item>17</item>
+        <item>18</item>
+        <item>19</item>
+        <item>20</item>
+        <item>21</item>
+        <item>22</item>
+        <item>23</item>
+        <item>24</item>
+    </string-array>
+    <string-array name="NotificationTime_setting_spinnerWidget_Min_item">
+        <item>MM</item>
+        <item>00</item>
+        <item>10</item>
+        <item>20</item>
+        <item>30</item>
+        <item>40</item>
+        <item>50</item>
+    </string-array>
 </resources>
