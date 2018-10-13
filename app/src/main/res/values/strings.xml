@@ -18,19 +18,22 @@
     <string name="error_incorrect_password">This password is incorrect</string>
     <string name="confirmedPassword">Confirm Password</string>
     <string name="title_email">Email</string>
-    <string name="createAccount">Create UniTripS \n account</string>
+    <string name="createAccount">Create your UniTripS account!</string>
     <string name="forgotPassword">Forgot your password?</string>
     <string name="title_activity_main">MainActivity</string>
     <string name="title_home">Home</string>
     <string name="title_dashboard">Dashboard</string>
     <string name="title_setting">setting</string>
+    <string name="title_logout">Logout</string>
+    <string name="title_userInfo">User Information</string>
+    <string name="title_timetable">My Timetable</string>
 
     <string name="confirmPassword_error">Password and confirm password do not match!</string>
     <string name="sign_fail_message">Authentication failed. Please double check your login detail.</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="transport_setting">Transport Setting</string>
     <string name="import_calendar">Add calendar</string>
-    <string name="import_description">From UTS myTimetable</string>
+    <string name="import_description">Import From UTS myTimetable</string>
     <string name="prompt_StudentId">Student ID </string>
     <string name="prompt_password">Password</string>
     <string name="action_Import">Import</string>
@@ -42,5 +45,7 @@
     <string name="existEmailError">You input email address has been used. Please try again!</string>
     <string name="fail_connection">Fail to connect the server! Please check your Internet connection!</string>
     <string name="no_response">server not response! Please try again!</string>
+    <string name="welcome">Welcome to UniTripS!</string>
+    <string name="calendar_name">Calendar Name</string>
 
 </resources>

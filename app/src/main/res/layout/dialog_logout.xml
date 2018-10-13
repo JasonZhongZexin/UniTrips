@@ -10,6 +10,7 @@
     android:layout_height="match_parent">
 
     <ImageView
+        android:layout_marginTop="25dp"
         android:layout_width="80dp"
         android:layout_height="80dp"
         android:src="@drawable/warning_icon"
@@ -18,8 +19,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/logout_warning"
+        android:layout_marginLeft="20dp"
         android:textSize="25dp"
-        android:layout_gravity="center_horizontal"
+        android:layout_gravity="center"
         android:padding="20dp"/>
     <LinearLayout
         android:layout_marginTop="18dp"
@@ -31,6 +33,7 @@
             android:id="@+id/dialog_logoutBtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginRight="60dp"
             android:text="@string/action_log_out"
             android:textAllCaps="false"
             android:textColor="@color/textColorWhite"

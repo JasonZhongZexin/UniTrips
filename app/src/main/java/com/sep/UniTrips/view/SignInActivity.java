@@ -335,10 +335,10 @@ public class SignInActivity extends AppCompatActivity{
     private void updateUI(FirebaseUser currentUser){
         //check if user is signed in (non-null)
         if(currentUser!=null){
-//            Intent intent = new Intent(SignInActivity.this,MainActivity.class);
-//            startActivity(intent);
-            Intent intent = new Intent(SignInActivity.this,Database_tester.class);
+            Intent intent = new Intent(SignInActivity.this,MainActivity.class);
             startActivity(intent);
+//            Intent intent = new Intent(SignInActivity.this,Database_tester.class);
+//            startActivity(intent);
         }
     }
     private void signIn(){
