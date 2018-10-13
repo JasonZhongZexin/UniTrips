@@ -18,9 +18,10 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/logout_warning"
-        android:layout_marginLeft="20dp"
-        android:textSize="25dp"
+        android:text="@string/resetPassword_Error"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:textSize="20dp"
         android:textStyle="bold"
         android:textColor="@color/colorSecondaryBtnClicked"
         android:layout_gravity="center"
@@ -31,12 +32,13 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:padding="20dp">
+
         <Button
             android:id="@+id/dialog_logoutBtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginRight="60dp"
-            android:text="@string/action_log_out"
+            android:text="@string/action_Retry"
             android:textStyle="bold"
             android:textAllCaps="false"
             android:textColor="@color/textColorWhite"
@@ -45,7 +47,7 @@
             android:id="@+id/dialog_cancelBtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/action_cancel"
+            android:text="@string/action_back_home"
             android:textAllCaps="false"
             android:textColor="@color/textColorWhite"
             android:textStyle="bold"

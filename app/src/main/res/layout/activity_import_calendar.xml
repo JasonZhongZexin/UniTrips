@@ -11,7 +11,7 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context=".view.ImportCalendarActivity"
-    android:background="@color/colorPrimaryDark">
+    android:background="@color/colorPrimary">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -29,6 +29,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:text="@string/import_description"
+            android:textStyle="bold"
             android:textColor="@color/common_google_signin_btn_text_dark"
             android:id="@+id/source_String_TextView"
             android:textSize="20dp"

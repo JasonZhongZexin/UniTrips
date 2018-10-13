@@ -6,14 +6,13 @@
   -->
 
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".view.AddEventActivity"
-    android:orientation="vertical"
-    android:background="@color/colorPrimaryDark">
-
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".view.AddEventActivity"
+        android:orientation="vertical"
+        android:background="@color/colorPrimaryDark">
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -63,7 +62,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:layout_margin="5dp"
-        android:textSize="20dp"
+        android:textSize="19dp"
         android:textStyle="bold"
         android:textColor="@color/ColorSecondaryBtn"
         android:text="@string/title_timePicker"/>
@@ -98,7 +97,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:layout_margin="5dp"
-        android:textSize="20dp"
+        android:textSize="19dp"
         android:textStyle="bold"
         android:textColor="@color/ColorSecondaryBtn"
         android:text="@string/title_eventLocation"/>
@@ -123,7 +122,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:layout_margin="5dp"
-            android:textSize="20dp"
+            android:textSize="19dp"
             android:textStyle="bold"
             android:textColor="@color/ColorSecondaryBtn"
             android:text="@string/NotificationTime"/>
@@ -152,3 +151,5 @@
         android:layout_height="wrap_content" />
 
 </LinearLayout>
+
+

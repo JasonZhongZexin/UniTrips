@@ -18,6 +18,11 @@
     <string name="title_home">Home</string>
     <string name="title_Timetable">Timetable</string>
     <string name="title_setting">Setting</string>
+    <string name="title_calendar">Calendar</string>
+    <string name="title_select_calendar">Select Calendar:</string>
+    <string name="title_FQA">FQA</string>
+    <string name="title_Manage_calendar">Manage Calendar</string>
+
 
     <string name="title_logout">Logout</string>
     <string name="title_userInfo">User Information</string>
@@ -34,6 +39,8 @@
     <string name="action_log_out">Logout</string>
     <string name="action_Sign_in">Sign in</string>
     <string name="action_Sign_up">Sign up</string>
+    <string name="action_back_home">Home</string>
+    <string name="action_Retry">Try Again</string>
     <string name="logout_warning">Are you sure you want to logout?</string>
     <string name="action_cancel">Cancel</string>
     <string name="title_resetPassword">Reset Your Password</string>
@@ -44,6 +51,7 @@
     <string name="hint_calendarName">Set a name for your new calendar</string>
     <string name="title_calendarName">Calendar Name</string>
     <string name="title_event_title">Title</string>
+    <string name="title_today_event">Today's event</string>
     <string name="hint_addEventTitle">Title of your event</string>
     <string name="title_timePicker">Event time</string>
     <string name="hint_event_start_time">Event start time</string>
@@ -53,6 +61,7 @@
     <string name="hint_notification_time">Notification time</string>
     <string name="text_addEvent_save_btn">Save Event</string>
     <string name="text_addUserProfile_save_btn">Save</string>
+    <string name="dialog_ok">OK</string>
     <string name="title_default_transport_option">Preferred Transport: </string>
     <string name="user_preference">My preference</string>
     <string name="hint_set_preference">Set your preference for transport and notification.</string>
@@ -87,6 +96,14 @@
     <string name="firebase_password_incorrect_exception">The input email and password do not match! Please try again...</string>
     <string name="firebase_Timetable_upload_successful">Timetable upload successful!</string>
     <string name="firebase_Timetable_upload_fail">Fail to store your calendar to firebase. Please try again!</string>
+
+    <!-- Strings related to FQA -->
+    <string name="question_one">Q1</string>
+    <string name="question_two">Q2</string>
+    <string name="question_three">Q3</string>
+    <string name="answer_one">A1</string>
+    <string name="answer_two">A2</string>
+    <string name="answer_three">A3</string>
 
     <!-- Strings related to spinners -->
     <string-array name="Transport_setting_spinnerWidget_item">
@@ -140,4 +157,12 @@
         <item>40</item>
         <item>50</item>
     </string-array>
+
+    <string-array name="Calendar_select_spinnerWidget_item">
+        <item>Calendar 1</item>
+        <item>Calendar 2</item>
+        <item>Calendar 3</item>
+        <item>Calendar 4</item>
+    </string-array>
+
 </resources>
