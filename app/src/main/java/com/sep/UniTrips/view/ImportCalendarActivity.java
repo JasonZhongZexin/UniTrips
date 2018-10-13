@@ -35,7 +35,6 @@ public class ImportCalendarActivity extends AppCompatActivity implements ImportC
     private EditText mStudentIDEt;
     private EditText mPasswordEt;
     private Button mImportBtn;
-    private EditText mCalendarName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,7 +43,6 @@ public class ImportCalendarActivity extends AppCompatActivity implements ImportC
         mPresenter = new ImportCalendarPresneter(this,this);
         mStudentIDEt = findViewById(R.id.studentIDEt);
         mPasswordEt = findViewById(R.id.passwordEt);
-        mCalendarName = findViewById(R.id.calendar_nameEt);
         mImportBtn = findViewById(R.id.importBtn);
         mImportBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -52,8 +50,7 @@ public class ImportCalendarActivity extends AppCompatActivity implements ImportC
                 String ID = mStudentIDEt.getText().toString();
                 String password = mPasswordEt.getText().toString();
                 String year = Integer.toString(Calendar.getInstance().get(Calendar.YEAR));
-                String calendarName = mCalendarName.getText().toString();
-                mPresenter.attemptGetCalendar(ID,password,year,calendarName);
+                mPresenter.attemptGetCalendar(ID,password,year);
             }
         });
     }
@@ -92,11 +89,5 @@ public class ImportCalendarActivity extends AppCompatActivity implements ImportC
     @Override
     public void updateUI() {
         startActivity(getParentActivityIntent());
-    }
-
-    @Override
-    public void setCalendarNameError(String errorMessage) {
-        mCalendarName.setError(errorMessage);
-        mFocusView = mCalendarName;
     }
 }

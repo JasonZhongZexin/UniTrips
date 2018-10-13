@@ -58,7 +58,6 @@ public class ImportCalendarTaskManager {
     private ArrayList<Course> mCourses;
     private FirebaseAuth mAuth;
     private DatabaseReference mDatabase;
-    private String mCalendarName;
 
     /**
      * This is the constructor of the class.
@@ -95,11 +94,10 @@ public class ImportCalendarTaskManager {
     /**
      *
      */
-    public void attemptGetCalendar(String studentID,String password,String year,String calendarName){
+    public void attemptGetCalendar(String studentID,String password,String year){
         this.mStudentId = studentID;
         this.mPassword = password;
         this.mYear = year;
-        this.mCalendarName =calendarName;
         boolean cancel = false;
 
         //reset errors.
@@ -125,11 +123,6 @@ public class ImportCalendarTaskManager {
             cancel = true;
         } else if (!isStudentId(mStudentId)) {
             mPresenter.setIDError(mContext.getString(R.string.error_invalid_email));
-            cancel = true;
-        }
-        //check for valid calendar name
-        if(TextUtils.isEmpty(calendarName)){
-            mPresenter.setCalendarNameError(mContext.getString(R.string.error_field_required));
             cancel = true;
         }
 
@@ -278,7 +271,7 @@ public class ImportCalendarTaskManager {
 //                        mPresenter.showToast(mContext.getString(R.string.storedSuccess));
 //                        mPresenter.finishActivity();
                         if(mCourses.size()>0){
-                            Calendar calendar = new Calendar(mCourses,mCalendarName);
+                            Calendar calendar = new Calendar(mCourses,"UTS");
                             final FirebaseUser currentUser = mAuth.getCurrentUser();
                             mDatabase.child("users").child(currentUser.getUid()).child("Calendars").child(calendar.getCalendarName()).setValue(calendar).addOnSuccessListener(new OnSuccessListener<Void>() {
                                 @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)

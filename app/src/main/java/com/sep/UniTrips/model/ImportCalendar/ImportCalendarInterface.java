@@ -14,14 +14,13 @@ package com.sep.UniTrips.model.ImportCalendar;
 
 public interface ImportCalendarInterface {
     interface Presenter{
-        void attemptGetCalendar(String id, String password, String year,String calendarName);
+        void attemptGetCalendar(String id, String password, String year);
         void showToast(String message);
         void resetError();
         void setPasswordError(String errorMessage);
         void setIDError(String errorMessage);
         void focusView();
         void updateUI();
-        void setCalendarNameError(String errorMessage);
     }
 
     interface View{
@@ -31,6 +30,5 @@ public interface ImportCalendarInterface {
         void focusView();
         void showToast(String message);
         void updateUI();
-        void setCalendarNameError(String errorMessage);
     }
 }

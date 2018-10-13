@@ -14,12 +14,15 @@
 package com.sep.UniTrips.model.SignUpModel;
 
 import android.content.Context;
+import android.os.AsyncTask;
 import android.support.annotation.NonNull;
 import android.text.TextUtils;
 import android.util.Log;
 
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.FirebaseNetworkException;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseAuthUserCollisionException;
@@ -30,6 +33,10 @@ import com.sep.UniTrips.model.UserSetting.User;
 import com.sep.UniTrips.model.UserSetting.UserProfile;
 import com.sep.UniTrips.presenter.SignUpPresenter;
 import com.sep.UniTrips.R;
+
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.TimeUnit;
+import java.util.concurrent.TimeoutException;
 
 public class SignUpTaskManager {
 
@@ -68,6 +75,7 @@ public class SignUpTaskManager {
         mPresenter.restError();
         boolean cancel = false;
 
+
         //Check if any field is empty.
         if(TextUtils.isEmpty(email)){
             mPresenter.setEmailError(mContext.getString(R.string.error_field_required));
@@ -103,11 +111,6 @@ public class SignUpTaskManager {
             // form field with an error.
             mPresenter.focusVies();
         } else {
-//            // Show a progress spinner, and kick off a background task to
-//            // perform the user loginToUTS attempt.
-//            showProgress(true);
-//            mAuthTask = new UserLoginTask(email, password);
-//            mAuthTask.execute((Void) null);
             createUser(email,password);
         }
     }
@@ -118,36 +121,115 @@ public class SignUpTaskManager {
      * otherwise display an error message to the user.
      */
     public void createUser(String email, String password){
-        mAuth.createUserWithEmailAndPassword(email,password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-            @Override
-            public void onComplete(@NonNull Task<AuthResult> task) {
+            mPresenter.showProgressBar();
+            mAuth.createUserWithEmailAndPassword(email,password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                @Override
+                public void onComplete(@NonNull Task<AuthResult> task) {
 
-                if(!task.isSuccessful()){
-                    //loginToUTS fail. feedback the user the error message
-                    //Toast.makeText(SignInActivity.this, R.string.sign_fail_message,Toast.LENGTH_LONG).show();
-                    try{
-                        mPresenter.updateUI(null);
-                        throw task.getException();
-                    }
-                     catch (FirebaseAuthUserCollisionException exception)
-                    {
-                        Log.d("email exception", "onComplete: exist_email");
-                        mPresenter.showSignUpError(mContext.getString(R.string.existEmailError));
+                    if(!task.isSuccessful()){
+                        //loginToUTS fail. feedback the user the error message
+                        //Toast.makeText(SignInActivity.this, R.string.sign_fail_message,Toast.LENGTH_LONG).show();
+                        try{
+                            mPresenter.updateUI(null);
+                            throw task.getException();
+                        }
+                        catch (FirebaseAuthUserCollisionException exception)
+                        {
+//                        Log.d("email exception", "onComplete: exist_email");
+                            mPresenter.showSignUpError(mContext.getString(R.string.existEmailError));
 
-                    } catch (Exception e) {
-                        Log.e("sign up exception", "onComplete: " + e.getMessage());
+                        }catch (FirebaseNetworkException exception){
+                            mPresenter.showTimeoutDialog();
+                        }
+                        catch (Exception e) {
+                            Log.e("sign up exception", "onComplete: " + e.getMessage());
+                        }
+                    }else{
+                        //loginToUTS success, update the ui with the signed-in user's information
+                        FirebaseUser user = mAuth.getCurrentUser();
+                        mPresenter.updateUI(user);
+                        //initial user setting
+                        UserProfile userProfile = new UserProfile();
+                        mDatabase.child("users").child(user.getUid()).child("User Profile").setValue(userProfile);
                     }
-                }else{
-                    //loginToUTS success, update the ui with the signed-in user's information
-                    //Toast.makeText(SignInActivity.this, "Login successful",Toast.LENGTH_LONG).show();
-                    //Log.d("create account success","CREATE ACCOUNT SUCCESSFUL");
-                    FirebaseUser user = mAuth.getCurrentUser();
-                    mPresenter.updateUI(user);
-                    //initial user setting
-                    UserProfile userProfile = new UserProfile();
-                    mDatabase.child("users").child(user.getUid()).child("User Profile").setValue(userProfile);
                 }
-            }
-        });
+            });
     }
+
+//    public class CreatAccountTask extends AsyncTask<Void, Void, String> {
+//
+//        private final String mEmail;
+//        private final String mPassword;
+//        private String mErrorMessage;
+//        private FirebaseUser mUser;
+//
+//        public CreatAccountTask(String email, String password) {
+//            this.mEmail = email;
+//            this.mPassword = password;
+//        }
+//
+//        @Override
+//        protected String doInBackground(Void... params) {
+////            try {
+////                // Simulate network access.
+////                Thread.sleep(3000);
+////            } catch (InterruptedException e) {
+////                return mContext.getString(R.string.existEmailError);
+////            }
+//            createUser();
+//            if(mErrorMessage != null ){
+//                return mErrorMessage;
+//            }
+//            return null;
+//        }
+//
+//        @Override
+//        protected void onPostExecute(final String errorMessage) {
+//                mPresenter.updateUI(mUser,errorMessage);
+//        }
+//
+//        @Override
+//        protected void onPreExecute() {
+//            super.onPreExecute();
+//            mPresenter.showProgressBar();
+//        }
+//
+//        @Override
+//        protected void onProgressUpdate(Void... values) {
+//            super.onProgressUpdate(values);
+//        }
+//
+//        /**
+//         * Create an account via using the firebase createUserWithEmailAndPasswordMethod and
+//         * waiting for the sign up result. if sign in success, update the current user with the sign-in user,
+//         * otherwise set error message.
+//         */
+//        public void createUser(){
+//            mAuth.createUserWithEmailAndPassword(mEmail,mPassword).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+//                @Override
+//                public void onComplete(@NonNull Task<AuthResult> task) {
+//
+//                    if(!task.isSuccessful()){
+//                        //loginToUTS fail. feedback the user the error message
+//                        //Toast.makeText(SignInActivity.this, R.string.sign_fail_message,Toast.LENGTH_LONG).show();
+//                        try{
+//                            throw task.getException();
+//                        }
+//                        catch (FirebaseAuthUserCollisionException exception)
+//                        {
+//                            //set error message
+//                            mErrorMessage = mContext.getString(R.string.existEmailError);
+//
+//                        } catch (Exception e) {
+//                            Log.e("sign up exception", "onComplete: " + e.getMessage());
+//                            mErrorMessage = "fail";
+//                        }
+//                    }else{
+//                        mUser = mAuth.getCurrentUser();
+//                        mErrorMessage = null;
+//                    }
+//                }
+//            });
+//        }
+//    }
 }
