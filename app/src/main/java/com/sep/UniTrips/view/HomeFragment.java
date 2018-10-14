@@ -107,7 +107,11 @@ public class HomeFragment extends Fragment {
                         case UPDATE_TRIP_INFORMATION:
                             Records trip_information = (Records) msg.obj;
                             mStationText.setText(trip_information.station_info);
+                        try{
                             ((MainActivity) getActivity()).setCoords_double(trip_information.coords_double);
+                        }catch (NullPointerException e){
+                            throw(e);
+                        }
                             break;
                     }
                 }
