@@ -320,25 +320,16 @@ public class FindPathToSchool {
         FindPathToSchool findPathToSchool = new FindPathToSchool(userPreferredTransport);
         // refresh current location
         findPathToSchool.refreshCurrentLocation(currentLocation);
-
         // query the NSW transport api, and get the json text
         String line = findPathToSchool.findTrips();
-
         // parse the json text into trip information, and store the information in a Hashmap
         // One example of the map is: {"Train":["station1 platform 1 time-time", "station2 platform2 time-time"}
         findPathToSchool.parseTrips(line);
-
         // filter one possible trip with the user preference
         Records records = findPathToSchool.filterTrip();
 
         return records;
 
-//        mStationText.setText(trip_information);
     }
 
-//    public static void main (String [] args) {
-//        // here is an example
-//        double [] currentLocation = new double [] {-33.9661649,151.1030075};
-//        getTripInformation(currentLocation,"Train");
-//    }
 }
