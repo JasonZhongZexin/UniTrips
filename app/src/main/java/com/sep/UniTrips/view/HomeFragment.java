@@ -203,8 +203,8 @@ public class HomeFragment extends Fragment implements HomeFragmentInterface.View
         }
     }
 
-    /**************************************************************************************************
-     * new debug testing
+    /**
+     * update user transport
      * @param userTransport
      */
     public void setUserTransport (String userTransport) {

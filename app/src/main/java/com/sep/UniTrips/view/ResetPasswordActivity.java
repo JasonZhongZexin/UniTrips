@@ -86,18 +86,19 @@ public class ResetPasswordActivity extends AppCompatActivity implements ResetPas
     public void updateUI(Boolean result) {
         if(result==true){
             //reset password link send successful
-            AlertDialog.Builder mBuilder = new AlertDialog.Builder(this);
-            final View dialogView = getLayoutInflater().inflate(R.layout.dialog_email_success,null);
-            Button buttonOk = dialogView.findViewById(R.id.dialog_OkBtn);
-            buttonOk.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    mDialog.dismiss();
-                }
-            });
-            mBuilder.setView(dialogView);
-            mDialog = mBuilder.create();
-            mDialog.show();
+//            AlertDialog.Builder mBuilder = new AlertDialog.Builder(this);
+//            final View dialogView = getLayoutInflater().inflate(R.layout.dialog_email_success,null);
+//            Button buttonOk = dialogView.findViewById(R.id.dialog_OkBtn);
+//            buttonOk.setOnClickListener(new View.OnClickListener() {
+//                @Override
+//                public void onClick(View v) {
+//                    mDialog.dismiss();
+//                }
+//            });
+//            mBuilder.setView(dialogView);
+//            mDialog = mBuilder.create();
+//            mDialog.show();
+            Toast.makeText(this,getString(R.string.resetPasswordSend),Toast.LENGTH_LONG).show();
         } else{
             //reset password link send successful
             AlertDialog.Builder mBuilder = new AlertDialog.Builder(this);

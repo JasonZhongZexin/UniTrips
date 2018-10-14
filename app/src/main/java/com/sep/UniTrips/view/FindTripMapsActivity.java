@@ -35,7 +35,6 @@ public class FindTripMapsActivity extends FragmentActivity implements OnMapReady
         // 获取路径信息
         Intent intent = getIntent();
         String coords_String = intent.getStringExtra("coords_string");
-        //System.out.println("*************coords_String: " + coords_String);
         coords = Records.coords_string_to_double(coords_String);
 
     }
@@ -65,7 +64,6 @@ public class FindTripMapsActivity extends FragmentActivity implements OnMapReady
             double [] coord = coords.get(i);
 
             LatLng position = new LatLng(coord[0], coord[1]);
-            //System.out.println(position.toString());
             positions.add(position);
         }
         // 放大以及定位到起点

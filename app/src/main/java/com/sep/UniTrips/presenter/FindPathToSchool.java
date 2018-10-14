@@ -133,7 +133,6 @@ public class FindPathToSchool {
             e.printStackTrace();
 
         }
-        System.out.println("[Debug in FindPathToSchool.findTrips]: "+ "*************" + line + "*********************");
 
         return line;
     }
@@ -236,6 +235,8 @@ public class FindPathToSchool {
                 String departsTime = departsLeg.getJSONObject("origin").getString("departureTimePlanned");
                 String [] departMinSec = departsTime.split("T")[1].split(":");
                 int departMinSec_syd = Integer.parseInt(departMinSec[0]) + 11;
+                if(departMinSec_syd>=24)
+                    departMinSec_syd -= 24;
                 String departMinSec_syds = Integer.toString(departMinSec_syd);
                 String departsTimeInfo = departMinSec_syds + ":" + departMinSec[1];
 
@@ -243,6 +244,8 @@ public class FindPathToSchool {
                 String arriveTime = arriveLeg.getJSONObject("destination").getString("arrivalTimeEstimated");
                 String [] arriveMinSec = arriveTime.split("T")[1].split(":");
                 int arriveMinSec_syd = Integer.parseInt(arriveMinSec[0]) + 11;
+                if(arriveMinSec_syd>= 24)
+                    arriveMinSec_syd -= 24;
                 String arriveMinSec_syds = Integer.toString(arriveMinSec_syd);
                 String arriveTimeInfo = arriveMinSec_syds + ":" + arriveMinSec[1];
 
@@ -320,16 +323,20 @@ public class FindPathToSchool {
         FindPathToSchool findPathToSchool = new FindPathToSchool(userPreferredTransport);
         // refresh current location
         findPathToSchool.refreshCurrentLocation(currentLocation);
+
         // query the NSW transport api, and get the json text
         String line = findPathToSchool.findTrips();
+
         // parse the json text into trip information, and store the information in a Hashmap
         // One example of the map is: {"Train":["station1 platform 1 time-time", "station2 platform2 time-time"}
         findPathToSchool.parseTrips(line);
+
         // filter one possible trip with the user preference
         Records records = findPathToSchool.filterTrip();
 
         return records;
 
+//        mStationText.setText(trip_information);
     }
 
 }
