@@ -55,6 +55,9 @@
     <string name="title_timeout">Connection Timeout</string>
     <string name="hours">hrs</string>
     <string name="Course_Title">Course Detail</string>
+    <string name= "userSetting_success">Update user preference success !</string>
+    <string name="title_settingFail">Update Fail</string>
+    <string name="update_fail">Oops! Fail to update your setting. Please try again !</string>
 
     <!-- Strings related to error message -->
     <string name="error_invalid_email">Invalid email address!</string>
@@ -133,4 +136,13 @@
         <item>50</item>
     </string-array>
     <string name="title_activity_find_trip_maps">Map</string>
+    <!-- FQA view -->
+    <string name="question_one">Q1: How can I login to the app when I forgot my Password ?</string>
+    <string name="question_two">Q2: If the UTS timetable calendar was changed, how can I update the new calendar to the homepage ?</string>
+    <string name="question_three">Q3: How can I get the real time location and transport information in the home page when I changed location and events ?</string>
+    <string name="question_four">There is the contact details which you can contact us if you have any questions.</string>
+    <string name="answer_one">You can reset your password in login page, there is a link to reset password page.When you submit the email you used to login, you will received an email which have a link to set the new password.</string>
+    <string name="answer_two">When you changed your UTS timetable and you want to import the new one to view the transport information, you can just import the calendar again to cover the old calendar, the App will save the new calendar to database and show it on the homepage.</string>
+    <string name="answer_three">Press the home button, the home page and the google map page will refresh, so that you can get the station and time you need.</string>
+    <string name="answer_four">Email:</string>
 </resources>

@@ -6,11 +6,15 @@
 
 package com.sep.UniTrips.view;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -45,12 +49,18 @@ public class UserSettingActivity extends AppCompatActivity implements UserSettin
         mSaveBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                UserProfile newUserProfiel = new UserProfile(mTranportSettingSpinner.getSelectedItem().toString(),
-                        Integer.parseInt(mNotificatationTimeHSpinner.getSelectedItem().toString()),
-                        Integer.parseInt(mNotificatationTimeMSpinner.getSelectedItem().toString()),
-                        Integer.parseInt(mArrivalTimeHSpinner.getSelectedItem().toString()),
-                        Integer.parseInt(mArrivalTimeMSpinner.getSelectedItem().toString()));
-                mPresenter.setUserProfile(newUserProfiel);
+                try{
+                    UserProfile newUserProfiel = new UserProfile(mTranportSettingSpinner.getSelectedItem().toString(),
+                            Integer.parseInt(mNotificatationTimeHSpinner.getSelectedItem().toString()),
+                            Integer.parseInt(mNotificatationTimeMSpinner.getSelectedItem().toString()),
+                            Integer.parseInt(mArrivalTimeHSpinner.getSelectedItem().toString()),
+                            Integer.parseInt(mArrivalTimeMSpinner.getSelectedItem().toString()));
+                    mPresenter.setUserProfile(newUserProfiel);
+                }catch(NumberFormatException e) {
+                    Toast.makeText(getApplicationContext(),getString(R.string.update_fail),Toast.LENGTH_LONG).show();
+                    e.printStackTrace();
+                    throw(e);
+                }
             }
         });
     }
@@ -81,6 +91,25 @@ public class UserSettingActivity extends AppCompatActivity implements UserSettin
             mArrivalTimeHSpinner.setSelection(pos);
             pos = userProfile.getArrivalTimeM()/10+1;
             mArrivalTimeMSpinner.setSelection(pos);
+        }
+    }
+
+    @Override
+    public void updateView(Boolean isSuccess) {
+        if(isSuccess){
+            Intent intent = new Intent(this,MainActivity.class);
+            startActivity(intent);
+            Toast.makeText(this,getString(R.string.userSetting_success),Toast.LENGTH_LONG).show();
+        }else{
+            new AlertDialog.Builder(this).setTitle(R.string.title_settingFail)
+                    .setMessage(R.string.update_fail)
+                    .setIcon(R.drawable.ic_error_outline_black_30dp)
+                    .setPositiveButton(R.string.title_tryAgain, new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.dismiss();
+                        }
+                    }).show();
         }
     }
 }

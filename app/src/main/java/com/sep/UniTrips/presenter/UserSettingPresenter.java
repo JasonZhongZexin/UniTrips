@@ -36,6 +36,11 @@ public class UserSettingPresenter implements UserSettingInterface.presenter{
         mTaskManager.getUserProfile();
     }
 
+    @Override
+    public void updateView(Boolean isSuccess) {
+        mUserSettingActivity.updateView(isSuccess);
+    }
+
     public void initialView(UserProfile userProfile){
         mUserSettingActivity.initialView(userProfile);
     }

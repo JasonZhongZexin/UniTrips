@@ -125,7 +125,6 @@ public class HomeFragment extends Fragment implements HomeFragmentInterface.View
             public void onClick(View v) {
                 Intent intent = new Intent(getActivity(), FindTripMapsActivity.class);
                 List<double []> coords_double = ((MainActivity) getActivity()).getCoords_double();
-                //System.out.println("records string" + Records.coords_double_to_string(coords_double));
                 intent.putExtra("coords_string", Records.coords_double_to_string(coords_double));
 
                 startActivity(intent);
