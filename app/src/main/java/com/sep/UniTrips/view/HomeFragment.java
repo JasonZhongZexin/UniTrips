@@ -94,7 +94,7 @@ public class HomeFragment extends Fragment {
         });
         this.mAuth = FirebaseAuth.getInstance();
         mDatabase = FirebaseDatabase.getInstance().getReference();
-        
+
         // the setting's transportation information
         // the station information which is to show in the form of "station platform time-time"
         mStationText = mView.findViewById(R.id.station_textview);
@@ -124,7 +124,7 @@ public class HomeFragment extends Fragment {
         }
 
         // initialize the trip information with transportation manner of userTransport
-        //userTransport = ((MainActivity) getActivity()).getUserTransport();
+        userTransport = ((MainActivity) getActivity()).getUserTransport();
         userTransport = null;
         if (userTransport == null) {
             FirebaseUser currentUser = mAuth.getCurrentUser();
