@@ -72,7 +72,7 @@ public class HomeFragment extends Fragment implements HomeFragmentInterface.View
                              Bundle savedInstanceState) throws NullPointerException{
         // Inflate the layout for this fragment
         mView =inflater.inflate(R.layout.fragment_home, container, false);
-        mAddEventFbtn = mView.findViewById(R.id.saveEvent_btn);
+        mAddEventFbtn = mView.findViewById(R.id.addEventBtn);
         mAddEventFbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
