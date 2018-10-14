@@ -21,7 +21,6 @@ public class FindTripMapsActivity extends FragmentActivity implements OnMapReady
 
     private GoogleMap mMap;
 
-
     List<double[]> coords = null; //the coords of path
 
     @Override
@@ -63,7 +62,7 @@ public class FindTripMapsActivity extends FragmentActivity implements OnMapReady
         PolylineOptions lineOptions = new PolylineOptions();
         List<LatLng> positions = new ArrayList<LatLng>();
         for (int i = 0; i < coords.size(); i++) {
-            double[] coord = coords.get(i);
+            double [] coord = coords.get(i);
 
             LatLng position = new LatLng(coord[0], coord[1]);
             //System.out.println(position.toString());
@@ -74,7 +73,8 @@ public class FindTripMapsActivity extends FragmentActivity implements OnMapReady
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(positions.get(0), maxZoom));
 
         mMap.addMarker(new MarkerOptions().position(positions.get(0)).title("Marker start"));
-        mMap.addMarker(new MarkerOptions().position(positions.get(positions.size() - 1)).title("Marker end"));
+        mMap.addMarker(new MarkerOptions().position(positions.get(positions.size()-1)).title("Marker end"));
+
 
 
         lineOptions.addAll(positions);

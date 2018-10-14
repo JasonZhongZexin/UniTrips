@@ -16,10 +16,20 @@
                 android:layout_gravity="center_horizontal">
             <ImageView
                 android:layout_width="match_parent"
-                android:layout_height="320dp"
+                android:layout_height="300dp"
                 android:layout_marginTop="50dp"
                 android:layout_centerHorizontal="true"
                 android:src="@drawable/train_rail"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginBottom="20dp"
+                    android:layout_marginTop="0dp"
+                    android:text="@string/welcome"
+                    android:textColor="@color/textColorWhite"
+                    android:textSize="30dp"
+                    android:textStyle="bold" />
                 <Button
                     android:id="@+id/signUpBtn"
                     android:layout_width="280dp"

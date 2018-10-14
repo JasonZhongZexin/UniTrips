@@ -10,6 +10,7 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_GPS" />
 
     <application
         android:allowBackup="true"
@@ -46,11 +47,12 @@
         <activity
             android:name=".view.ImportCalendarActivity"
             android:parentActivityName=".view.MainActivity" />
-
+        >
         <activity android:name=".view.ResetPasswordActivity" />
         <activity android:name=".view.AddEventActivity" />
         <activity
             android:name=".view.UserSettingActivity"
+            android:parentActivityName=".view.MainActivity"
             android:label="@string/title_setting" />
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
@@ -70,10 +72,8 @@
         <activity
             android:name=".view.CourseDetailActivity"
             android:label="@string/Course_Title" />
-        <activity android:name=".view.FAQ_Activity"></activity>
-        <activity
-            android:name=".view.FindTripMapsActivity"
-            android:label="@string/title_activity_find_trip_maps"></activity>
+        <activity android:name=".view.FAQ_Activity"
+            android:parentActivityName=".view.MainActivity"></activity>
     </application>
 
 </manifest>
