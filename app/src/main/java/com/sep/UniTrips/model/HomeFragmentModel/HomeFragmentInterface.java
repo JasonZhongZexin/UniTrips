@@ -6,6 +6,9 @@
 
 package com.sep.UniTrips.model.HomeFragmentModel;
 
+import android.content.Context;
+
+import com.sep.UniTrips.model.ImportCalendar.Course;
 import com.sep.UniTrips.model.UserSetting.UserProfile;
 
 import java.util.ArrayList;
@@ -16,9 +19,11 @@ public interface HomeFragmentInterface {
         void showCourseTextView(String viewTag,int color);
         void setSubjectDescription(String viewSubjectDescriptionTag, String subject_description);
         void setLocation(String locationViewTag, String location);
+        void setOnClickListener(String viewTag, final Course course);
     }
     interface Presenter{
         void showCourseData();
+        void displayCourseDetail(Course course,Context context);
     }
     interface CalendarDataCallBack {
         void onCalendarCallBack(com.sep.UniTrips.model.ImportCalendar.Calendar calendar);

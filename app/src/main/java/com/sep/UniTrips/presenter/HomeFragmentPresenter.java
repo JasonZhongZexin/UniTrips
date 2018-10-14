@@ -7,12 +7,15 @@
 package com.sep.UniTrips.presenter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 
+import com.sep.UniTrips.R;
 import com.sep.UniTrips.model.HomeFragmentModel.HomeFragmentInterface;
 import com.sep.UniTrips.model.HomeFragmentModel.HomeFragmentTaskManager;
 import com.sep.UniTrips.model.ImportCalendar.Calendar;
 import com.sep.UniTrips.model.ImportCalendar.Course;
+import com.sep.UniTrips.view.CourseDetailActivity;
 import com.sep.UniTrips.view.HomeFragment;
 
 import java.util.ArrayList;
@@ -25,6 +28,13 @@ public class HomeFragmentPresenter implements HomeFragmentInterface.Presenter{
     private Calendar mCalendar;
     private HomeFragmentTaskManager mTaskManager;
     private ArrayList<Course> weeklyCourse = new ArrayList<>();
+    public static final String SUBJECT_DESCRIPTION = "subject_description";
+    public static final String ACTIVITY_GROUP = "activity_group";
+    public static final String LOCATION = "location";
+    public static final String SUBJECT_CODE = "subject_code";
+    public static final String DURATION = "duration";
+    public static final String DATE_OF_WEEK = "dateOfWeek";
+    public static final String START_TIME = "startTime";
 
     public HomeFragmentPresenter(Context context,HomeFragment homeFragment) {
         this.mHomeFragmentView = homeFragment;
@@ -60,7 +70,7 @@ public class HomeFragmentPresenter implements HomeFragmentInterface.Presenter{
                         for(int j=0;j<duration;j++){
                             String viewTag = date+tagDouble;
                             mHomeFragmentView.showCourseTextView(viewTag,color);
-                            //mHomeFragmentView.setOnClickListener(viewTag,weeklyCourse.get(i));
+                            mHomeFragmentView.setOnClickListener(viewTag,weeklyCourse.get(i));
                             tagDouble = Double.parseDouble(startTime);
                             tagDouble += 0.50;
                             startTime = tagDouble.toString();
@@ -69,5 +79,18 @@ public class HomeFragmentPresenter implements HomeFragmentInterface.Presenter{
                 }
             }
         });
+    }
+    @Override
+    public void displayCourseDetail(Course course,Context context) {
+        Intent intent = new Intent(context, CourseDetailActivity.class);
+        intent.putExtra(SUBJECT_DESCRIPTION,course.getSubject_description());
+        intent.putExtra(ACTIVITY_GROUP,course.getActivity_group_code());
+        intent.putExtra(LOCATION,course.getLocation());
+        intent.putExtra(SUBJECT_CODE,course.getSubject_code());
+        intent.putExtra(DATE_OF_WEEK,course.getDay_of_week());
+        intent.putExtra(START_TIME,course.getStart_time());
+        double duration = Double.parseDouble(course.getDuration())/60;
+        intent.putExtra(DURATION,duration+" "+context.getResources().getString(R.string.hours));
+        context.startActivity(intent);
     }
 }

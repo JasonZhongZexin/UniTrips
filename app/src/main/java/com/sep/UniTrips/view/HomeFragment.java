@@ -38,6 +38,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.sep.UniTrips.model.HomeFragmentModel.HomeFragmentInterface;
+import com.sep.UniTrips.model.ImportCalendar.Course;
 import com.sep.UniTrips.model.UserSetting.UserProfile;
 import com.sep.UniTrips.presenter.FindPathToSchool;
 import com.sep.UniTrips.presenter.HomeFragmentPresenter;
@@ -160,6 +161,17 @@ public class HomeFragment extends Fragment implements HomeFragmentInterface.View
         textView_location.setTextColor(getActivity().getApplication().getApplicationContext().getColor(R.color.textColorWhite));
         textView_location.setText(location);
         textView_location.setTypeface(null, Typeface.BOLD);
+    }
+
+    @Override
+    public void setOnClickListener(String viewTag, final Course course) {
+        TextView textView = mView.findViewWithTag(viewTag);
+        textView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mPresenter.displayCourseDetail(course,getActivity());
+            }
+        });
     }
 
     /**

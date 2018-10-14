@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/colorPrimaryDark"
+    tools:context=".view.CourseDetailActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:background="@color/textColorWhite"
+        android:paddingLeft="25dp"
+        android:paddingRight="25dp"
+        android:layout_marginTop="20dp">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingTop="10dp"
+            android:textStyle="bold"
+            android:textSize="20dp"
+            android:id="@+id/subject_description_tv"
+            android:textColor="@color/ColorSecondaryBtn"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawableLeft="@drawable/duration_icon"
+            android:padding="10dp"
+            android:textSize="20dp"
+            android:textColor="@color/black_overlay"
+            android:id="@+id/duration_tv"/>
+        <View
+            android:layout_width="match_parent"
+            android:layout_margin="1dp"
+            android:layout_height="1.5dp"
+            android:background="@color/black_overlay" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawableLeft="@drawable/location_icon"
+            android:padding="10dp"
+            android:textSize="20dp"
+            android:textColor="@color/black_overlay"
+            android:id="@+id/location_tv"/>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_margin="2dp"
+            android:layout_height="1.5dp"
+            android:background="@color/black_overlay" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawableLeft="@drawable/subject_code_icon"
+            android:padding="10dp"
+            android:textSize="20dp"
+            android:textColor="@color/black_overlay"
+            android:id="@+id/subject_code_tv"/>
+
+    </LinearLayout>
+
+</LinearLayout>

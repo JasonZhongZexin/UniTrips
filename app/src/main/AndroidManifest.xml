@@ -69,6 +69,9 @@
         <activity
             android:name=".view.FindTripMapsActivity"
             android:label="@string/title_activity_find_trip_maps"></activity>
+        <activity
+            android:name=".view.CourseDetailActivity"
+            android:label="@string/Course_Title"></activity>
     </application>
 
 </manifest>
