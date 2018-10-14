@@ -12,6 +12,11 @@
         android:layout_width="match_parent"
         android:layout_height="550dp"
         android:id="@+id/fragment_container">
+        <TextView
+            android:id="@+id/location_test"
+            android:text="notlocated"
+            android:layout_width="1px"
+            android:layout_height="1px" />
     </FrameLayout>
     <!--<android.support.design.widget.FloatingActionButton-->
         <!--android:id="@+id/addEventBtn"-->
