@@ -13,15 +13,37 @@
 
 package com.sep.UniTrips.view;
 
+import android.app.Activity;
+import android.app.Notification;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
+import android.content.Context;
 import android.content.Intent;
+import android.graphics.BitmapFactory;
+import android.graphics.Color;
+import android.location.Location;
+import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.NotificationCompat;
+import android.support.v4.app.NotificationManagerCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
+import android.widget.Spinner;
+import android.widget.TextView;
+import android.widget.Toast;
 
+import com.sep.UniTrips.presenter.FindPathToSchool;
+import com.sep.UniTrips.presenter.Records;
 import com.sep.UniTrips.R;
+
+import java.util.List;
+import java.util.Map;
 
 
 public class HomeFragment extends Fragment {
@@ -35,8 +57,23 @@ public class HomeFragment extends Fragment {
 //    private String mParam2;
 //
 //    private OnFragmentInteractionListener mListener;
+
+    // this is used for update trip information in a new thread
+    private static final int UPDATE_TRIP_INFORMATION = 1;
+    private Handler handler = null;
+
+    private NotificationManager mNotificationManager;
+    private LinearLayout titleLayout;
     private View mView;
     private FloatingActionButton mAddEventFbtn;
+
+    // here we define another button for refresh the current location
+    private FloatingActionButton mRefreshLocationFbtn;
+    private TextView mStationText;
+
+    private String userTransport = "Train";
+    private Location location = null;
+
     public HomeFragment() {
         // Required empty public constructor
     }
@@ -66,6 +103,14 @@ public class HomeFragment extends Fragment {
         // Inflate the layout for this fragment
         mView =inflater.inflate(R.layout.fragment_home, container, false);
         mAddEventFbtn = mView.findViewById(R.id.addEventBtn);
+        titleLayout = mView.findViewById(R.id.main_title_layout);
+
+        titleLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                sendNotification();
+            }
+        });
         mAddEventFbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -73,13 +118,137 @@ public class HomeFragment extends Fragment {
                 startActivity(intent);
             }
         });
-//        mHomeFragmentPresenter = new HomeFragmentPresenter(getActivity(),this);
-//        //get and show the course data
-//        mHomeFragmentPresenter.getCourseData();
-//        //get and show the transport information
-//        mHomeFragmentPresenter.getTransportInfo();
+
+
+        // the setting's transportation information
+        // the station information which is to show in the form of "station platform time-time"
+        mStationText = mView.findViewById(R.id.station_textview);
+        // used for new thread communication
+        handler = new Handler() {
+            @Override
+            public void handleMessage(Message msg) {
+                switch (msg.what) {
+                    case UPDATE_TRIP_INFORMATION:
+                        Records trip_information = (Records) msg.obj;
+                        mStationText.setText(trip_information.station_info);
+                        ((MainActivity) getActivity()).setCoords_double(trip_information.coords_double);
+                        break;
+                }
+            }
+        };
+
+        mNotificationManager = (NotificationManager) getActivity().getSystemService(Context.NOTIFICATION_SERVICE);
+        location = ((MainActivity) getActivity()).getLocation();
+        if (location == null) {
+            Toast toast=Toast.makeText(this.getActivity(), "Please enable location usage", Toast.LENGTH_SHORT);
+            toast.show();
+            return mView;
+        }
+
+        // debug
+        System.out.println("[Debug in HomeFragement.onCreateView] " + "************** location (" + location.getLatitude() + "," + location.getLongitude() + ")**************");
+
+        // initialize the trip information with transportation manner of userTransport
+        userTransport = ((MainActivity) getActivity()).getUserTransport();
+        if (userTransport == null) {
+            userTransport = "Train";
+        }
+        // debug
+        System.out.println("[Debug in HomeFragement.onCreateView]: " + "************** transport " + userTransport + "**************");
+        Thread thread = new UpdateTripInformationThread(location, userTransport);
+        thread.start();
+
+        mStationText.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), FindTripMapsActivity.class);
+                List<double []> coords_double = ((MainActivity) getActivity()).getCoords_double();
+                //System.out.println("records string" + Records.coords_double_to_string(coords_double));
+                intent.putExtra("coords_string", Records.coords_double_to_string(coords_double));
+
+                startActivity(intent);
+            }
+        });
+
         return mView;
     }
+
+    /**
+     * push an notification
+     */
+    private void sendNotification() {
+
+        if (Build.VERSION.SDK_INT >= 26) {
+            String id = "channel_1";
+            String description = "123";
+            int importance = NotificationManager.IMPORTANCE_LOW;
+            NotificationChannel mChannel = new NotificationChannel(id, "123", importance);
+            //  mChannel.setDescription(description);
+            //  mChannel.enableLights(true);
+            //  mChannel.setLightColor(Color.RED);
+            //  mChannel.enableVibration(true);
+            //  mChannel.setVibrationPattern(new long[]{100, 200, 300, 400, 500, 400, 300, 200, 400});
+            mNotificationManager.createNotificationChannel(mChannel);
+            Notification notification = new Notification.Builder(getActivity(), id).setContentTitle("UniTripS")
+                    .setSmallIcon(R.mipmap.ic_launcher)
+                    .setLargeIcon(BitmapFactory.decodeResource(getResources(), R.mipmap.ic_launcher))
+                    .setContentTitle("new message")
+                    .setContentText("get route successfully")
+                    .setAutoCancel(true)
+                    .build();
+            mNotificationManager.notify(1, notification);
+        }else{
+            sendNotification_24();
+        }
+    }
+    // satisfy android O notification
+    private void sendNotification_24() {
+        Notification notification = new NotificationCompat.Builder(getActivity())
+                .setSmallIcon(R.mipmap.ic_launcher)             //一定要设置
+                .setLargeIcon(BitmapFactory.decodeResource(getResources(), R.mipmap.ic_launcher))
+                .setContentTitle("您有一条新通知")
+                .setContentText("这是一条逗你玩的消息")
+                .setAutoCancel(true)
+                .setVibrate(new long[]{100, 200, 300, 400, 500, 400, 300, 200, 400})
+                .setLights(Color.RED,1000,1000)
+                .build();
+        mNotificationManager.notify(1, notification);
+    }
+
+    /**
+     * The thread used to update trip information
+     */
+    class UpdateTripInformationThread extends Thread {
+
+        private String transportation = "Train";
+        private Location location = null;
+        private double [] location_double = new double[2];
+
+        public UpdateTripInformationThread (Location location, String transportation) {
+
+            this.transportation = transportation;
+            this.location = location;
+            this.location_double[0] = location.getLatitude();
+            this.location_double[1] = location.getLongitude();
+        }
+
+        @Override
+        public void run() {
+
+            Records trip_infomation = FindPathToSchool.getTripInformation(location_double, transportation);
+
+            Message msg = new Message();
+            msg.what = UPDATE_TRIP_INFORMATION;
+            msg.obj = trip_infomation;
+
+            handler.sendMessage(msg);
+        }
+    }
+
+    public void setUserTransport (String userTransport) {
+        this.userTransport = userTransport;
+    }
+
 
 //    // TODO: Rename method, update argument and hook method into UI event
 //    public void onButtonPressed(Uri uri) {
@@ -104,6 +273,7 @@ public class HomeFragment extends Fragment {
 //        super.onDetach();
 //        mListener = null;
 //    }
+
 
     /**
      * This interface must be implemented by activities that contain this

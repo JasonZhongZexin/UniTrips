@@ -127,4 +127,5 @@
         <item>40</item>
         <item>50</item>
     </string-array>
+    <string name="title_activity_find_trip_maps">Map</string>
 </resources>
