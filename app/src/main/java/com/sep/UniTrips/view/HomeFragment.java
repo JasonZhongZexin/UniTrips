@@ -15,6 +15,7 @@ package com.sep.UniTrips.view;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.location.Location;
 import android.os.Bundle;
 import android.os.Handler;
@@ -36,8 +37,10 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.sep.UniTrips.model.HomeFragmentModel.HomeFragmentInterface;
 import com.sep.UniTrips.model.UserSetting.UserProfile;
 import com.sep.UniTrips.presenter.FindPathToSchool;
+import com.sep.UniTrips.presenter.HomeFragmentPresenter;
 import com.sep.UniTrips.presenter.Records;
 import com.sep.UniTrips.R;
 
@@ -45,36 +48,20 @@ import java.util.List;
 import java.util.Map;
 
 
-public class HomeFragment extends Fragment {
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-//    private static final String ARG_PARAM1 = "param1";
-//    private static final String ARG_PARAM2 = "param2";
+public class HomeFragment extends Fragment implements HomeFragmentInterface.View {
 
-    // TODO: Rename and change types of parameters
-//    private String mParam1;
-//    private String mParam2;
-//
-//    private OnFragmentInteractionListener mListener;
-
-    // this is used for update trip information in a new thread
     private static final int UPDATE_TRIP_INFORMATION = 1;
     private Handler handler = null;
-
-
     private View mView;
     private FloatingActionButton mAddEventFbtn;
-
     private FirebaseAuth mAuth;
     private DatabaseReference mDatabase;
-
+    private HomeFragmentPresenter mPresenter;
     // here we define another button for refresh the current location
     private FloatingActionButton mRefreshLocationFbtn;
     private TextView mStationText;
-
     private String userTransport = "Train";
     private Location location = null;
-
     public HomeFragment() {
         // Required empty public constructor
     }
@@ -94,7 +81,8 @@ public class HomeFragment extends Fragment {
         });
         this.mAuth = FirebaseAuth.getInstance();
         mDatabase = FirebaseDatabase.getInstance().getReference();
-
+        mPresenter = new HomeFragmentPresenter(getActivity(),this);
+        mPresenter.showCourseData();
         // the setting's transportation information
         // the station information which is to show in the form of "station platform time-time"
         mStationText = mView.findViewById(R.id.station_textview);
@@ -177,6 +165,27 @@ public class HomeFragment extends Fragment {
         }
     }
 
+    @Override
+    public void showCourseTextView(String viewTag,int color) {
+        TextView textView = mView.findViewWithTag(viewTag);
+        textView.setBackgroundColor(color);
+    }
+
+    @Override
+    public void setSubjectDescription(String viewSubjectDescriptionTag, String subject_description) {
+        TextView textView_title = mView.findViewWithTag(viewSubjectDescriptionTag);
+        textView_title.setTextColor(getResources().getColor(R.color.textColorWhite));
+        textView_title.setText(subject_description);
+        textView_title.setTypeface(null, Typeface.BOLD);
+    }
+
+    @Override
+    public void setLocation(String locationViewTag, String location) {
+        TextView textView_location = mView.findViewWithTag(locationViewTag);
+        textView_location.setTextColor(getResources().getColor(R.color.textColorWhite));
+        textView_location.setText(location);
+        textView_location.setTypeface(null, Typeface.BOLD);
+    }
 //    public void setUserTransport (String userTransport) {
 //        this.userTransport = userTransport;
 //    }
