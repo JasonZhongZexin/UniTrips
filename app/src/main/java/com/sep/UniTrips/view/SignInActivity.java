@@ -15,6 +15,7 @@ package com.sep.UniTrips.view;
 
 import android.content.Intent;
 import android.support.annotation.RequiresApi;
+import android.support.v4.app.FragmentActivity;
 import android.support.v7.app.AppCompatActivity;
 
 import android.os.Build;
@@ -158,6 +159,9 @@ public class SignInActivity extends AppCompatActivity implements LoginInterface.
             mFocusView.requestFocus();
         }
     }
+
+    //use for unit testing, check dialog
+//    public static boolean hasOpenedDialog(FragmentActivity activity){}
 }
 
 
