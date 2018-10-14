@@ -16,12 +16,9 @@ public interface HomeFragmentInterface {
         void showCourseTextView(String viewTag,int color);
         void setSubjectDescription(String viewSubjectDescriptionTag, String subject_description);
         void setLocation(String locationViewTag, String location);
-        void showTransportDetail(String station,String platform,String departureTime,String arrivalTime,String preferredTransport);
     }
     interface Presenter{
         void showCourseData();
-        void showTransportDetail(String station,String platform,String departureTime,String arrivalTime,String preferredTransport);
-        void getRealTimeTransportInfo();
     }
     interface CalendarDataCallBack {
         void onCalendarCallBack(com.sep.UniTrips.model.ImportCalendar.Calendar calendar);

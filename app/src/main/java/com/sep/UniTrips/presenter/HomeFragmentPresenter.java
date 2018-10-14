@@ -70,14 +70,4 @@ public class HomeFragmentPresenter implements HomeFragmentInterface.Presenter{
             }
         });
     }
-
-    @Override
-    public void showTransportDetail(String station, String platform, String departureTime, String arrivalTime,String preferredTransport) {
-        mHomeFragmentView.showTransportDetail(station,platform,departureTime,arrivalTime,preferredTransport);
-    }
-
-    @Override
-    public void getRealTimeTransportInfo() {
-        mTaskManager.getTripDetail();
-    }
 }
