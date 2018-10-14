@@ -30,13 +30,9 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
-import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -51,13 +47,10 @@ import com.sep.UniTrips.model.UserSetting.UserSettingTaskManager;
 
 import java.util.List;
 
-import java.util.List;
-
 public class MainActivity extends AppCompatActivity {
 
     private TextView mTextMessage;
-
-//    private FloatingActionButton mAddEventButton;
+    //    private FloatingActionButton mAddEventButton;
     // 交通方式
     private String userTransport = null;
     // 当前位置
@@ -142,27 +135,6 @@ public class MainActivity extends AppCompatActivity {
         }
         getLocation(this);
 
-    }
-
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.main_menu, menu);
-        this.menu = menu;
-
-        return super.onCreateOptionsMenu(menu);
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.refresh:
-                Toast.makeText(MainActivity.this, "do refresh", Toast.LENGTH_SHORT).show();
-                //TODO finish refresh logic here, but please don't delete this toast cause test code will check it's content
-
-        }
-        return super.onOptionsItemSelected(item);
     }
 
     /**
