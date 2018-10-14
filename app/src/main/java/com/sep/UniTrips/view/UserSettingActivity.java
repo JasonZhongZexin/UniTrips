@@ -6,6 +6,8 @@
 
 package com.sep.UniTrips.view;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -31,7 +33,7 @@ public class UserSettingActivity extends AppCompatActivity implements UserSettin
     private UserSettingPresenter mPresenter;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState) throws NumberFormatException {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_setting);
         mPresenter = new UserSettingPresenter(this,this);
@@ -45,12 +47,24 @@ public class UserSettingActivity extends AppCompatActivity implements UserSettin
         mSaveBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                UserProfile newUserProfiel = new UserProfile(mTranportSettingSpinner.getSelectedItem().toString(),
-                        Integer.parseInt(mNotificatationTimeHSpinner.getSelectedItem().toString()),
-                        Integer.parseInt(mNotificatationTimeMSpinner.getSelectedItem().toString()),
-                        Integer.parseInt(mArrivalTimeHSpinner.getSelectedItem().toString()),
-                        Integer.parseInt(mArrivalTimeMSpinner.getSelectedItem().toString()));
-                mPresenter.setUserProfile(newUserProfiel);
+                try {
+                    UserProfile newUserProfiel = new UserProfile(mTranportSettingSpinner.getSelectedItem().toString(),
+                            Integer.parseInt(mNotificatationTimeHSpinner.getSelectedItem().toString()),
+                            Integer.parseInt(mNotificatationTimeMSpinner.getSelectedItem().toString()),
+                            Integer.parseInt(mArrivalTimeHSpinner.getSelectedItem().toString()),
+                            Integer.parseInt(mArrivalTimeMSpinner.getSelectedItem().toString()));
+                    mPresenter.setUserProfile(newUserProfiel);
+                }catch (NumberFormatException e){
+                    new AlertDialog.Builder(getApplicationContext()).setTitle(R.string.title_updateFail)
+                            .setMessage(R.string.update_Fail_msessage)
+                            .setIcon(R.drawable.ic_error_outline_black_30dp)
+                            .setPositiveButton(R.string.title_tryAgain, new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    dialog.dismiss();
+                                }
+                            }).show();
+                }
             }
         });
     }
