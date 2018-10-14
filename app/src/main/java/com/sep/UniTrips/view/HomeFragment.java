@@ -127,18 +127,7 @@ public class HomeFragment extends Fragment {
         userTransport = ((MainActivity) getActivity()).getUserTransport();
         userTransport = null;
         if (userTransport == null) {
-            FirebaseUser currentUser = mAuth.getCurrentUser();
-            DatabaseReference ref = mDatabase.child("users").child(currentUser.getUid()).child("User Profile");
-            ref.addListenerForSingleValueEvent(new ValueEventListener() {
-                @Override
-                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                    userTransport = dataSnapshot.getValue(UserProfile.class).getPreferredTransport();
-                }
-
-                @Override
-                public void onCancelled(@NonNull DatabaseError databaseError) {
-                }
-            });
+            userTransport = ((MainActivity) getActivity()).getUserTransport();
         }
         Thread thread = new UpdateTripInformationThread(location, userTransport);
         thread.start();
