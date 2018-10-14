@@ -47,22 +47,24 @@
                 android:paddingLeft="8dp"
                 android:layout_gravity="center_vertical"
                 android:textSize="16dp" />
-            <TextView
-                android:id="@+id/platform_textview"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:paddingLeft="3dp"
-                android:textColor="@color/textColorWhite"
-                android:layout_gravity="center_vertical"
-                android:textSize="20dp" />
-            <TextView
-                android:id="@+id/time_textView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:paddingLeft="6dp"
-                android:textColor="@color/textColorWhite"
-                android:layout_gravity="center_vertical"
-                android:textSize="16dp" />
+            <!--<TextView-->
+                <!--android:id="@+id/platform_textview"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:paddingLeft="3dp"-->
+                <!--android:textColor="@color/textColorWhite"-->
+                <!--android:layout_gravity="center_vertical"-->
+                <!--android:text=" Platform 4"-->
+                <!--android:textSize="20dp" />-->
+            <!--<TextView-->
+                <!--android:id="@+id/time_textView"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:text="10:00-10:15"-->
+                <!--android:paddingLeft="6dp"-->
+                <!--android:textColor="@color/textColorWhite"-->
+                <!--android:layout_gravity="center_vertical"-->
+                <!--android:textSize="16dp" />-->
         </LinearLayout>
 
         <ScrollView
@@ -2303,9 +2305,11 @@
             </LinearLayout>
         </ScrollView>
     </LinearLayout>
+
+
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/addEventBtn"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:clickable="true"
         android:layout_alignParentBottom="true"

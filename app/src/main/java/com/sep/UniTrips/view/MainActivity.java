@@ -13,12 +13,22 @@
 
 package com.sep.UniTrips.view;
 
+import android.Manifest;
+import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.location.Location;
+import android.location.LocationListener;
+import android.location.LocationManager;
+import android.location.LocationProvider;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.design.widget.FloatingActionButton;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 import android.view.View;
@@ -26,10 +36,38 @@ import android.widget.TextView;
 
 import com.sep.UniTrips.R;
 
+import java.util.List;
+
 public class MainActivity extends AppCompatActivity {
 
     private TextView mTextMessage;
 //    private FloatingActionButton mAddEventButton;
+    // 交通方式
+    private String userTransport = null;
+    // 当前位置
+    private Location location = null;
+    // 到达路径
+    private List<double[]> coords_double = null;
+
+    private LocationManager locationManager = null;
+
+    LocationListener mListener = new LocationListener() {
+        @Override
+        public void onStatusChanged(String provider, int status, Bundle extras) {}
+
+        @Override
+        public void onProviderEnabled(String provider) {}
+
+        @Override
+        public void onProviderDisabled(String provider) {}
+
+        @Override
+        public void onLocationChanged(Location location) {
+            location.getAccuracy();//精确度
+            setLocation( location );
+        }
+    };
+
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -49,7 +87,7 @@ public class MainActivity extends AppCompatActivity {
                 case R.id.navigation_setting:
                     SettingFragment settingFragment = new SettingFragment();
                     FragmentTransaction settingFragmentTransaction = getSupportFragmentManager().beginTransaction();
-                    settingFragmentTransaction.replace(R.id.fragment_container,settingFragment,"HomeFragment");
+                    settingFragmentTransaction.replace(R.id.fragment_container,settingFragment,"SettingFragment"); // 这里的tag不对
                     settingFragmentTransaction.commit();
                     return true;
             }
@@ -78,6 +116,92 @@ public class MainActivity extends AppCompatActivity {
             homeFragmentTransaction.commit();
 
         }
+        getLocation(this);
+
+        }
+
+    /**
+     * 检查获取地理位置的权限
+     */
+    public void checkLocationPermission () {
+        // check permission
+        if (ContextCompat.checkSelfPermission(this,
+                Manifest.permission.ACCESS_FINE_LOCATION)
+                != PackageManager.PERMISSION_GRANTED) {
+            if (ActivityCompat.shouldShowRequestPermissionRationale(this,
+                    Manifest.permission.ACCESS_FINE_LOCATION)) {
+
+
+            } else {
+                ActivityCompat.requestPermissions(this, new String[]{
+                        Manifest.permission.ACCESS_FINE_LOCATION}, 1);
+            }
+        }
+
+        if (ContextCompat.checkSelfPermission(this,
+                Manifest.permission.ACCESS_COARSE_LOCATION)
+                != PackageManager.PERMISSION_GRANTED) {
+            if (ActivityCompat.shouldShowRequestPermissionRationale(this,
+                    Manifest.permission.ACCESS_COARSE_LOCATION)) {
+
+            } else {
+                ActivityCompat.requestPermissions(this, new String[]{
+                        Manifest.permission.ACCESS_COARSE_LOCATION}, 1);
+            }
+        }
+
     }
+
+    /**
+     * 获取GPS实时地理位置
+     * @param context
+     */
+    public void getLocation (Context context) {
+        // get location manager
+        locationManager = (LocationManager) context.getSystemService(Context.LOCATION_SERVICE);
+        // get providers: either GPS or network
+        List<String> providers = locationManager.getProviders(true);
+        String locationProvider = locationManager.GPS_PROVIDER;
+
+        checkLocationPermission();
+
+        if (ContextCompat.checkSelfPermission(this,
+                Manifest.permission.ACCESS_FINE_LOCATION)
+                != PackageManager.PERMISSION_GRANTED
+                || ContextCompat.checkSelfPermission(this,
+                Manifest.permission.ACCESS_COARSE_LOCATION)
+                != PackageManager.PERMISSION_GRANTED) {
+            return;
+        }
+
+        // get location
+        Location location = locationManager.getLastKnownLocation( locationProvider );
+        if (location != null) {
+            setLocation( location );
+        }
+//        //debug
+//        System.out.println("************* location provider is " + location + " *********");
+
+        locationManager.requestLocationUpdates(locationProvider, 0, 0, mListener);
+
+    }
+
+    public String getUserTransport () {
+        return userTransport;
+    }
+
+    public void setUserTransport (String userTransport) {
+        this.userTransport = userTransport;
+    }
+
+    public void setLocation(Location location) {
+        this.location = location;
+    }
+
+    public Location getLocation() { return this.location; }
+
+    public void setCoords_double (List<double[]> coords_double) { this.coords_double = coords_double; }
+
+    public List<double[]> getCoords_double () { return coords_double; }
 
 }
