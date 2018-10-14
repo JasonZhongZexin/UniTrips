@@ -113,7 +113,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         this.mAuth = FirebaseAuth.getInstance();
-        mDatabase = FirebaseDatabase.getInstance().getReference();;
+        mDatabase = FirebaseDatabase.getInstance().getReference();
 //        mAddEventButton = findViewById(R.id.addEventBtn);
 //        mAddEventButton.setOnClickListener(new View.OnClickListener() {
 //            @Override

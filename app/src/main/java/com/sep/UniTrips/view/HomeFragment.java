@@ -19,6 +19,7 @@ import android.location.Location;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -28,6 +29,14 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+import com.sep.UniTrips.model.UserSetting.UserProfile;
 import com.sep.UniTrips.presenter.FindPathToSchool;
 import com.sep.UniTrips.presenter.Records;
 import com.sep.UniTrips.R;
@@ -56,6 +65,9 @@ public class HomeFragment extends Fragment {
     private View mView;
     private FloatingActionButton mAddEventFbtn;
 
+    private FirebaseAuth mAuth;
+    private DatabaseReference mDatabase;
+
     // here we define another button for refresh the current location
     private FloatingActionButton mRefreshLocationFbtn;
     private TextView mStationText;
@@ -67,28 +79,9 @@ public class HomeFragment extends Fragment {
         // Required empty public constructor
     }
 
-    // TODO: Rename and change types and number of parameters
-//    public static HomeFragment newInstance(String param1, String param2) {
-//        HomeFragment fragment = new HomeFragment();
-//        Bundle args = new Bundle();
-//        args.putString(ARG_PARAM1, param1);
-//        args.putString(ARG_PARAM2, param2);
-//        fragment.setArguments(args);
-//        return fragment;
-//    }
-
-//    @Override
-//    public void onCreate(Bundle savedInstanceState) {
-//        super.onCreate(savedInstanceState);
-////        if (getArguments() != null) {
-////            mParam1 = getArguments().getString(ARG_PARAM1);
-////            mParam2 = getArguments().getString(ARG_PARAM2);
-////        }
-//    }
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+                             Bundle savedInstanceState) throws NullPointerException{
         // Inflate the layout for this fragment
         mView =inflater.inflate(R.layout.fragment_home, container, false);
         mAddEventFbtn = mView.findViewById(R.id.addEventBtn);
@@ -99,24 +92,29 @@ public class HomeFragment extends Fragment {
                 startActivity(intent);
             }
         });
-
-
+        this.mAuth = FirebaseAuth.getInstance();
+        mDatabase = FirebaseDatabase.getInstance().getReference();
+        
         // the setting's transportation information
         // the station information which is to show in the form of "station platform time-time"
         mStationText = mView.findViewById(R.id.station_textview);
         // used for new thread communication
-        handler = new Handler() {
-            @Override
-            public void handleMessage(Message msg) {
-                switch (msg.what) {
-                    case UPDATE_TRIP_INFORMATION:
-                        Records trip_information = (Records) msg.obj;
-                        mStationText.setText(trip_information.station_info);
-                        ((MainActivity) getActivity()).setCoords_double(trip_information.coords_double);
-                        break;
+        try{
+            handler = new Handler() {
+                @Override
+                public void handleMessage(Message msg) {
+                    switch (msg.what) {
+                        case UPDATE_TRIP_INFORMATION:
+                            Records trip_information = (Records) msg.obj;
+                            mStationText.setText(trip_information.station_info);
+                            ((MainActivity) getActivity()).setCoords_double(trip_information.coords_double);
+                            break;
+                    }
                 }
-            }
-        };
+            };
+        }catch (NullPointerException e){
+            e.printStackTrace();
+        }
 
         location = ((MainActivity) getActivity()).getLocation();
         if (location == null) {
@@ -125,16 +123,23 @@ public class HomeFragment extends Fragment {
             return mView;
         }
 
-        // debug
-        System.out.println("[Debug in HomeFragement.onCreateView] " + "************** location (" + location.getLatitude() + "," + location.getLongitude() + ")**************");
-
         // initialize the trip information with transportation manner of userTransport
-        userTransport = ((MainActivity) getActivity()).getUserTransport();
+        //userTransport = ((MainActivity) getActivity()).getUserTransport();
+        userTransport = null;
         if (userTransport == null) {
-            userTransport = "Train";
+            FirebaseUser currentUser = mAuth.getCurrentUser();
+            DatabaseReference ref = mDatabase.child("users").child(currentUser.getUid()).child("User Profile");
+            ref.addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                    userTransport = dataSnapshot.getValue(UserProfile.class).getPreferredTransport();
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError databaseError) {
+                }
+            });
         }
-        // debug
-        System.out.println("[Debug in HomeFragement.onCreateView]: " + "************** transport " + userTransport + "**************");
         Thread thread = new UpdateTripInformationThread(location, userTransport);
         thread.start();
 
