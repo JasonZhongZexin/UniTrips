@@ -94,7 +94,7 @@ public class MainActivity extends AppCompatActivity {
                     homeFragmentTransaction.replace(R.id.fragment_container,homeFragment,"HomeFragment");
                     homeFragmentTransaction.commit();
                     try {
-                        Thread.sleep(3000);
+                        Thread.sleep(1000);
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }
