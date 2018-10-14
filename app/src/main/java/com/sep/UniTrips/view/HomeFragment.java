@@ -70,6 +70,7 @@ public class HomeFragment extends Fragment implements HomeFragmentInterface.View
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) throws NullPointerException{
         // Inflate the layout for this fragment
+        super.onCreate(savedInstanceState);
         mView =inflater.inflate(R.layout.fragment_home, container, false);
         mAddEventFbtn = mView.findViewById(R.id.addEventBtn);
         mAddEventFbtn.setOnClickListener(new View.OnClickListener() {
@@ -82,7 +83,6 @@ public class HomeFragment extends Fragment implements HomeFragmentInterface.View
         this.mAuth = FirebaseAuth.getInstance();
         mDatabase = FirebaseDatabase.getInstance().getReference();
         mPresenter = new HomeFragmentPresenter(getActivity(),this);
-        mPresenter.showCourseData();
         // the setting's transportation information
         // the station information which is to show in the form of "station platform time-time"
         mStationText = mView.findViewById(R.id.station_textview);
@@ -133,6 +133,12 @@ public class HomeFragment extends Fragment implements HomeFragmentInterface.View
         });
 
         return mView;
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        mPresenter.showCourseData();
     }
 
     /**
