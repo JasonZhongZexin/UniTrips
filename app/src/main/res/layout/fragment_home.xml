@@ -20,7 +20,7 @@
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"
             android:layout_marginTop="10dp"
-            android:background="@color/ColorSecondaryBtn"
+            android:id="@+id/transport_layout"
             android:orientation="horizontal">
 
             <ImageView
@@ -44,7 +44,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="@color/textColorWhite"
-                android:text=""
                 android:paddingLeft="8dp"
                 android:layout_gravity="center_vertical"
                 android:textSize="16dp" />

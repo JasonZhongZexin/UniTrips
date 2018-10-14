@@ -14,6 +14,7 @@
 package com.sep.UniTrips.presenter;
 
 import android.content.Context;
+import android.os.AsyncTask;
 import android.util.Log;
 import android.view.View;
 
@@ -76,5 +77,13 @@ public class SignUpPresenter implements SignUpInterface.presenter {
         mSignUpActivity.showSignUpError(errorMessage);
     }
 
+    @Override
+    public void showProgressBar() {
+        mSignUpActivity.showProgressBar();
+    }
 
+    @Override
+    public void showTimeoutDialog() {
+        mSignUpActivity.showTimeoutDialog();
+    }
 }

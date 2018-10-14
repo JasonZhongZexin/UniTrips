@@ -13,6 +13,8 @@
 
 package com.sep.UniTrips.view;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.annotation.RequiresApi;
 import android.support.v7.app.AppCompatActivity;
@@ -24,6 +26,7 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseUser;
@@ -44,6 +47,7 @@ public class SignUpActivity extends AppCompatActivity  implements SignUpInterfac
     private Button mCreateAccountBtn;
     private SignUpPresenter mPresenter;
     private View mFocusView;
+    private ProgressBar mProgressBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,12 +55,12 @@ public class SignUpActivity extends AppCompatActivity  implements SignUpInterfac
         setContentView(R.layout.activity_sign_up);
         // Set up the login form.
         mBackBtn = (ImageButton) findViewById(R.id.singUpbackBtn);
-        mSignUpFormView = findViewById(R.id.signUp_form);
+        mSignUpFormView = findViewById(R.id.email_signUp_form);
         mSignUpEmailEt = (EditText) findViewById(R.id.signUpEmailEt);
         mSignUpPasswordEt = (EditText) findViewById(R.id.signUpPasswordEt);
         mConfirmPasswordEt = (EditText) findViewById(R.id.confirmedPasswordEt);
         mPresenter = new SignUpPresenter(this,this);
-
+        mProgressBar = findViewById(R.id.signUpProgressBar);
         //onClick listener of the back button, launch the parent activity when user pressed the back button
         mBackBtn.setOnClickListener(new OnClickListener() {
             @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
@@ -73,9 +77,7 @@ public class SignUpActivity extends AppCompatActivity  implements SignUpInterfac
                 String email = mSignUpEmailEt.getText().toString();
                 String password = mSignUpPasswordEt.getText().toString();
                 String confirmPassword = mConfirmPasswordEt.getText().toString();
-                mPresenter.attemptCreateAccount(email,password,confirmPassword);
-                Toast.makeText(getApplication(), (String)"create account button clicked",
-                        Toast.LENGTH_LONG).show();
+                    mPresenter.attemptCreateAccount(email,password,confirmPassword);
             }
         });
     }
@@ -117,112 +119,48 @@ public class SignUpActivity extends AppCompatActivity  implements SignUpInterfac
     public void updateUI(FirebaseUser currentUser){
         //check if user is signed in (non-null)
         if(currentUser!=null){
+            mSignUpFormView.setVisibility(View.VISIBLE);
+            mProgressBar.setVisibility(View.GONE);
             Intent intent = new Intent(SignUpActivity.this,MainActivity.class);
             startActivity(intent);
         }
     }
 
     @Override
-    public void showSignUpError(String errorMessage){
-        Toast.makeText(this,errorMessage,Toast.LENGTH_SHORT).show();
+    public void showProgressBar() {
+        mSignUpFormView.setVisibility(View.GONE);
+        mProgressBar.setVisibility(View.VISIBLE);
     }
 
-    //    /**
-//     * Shows the progress UI and hides the login form.
-//     */
-//    @TargetApi(Build.VERSION_CODES.HONEYCOMB_MR2)
-//    private void showProgress(final boolean show) {
-//        // On Honeycomb MR2 we have the ViewPropertyAnimator APIs, which allow
-//        // for very easy animations. If available, use these APIs to fade-in
-//        // the progress spinner.
-//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB_MR2) {
-//            int shortAnimTime = getResources().getInteger(android.R.integer.config_shortAnimTime);
-//
-//            mSignUpFormView.setVisibility(show ? View.GONE : View.VISIBLE);
-//            mSignUpFormView.animate().setDuration(shortAnimTime).alpha(
-//                    show ? 0 : 1).setListener(new AnimatorListenerAdapter() {
-//                @Override
-//                public void onAnimationEnd(Animator animation) {
-//                    mSignUpFormView.setVisibility(show ? View.GONE : View.VISIBLE);
-//                }
-//            });
-//
-//            mProgressView.setVisibility(show ? View.VISIBLE : View.GONE);
-//            mProgressView.animate().setDuration(shortAnimTime).alpha(
-//                    show ? 1 : 0).setListener(new AnimatorListenerAdapter() {
-//                @Override
-//                public void onAnimationEnd(Animator animation) {
-//                    mProgressView.setVisibility(show ? View.VISIBLE : View.GONE);
-//                }
-//            });
-//        } else {
-//            // The ViewPropertyAnimator APIs are not available, so simply show
-//            // and hide the relevant UI components.
-//            mProgressView.setVisibility(show ? View.VISIBLE : View.GONE);
-//            mSignUpFormView.setVisibility(show ? View.GONE : View.VISIBLE);
-//        }
-//    }
 
+    @Override
+    public void showSignUpError(String errorMessage){
+        new AlertDialog.Builder(this).setTitle("Error")
+                .setMessage(errorMessage)
+                .setIcon(R.drawable.ic_error_outline_black_30dp)
+                .setPositiveButton(R.string.title_tryAgain, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                        mSignUpFormView.setVisibility(View.VISIBLE);
+                        mProgressBar.setVisibility(View.GONE);
+                    }
+                }).show();
+    }
 
-    /********************************************************************************
-     ********************************Async task**************************************
-     ********************************************************************************/
-//    /**
-//     * Represents an asynchronous login/registration task used to authenticate
-//     * the user.
-//     */
-//    public class UserLoginTask extends AsyncTask<Void, Void, Boolean> {
-//
-//        private final String mEmail;
-//        private final String mPassword;
-//
-//        UserLoginTask(String email, String password) {
-//            mEmail = email;
-//            mPassword = password;
-//        }
-//
-//        @Override
-//        protected Boolean doInBackground(Void... params) {
-//            // TODO: attempt authentication against a network service.
-//
-//            try {
-//                // Simulate network access.
-//                Thread.sleep(2000);
-//            } catch (InterruptedException e) {
-//                return false;
-//            }
-//
-//            for (String credential : DUMMY_CREDENTIALS) {
-//                String[] pieces = credential.split(":");
-//                if (pieces[0].equals(mEmail)) {
-//                    // Account exists, return true if the password matches.
-//                    return pieces[1].equals(mPassword);
-//                }
-//            }
-//
-//            // TODO: register the new account here.
-//            return true;
-//        }
-//
-//        @Override
-//        protected void onPostExecute(final Boolean success) {
-//            mAuthTask = null;
-//            showProgress(false);
-//
-//            if (success) {
-//                finish();
-//            } else {
-//                mPasswordView.setError(getString(R.string.error_incorrect_password));
-//                mPasswordView.requestFocus();
-//            }
-//        }
-//
-//        @Override
-//        protected void onCancelled() {
-//            mAuthTask = null;
-//            showProgress(false);
-//        }
-//    }
-
+    @Override
+    public void showTimeoutDialog(){
+        new AlertDialog.Builder(this).setTitle(R.string.title_timeout)
+                .setMessage(R.string.Internet_Connection_error)
+                .setIcon(R.drawable.ic_error_outline_black_30dp)
+                .setPositiveButton(R.string.title_tryAgain, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                        mSignUpFormView.setVisibility(View.VISIBLE);
+                        mProgressBar.setVisibility(View.GONE);
+                    }
+                }).show();
+    }
 }
 

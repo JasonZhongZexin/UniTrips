@@ -38,8 +38,8 @@ public class ImportCalendarPresneter implements ImportCalendarInterface.Presente
     }
 
     @Override
-    public void attemptGetCalendar(String id, String password, String year,String calendarName) {
-        mImportCalendarTaskManager.attemptGetCalendar(id,password,year,calendarName);
+    public void attemptGetCalendar(String id, String password, String year) {
+        mImportCalendarTaskManager.attemptGetCalendar(id,password,year);
     }
 
     @Override
@@ -73,8 +73,4 @@ public class ImportCalendarPresneter implements ImportCalendarInterface.Presente
         mImportCalendarView.updateUI();
     }
 
-    @Override
-    public void setCalendarNameError(String errorMessage) {
-        mImportCalendarView.setCalendarNameError(errorMessage);
-    }
 }

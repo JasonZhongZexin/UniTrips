@@ -30,6 +30,8 @@ public interface SignUpInterface {
         void restError();
         void attemptCreateAccount(String email,String password,String confirmPassword);
         void showSignUpError(String errorMessage);
+        void showProgressBar();
+        void showTimeoutDialog();
     }
 
     interface view{
@@ -38,8 +40,9 @@ public interface SignUpInterface {
         void setConfirmPasswordError(String errorMessage);
         void focusView();
         void restError();
-        //UpdateUI according to the current user
         void updateUI(FirebaseUser currentUser);
+        void showProgressBar();
         void showSignUpError(String errorMessage);
+        void showTimeoutDialog();
     }
 }

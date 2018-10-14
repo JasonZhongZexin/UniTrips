@@ -342,5 +342,3 @@ public class FindPathToSchool {
         getTripInformation(currentLocation,"Train");
     }
 }
-
-

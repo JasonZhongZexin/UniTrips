@@ -52,6 +52,7 @@
     <string name="title_preferred_arrival_time">Arrival: </string>
     <string name="hint_notification_time_description">UniTrips will remind you before your schedule.</string>
     <string name="hint_arrival_time_description">UniTrips will provide a public transport time that matching your preferred arrival time before your schedule time.</string>
+    <string name="title_timeout">Connection Timeout</string>
 
     <!-- Strings related to error message -->
     <string name="error_invalid_email">Invalid email address!</string>
@@ -60,6 +61,7 @@
     <string name="confirmPassword_error">Password and confirm password do not match!</string>
     <string name="sign_fail_message">Authentication failed. Please double check your login detail.</string>
     <string name="resetPassword_Error">Fail to send the reset password link! Please try again!</string>
+    <string name="Internet_Connection_error">Oops! It seems like UniTrip has lost connection with the server! Please double check your internet connection and try again!</string>
 
 
     <!-- Strings related to UTS myTimeTable server -->
@@ -74,6 +76,7 @@
     <string name="firebase_password_incorrect_exception">The input email and password do not match! Please try again...</string>
     <string name="firebase_Timetable_upload_successful">Timetable upload successful!</string>
     <string name="firebase_Timetable_upload_fail">Fail to store your calendar to firebase. Please try again!</string>
+    <string name="title_tryAgain">Try Again</string>
 
     <!-- Strings related to spinners -->
     <string-array name="Transport_setting_spinnerWidget_item">

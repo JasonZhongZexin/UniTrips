@@ -25,8 +25,18 @@ public class UserSettingPresenter implements UserSettingInterface.presenter{
         mTaskManager = new UserSettingTaskManager(this,mConetxt);
     }
 
+
     @Override
-    public UserProfile getUserProfile() {
-        return null;
+    public void setUserProfile(UserProfile userProfile) {
+        mTaskManager.setUserProfile(userProfile);
+    }
+
+    @Override
+    public void getUserProfile() {
+        mTaskManager.getUserProfile();
+    }
+
+    public void initialView(UserProfile userProfile){
+        mUserSettingActivity.initialView(userProfile);
     }
 }
