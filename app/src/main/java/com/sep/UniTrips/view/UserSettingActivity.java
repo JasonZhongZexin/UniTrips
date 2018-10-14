@@ -35,7 +35,7 @@ public class UserSettingActivity extends AppCompatActivity implements UserSettin
     private UserSettingPresenter mPresenter;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_setting);
         mPresenter = new UserSettingPresenter(this,this);
@@ -46,9 +46,9 @@ public class UserSettingActivity extends AppCompatActivity implements UserSettin
         mArrivalTimeMSpinner = findViewById(R.id.arrival_time_min_spinner);
         mSaveBtn = findViewById(R.id.saveEvent_btn);
         mPresenter.getUserProfile();
-        mSaveBtn.setOnClickListener(new View.OnClickListener() {
+        mSaveBtn.setOnClickListener(new View.OnClickListener()  {
             @Override
-            public void onClick(View v) {
+            public void onClick(View v) throws NumberFormatException{
                 try{
                     UserProfile newUserProfiel = new UserProfile(mTranportSettingSpinner.getSelectedItem().toString(),
                             Integer.parseInt(mNotificatationTimeHSpinner.getSelectedItem().toString()),
@@ -83,13 +83,13 @@ public class UserSettingActivity extends AppCompatActivity implements UserSettin
                     break;
             }
             mTranportSettingSpinner.setSelection(pos);
-            pos = userProfile.getNotificationTimeH()+1;
+            pos = userProfile.getNotificationTimeH();
             mNotificatationTimeHSpinner.setSelection(pos);
-            pos = userProfile.getNotificationTimeM()/10+1;
+            pos = userProfile.getNotificationTimeM()/10;
             mNotificatationTimeMSpinner.setSelection(pos);
-            pos = userProfile.getArrivalTimeH()+1;
+            pos = userProfile.getArrivalTimeH();
             mArrivalTimeHSpinner.setSelection(pos);
-            pos = userProfile.getArrivalTimeM()/10+1;
+            pos = userProfile.getArrivalTimeM()/10;
             mArrivalTimeMSpinner.setSelection(pos);
         }
     }

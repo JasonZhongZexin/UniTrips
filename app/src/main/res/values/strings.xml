@@ -99,7 +99,6 @@
         <item>Light Rail</item>
     </string-array>
     <string-array name="NotificationTime_setting_spinnerWidget_Hours_item">
-        <item>HH</item>
         <item>0</item>
         <item>1</item>
         <item>2</item>
@@ -135,7 +134,6 @@
         <item>24</item>
     </string-array>
     <string-array name="NotificationTime_setting_spinnerWidget_Min_item">
-        <item>MM</item>
         <item>00</item>
         <item>10</item>
         <item>20</item>
