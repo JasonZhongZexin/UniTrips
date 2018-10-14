@@ -307,6 +307,404 @@
                         android:orientation="horizontal">
 
                         <LinearLayout
+                            android:id="@+id/Sun"
+                            android:layout_width="110dp"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            android:tag="mon_linearLayout">
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="10pt"
+                                android:background="#EAEAEA"
+                                android:gravity="center_horizontal"
+                                android:text="Sun" />
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="23.5pt"
+                                android:layout_marginLeft="2pt"
+                                android:layout_weight="1"
+                                android:background="#FFFFFF"
+                                android:ellipsize="end"
+                                android:maxLines="2"
+                                android:padding="5dp"
+                                android:tag="Sun8.0"
+                                android:text=" " />
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="23.5pt"
+                                android:layout_marginLeft="2pt"
+                                android:layout_weight="2"
+                                android:background="#F6F6F6"
+                                android:ellipsize="end"
+                                android:maxLines="2"
+                                android:padding="5dp"
+                                android:tag="Sun8.5"
+                                android:text="" />
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="23.5pt"
+                                android:layout_marginLeft="2pt"
+                                android:layout_weight="1"
+                                android:background="#FFFFFF"
+                                android:ellipsize="end"
+                                android:maxLines="2"
+                                android:padding="5dp"
+                                android:tag="Sun9.0"
+                                android:text=" " />
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="23.5pt"
+                                android:layout_marginLeft="2pt"
+                                android:layout_weight="1"
+                                android:background="#F6F6F6"
+                                android:ellipsize="end"
+                                android:maxLines="2"
+                                android:padding="5dp"
+                                android:tag="Sun9.5"
+                                android:text="" />
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="23.5pt"
+                                android:layout_marginLeft="2pt"
+                                android:layout_weight="1"
+                                android:background="#FFFFFF"
+                                android:ellipsize="end"
+                                android:maxLines="2"
+                                android:padding="5dp"
+                                android:tag="Sun10.0"
+                                android:text="" />
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="23.5pt"
+                                android:layout_marginLeft="2pt"
+                                android:layout_weight="1"
+                                android:background="#F6F6F6"
+                                android:ellipsize="end"
+                                android:maxLines="2"
+                                android:padding="5dp"
+                                android:tag="Sun10.5"
+                                android:text=" " />
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="23.5pt"
+                                android:layout_marginLeft="2pt"
+                                android:layout_weight="1"
+                                android:background="#FFFFFF"
+                                android:ellipsize="end"
+                                android:maxLines="2"
+                                android:padding="5dp"
+                                android:tag="Sun11.0"
+                                android:text=" " />
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="23.5pt"
+                                android:layout_marginLeft="2pt"
+                                android:layout_weight="1"
+                                android:background="#F6F6F6"
+                                android:ellipsize="end"
+                                android:maxLines="2"
+                                android:padding="5dp"
+                                android:tag="Sun11.5"
+                                android:text=" " />
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="23.5pt"
+                                android:layout_marginLeft="2pt"
+                                android:layout_weight="1"
+                                android:background="#FFFFFF"
+                                android:ellipsize="end"
+                                android:maxLines="2"
+                                android:padding="5dp"
+                                android:tag="Sun12.0"
+                                android:text=" " />
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="23.5pt"
+                                android:layout_marginLeft="2pt"
+                                android:layout_weight="1"
+                                android:background="#F6F6F6"
+                                android:ellipsize="end"
+                                android:maxLines="2"
+                                android:padding="5dp"
+                                android:tag="Sun12.5"
+                                android:text=" " />
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="23.5pt"
+                                android:layout_marginLeft="2pt"
+                                android:layout_weight="1"
+                                android:background="#FFFFFF"
+                                android:ellipsize="end"
+                                android:maxLines="2"
+                                android:padding="5dp"
+                                android:tag="Sun13.0"
+                                android:text=" " />
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="23.5pt"
+                                android:layout_marginLeft="2pt"
+                                android:layout_weight="1"
+                                android:background="#F6F6F6"
+                                android:ellipsize="end"
+                                android:maxLines="2"
+                                android:padding="5dp"
+                                android:tag="Sun13.5"
+                                android:text=" " />
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="23.5pt"
+                                android:layout_marginLeft="2pt"
+                                android:layout_weight="1"
+                                android:background="#FFFFFF"
+                                android:ellipsize="end"
+                                android:maxLines="2"
+                                android:padding="5dp"
+                                android:tag="Sun14.0"
+                                android:text=" " />
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="23.5pt"
+                                android:layout_marginLeft="2pt"
+                                android:layout_weight="1"
+                                android:background="#F6F6F6"
+                                android:ellipsize="end"
+                                android:maxLines="2"
+                                android:padding="5dp"
+                                android:tag="Sun14.5"
+                                android:text=" " />
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="23.5pt"
+                                android:layout_marginLeft="2pt"
+                                android:layout_weight="1"
+                                android:background="#FFFFFF"
+                                android:ellipsize="end"
+                                android:maxLines="2"
+                                android:padding="5dp"
+                                android:tag="Sun15.0"
+                                android:text=" " />
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="23.5pt"
+                                android:layout_marginLeft="2pt"
+                                android:layout_weight="1"
+                                android:background="#F6F6F6"
+                                android:ellipsize="end"
+                                android:maxLines="2"
+                                android:padding="5dp"
+                                android:tag="Sun15.5"
+                                android:text=" " />
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="23.5pt"
+                                android:layout_marginLeft="2pt"
+                                android:layout_weight="1"
+                                android:background="#FFFFFF"
+                                android:ellipsize="end"
+                                android:maxLines="2"
+                                android:padding="5dp"
+                                android:tag="Sun16.0"
+                                android:text=" " />
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="23.5pt"
+                                android:layout_marginLeft="2pt"
+                                android:layout_weight="1"
+                                android:background="#F6F6F6"
+                                android:ellipsize="end"
+                                android:maxLines="2"
+                                android:padding="5dp"
+                                android:tag="Sun16.5"
+                                android:text=" " />
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="23.5pt"
+                                android:layout_marginLeft="2pt"
+                                android:layout_weight="1"
+                                android:background="#FFFFFF"
+                                android:ellipsize="end"
+                                android:maxLines="2"
+                                android:padding="5dp"
+                                android:tag="Sun17.0"
+                                android:text=" " />
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="23.5pt"
+                                android:layout_marginLeft="2pt"
+                                android:layout_weight="1"
+                                android:background="#F6F6F6"
+                                android:ellipsize="end"
+                                android:maxLines="2"
+                                android:padding="5dp"
+                                android:tag="Sun17.5"
+                                android:text=" " />
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="23.5pt"
+                                android:layout_marginLeft="2pt"
+                                android:layout_weight="1"
+                                android:background="#FFFFFF"
+                                android:ellipsize="end"
+                                android:maxLines="2"
+                                android:padding="5dp"
+                                android:tag="Sun18.0"
+                                android:text=" " />
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="23.5pt"
+                                android:layout_marginLeft="2pt"
+                                android:layout_weight="1"
+                                android:background="#F6F6F6"
+                                android:ellipsize="end"
+                                android:maxLines="2"
+                                android:padding="5dp"
+                                android:tag="Sun18.5"
+                                android:text=" " />
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="23.5pt"
+                                android:layout_marginLeft="2pt"
+                                android:layout_weight="1"
+                                android:background="#FFFFFF"
+                                android:ellipsize="end"
+                                android:maxLines="2"
+                                android:padding="5dp"
+                                android:tag="Sun19.0"
+                                android:text=" " />
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="23.5pt"
+                                android:layout_marginLeft="2pt"
+                                android:layout_weight="1"
+                                android:background="#F6F6F6"
+                                android:ellipsize="end"
+                                android:maxLines="2"
+                                android:padding="5dp"
+                                android:tag="Sun19.5"
+                                android:text=" " />
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="23.5pt"
+                                android:layout_marginLeft="2pt"
+                                android:layout_weight="1"
+                                android:background="#FFFFFF"
+                                android:ellipsize="end"
+                                android:maxLines="2"
+                                android:padding="5dp"
+                                android:tag="Sun20.0"
+                                android:text=" " />
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="23.5pt"
+                                android:layout_marginLeft="2pt"
+                                android:layout_weight="1"
+                                android:background="#F6F6F6"
+                                android:ellipsize="end"
+                                android:maxLines="2"
+                                android:padding="5dp"
+                                android:tag="Sun20.5"
+                                android:text=" " />
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="23.5pt"
+                                android:layout_marginLeft="2pt"
+                                android:layout_weight="1"
+                                android:background="#FFFFFF"
+                                android:ellipsize="end"
+                                android:maxLines="2"
+                                android:padding="5dp"
+                                android:tag="Sun21.0"
+                                android:text=" " />
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="23.5pt"
+                                android:layout_marginLeft="2pt"
+                                android:layout_weight="1"
+                                android:background="#F6F6F6"
+                                android:ellipsize="end"
+                                android:maxLines="2"
+                                android:padding="5dp"
+                                android:tag="Sun21.5"
+                                android:text=" " />
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="23.5pt"
+                                android:layout_marginLeft="2pt"
+                                android:layout_weight="1"
+                                android:background="#FFFFFF"
+                                android:ellipsize="end"
+                                android:maxLines="2"
+                                android:padding="5dp"
+                                android:tag="Sun22.0"
+                                android:text=" " />
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="23.5pt"
+                                android:layout_marginLeft="2pt"
+                                android:layout_weight="1"
+                                android:background="#F6F6F6"
+                                android:ellipsize="end"
+                                android:maxLines="2"
+                                android:padding="5dp"
+                                android:tag="Sun22.5"
+                                android:text=" " />
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="23.5pt"
+                                android:layout_marginLeft="2pt"
+                                android:layout_weight="1"
+                                android:background="#FFFFFF"
+                                android:ellipsize="end"
+                                android:maxLines="2"
+                                android:padding="5dp"
+                                android:tag="Sun23.0"
+                                android:text=" " />
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="23.5pt"
+                                android:layout_marginLeft="2pt"
+                                android:layout_weight="1"
+                                android:background="#F6F6F6"
+                                android:ellipsize="end"
+                                android:maxLines="2"
+                                android:padding="5dp"
+                                android:tag="Sun23.5"
+                                android:text=" " />
+                        </LinearLayout>
+                        <LinearLayout
                             android:id="@+id/Mon"
                             android:layout_width="110dp"
                             android:layout_height="wrap_content"
@@ -329,7 +727,7 @@
                                 android:ellipsize="end"
                                 android:maxLines="2"
                                 android:padding="5dp"
-                                android:tag="Mon08.0"
+                                android:tag="Mon8.0"
                                 android:text=" " />
 
                             <TextView
@@ -341,7 +739,7 @@
                                 android:ellipsize="end"
                                 android:maxLines="2"
                                 android:padding="5dp"
-                                android:tag="Mon08.5"
+                                android:tag="Mon8.5"
                                 android:text="" />
 
                             <TextView
@@ -353,7 +751,7 @@
                                 android:ellipsize="end"
                                 android:maxLines="2"
                                 android:padding="5dp"
-                                android:tag="Mon09.0"
+                                android:tag="Mon9.0"
                                 android:text=" " />
 
                             <TextView
@@ -365,7 +763,7 @@
                                 android:ellipsize="end"
                                 android:maxLines="2"
                                 android:padding="5dp"
-                                android:tag="Mon09.5"
+                                android:tag="Mon9.5"
                                 android:text="" />
 
                             <TextView
@@ -728,7 +1126,7 @@
                                 android:ellipsize="end"
                                 android:maxLines="2"
                                 android:padding="5dp"
-                                android:tag="Tue08.0"
+                                android:tag="Tue8.0"
                                 android:text=" " />
 
                             <TextView
@@ -740,7 +1138,7 @@
                                 android:ellipsize="end"
                                 android:maxLines="2"
                                 android:padding="5dp"
-                                android:tag="Tue08.5"
+                                android:tag="Tue8.5"
                                 android:text="" />
 
                             <TextView
@@ -752,7 +1150,7 @@
                                 android:ellipsize="end"
                                 android:maxLines="2"
                                 android:padding="5dp"
-                                android:tag="Tue09.0"
+                                android:tag="Tue9.0"
                                 android:text=" " />
 
                             <TextView
@@ -764,7 +1162,7 @@
                                 android:ellipsize="end"
                                 android:maxLines="2"
                                 android:padding="5dp"
-                                android:tag="Tue09.5"
+                                android:tag="Tue9.5"
                                 android:text="" />
 
                             <TextView
@@ -1127,7 +1525,7 @@
                                 android:ellipsize="end"
                                 android:maxLines="2"
                                 android:padding="5dp"
-                                android:tag="Wed08.0"
+                                android:tag="Wed8.0"
                                 android:text=" " />
 
                             <TextView
@@ -1139,7 +1537,7 @@
                                 android:ellipsize="end"
                                 android:maxLines="2"
                                 android:padding="5dp"
-                                android:tag="Wed08.5"
+                                android:tag="Wed8.5"
                                 android:text="" />
 
                             <TextView
@@ -1151,7 +1549,7 @@
                                 android:ellipsize="end"
                                 android:maxLines="2"
                                 android:padding="5dp"
-                                android:tag="Wed09.0"
+                                android:tag="Wed9.0"
                                 android:text=" " />
 
                             <TextView
@@ -1163,7 +1561,7 @@
                                 android:ellipsize="end"
                                 android:maxLines="2"
                                 android:padding="5dp"
-                                android:tag="Wed09.5"
+                                android:tag="Wed9.5"
                                 android:text="" />
 
                             <TextView
@@ -1527,7 +1925,7 @@
                                 android:ellipsize="end"
                                 android:maxLines="2"
                                 android:padding="5dp"
-                                android:tag="Thu08.0"
+                                android:tag="Thu8.0"
                                 android:text=" " />
 
                             <TextView
@@ -1539,7 +1937,7 @@
                                 android:ellipsize="end"
                                 android:maxLines="2"
                                 android:padding="5dp"
-                                android:tag="Thu08.5"
+                                android:tag="Thu8.5"
                                 android:text="" />
 
                             <TextView
@@ -1551,7 +1949,7 @@
                                 android:ellipsize="end"
                                 android:maxLines="2"
                                 android:padding="5dp"
-                                android:tag="Thu09.0"
+                                android:tag="Thu9.0"
                                 android:text=" " />
 
                             <TextView
@@ -1563,7 +1961,7 @@
                                 android:ellipsize="end"
                                 android:maxLines="2"
                                 android:padding="5dp"
-                                android:tag="Thu09.5"
+                                android:tag="Thu9.5"
                                 android:text="" />
 
                             <TextView
@@ -1925,7 +2323,7 @@
                                 android:ellipsize="end"
                                 android:maxLines="2"
                                 android:padding="5dp"
-                                android:tag="Fri08.0"
+                                android:tag="Fri8.0"
                                 android:text=" " />
 
                             <TextView
@@ -1937,7 +2335,7 @@
                                 android:ellipsize="end"
                                 android:maxLines="2"
                                 android:padding="5dp"
-                                android:tag="Fri08.5"
+                                android:tag="Fri8.5"
                                 android:text="" />
 
                             <TextView
@@ -1949,7 +2347,7 @@
                                 android:ellipsize="end"
                                 android:maxLines="2"
                                 android:padding="5dp"
-                                android:tag="Fri09.0"
+                                android:tag="Fri9.0"
                                 android:text=" " />
 
                             <TextView
@@ -1961,7 +2359,7 @@
                                 android:ellipsize="end"
                                 android:maxLines="2"
                                 android:padding="5dp"
-                                android:tag="Fri09.5"
+                                android:tag="Fri9.5"
                                 android:text="" />
 
                             <TextView
