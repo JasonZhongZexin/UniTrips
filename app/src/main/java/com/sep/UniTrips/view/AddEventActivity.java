@@ -7,6 +7,7 @@
 package com.sep.UniTrips.view;
 
 import android.app.DatePickerDialog;
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.hardware.camera2.TotalCaptureResult;
@@ -61,34 +62,6 @@ public class AddEventActivity extends AppCompatActivity {
         mNotificationTimeEt = findViewById(R.id.eventNotification_et);
         mAuth = FirebaseAuth.getInstance();
         mDatabase = FirebaseDatabase.getInstance().getReference();
-//        mStartTimeEt.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                int year = mCalendar.get(Calendar.YEAR);
-//                int month = mCalendar.get(Calendar.MONTH);
-//                int day = mCalendar.get(Calendar.DAY_OF_MONTH);
-//                DatePickerDialog dialog = new DatePickerDialog(getApplicationContext(),
-//                        android.R.style.Theme_Holo_Light_Dialog_MinWidth,
-//                        mDateSetListener,
-//                        year,month,day);
-//                dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-//                dialog.show();
-//            }
-//        });
-//        mDateSetListener = new DatePickerDialog.OnDateSetListener() {
-//            @Override
-//            public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-//                mDate.set(Calendar.YEAR, year);
-//                mDate.set(Calendar.MONTH, month);
-//                mDate.set(Calendar.DAY_OF_MONTH, dayOfMonth);
-//            }
-//        };
-//        mEndTimeEt.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//
-//            }
-//        });
         mLocationEt = findViewById(R.id.eventLocation_et);
         mSaveEventBtn = findViewById(R.id.saveEvent_btn);
         mSaveEventBtn.setOnClickListener(new View.OnClickListener() {
@@ -106,7 +79,8 @@ public class AddEventActivity extends AppCompatActivity {
                     @Override
                     public void onSuccess(Void aVoid) {
                         Toast.makeText(getApplicationContext(),"Event add successful !",Toast.LENGTH_SHORT).show();
-                        startActivity(getParentActivityIntent());
+                        Intent intent = new Intent(getApplicationContext(),MainActivity.class);
+                        startActivity(intent);
                     }
                 }).addOnFailureListener(new OnFailureListener() {
                     @Override
