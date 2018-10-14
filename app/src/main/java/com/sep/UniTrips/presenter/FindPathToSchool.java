@@ -336,9 +336,9 @@ public class FindPathToSchool {
 //        mStationText.setText(trip_information);
     }
 
-    public static void main (String [] args) {
-        // here is an example
-        double [] currentLocation = new double [] {-33.9661649,151.1030075};
-        getTripInformation(currentLocation,"Train");
-    }
+//    public static void main (String [] args) {
+//        // here is an example
+//        double [] currentLocation = new double [] {-33.9661649,151.1030075};
+//        getTripInformation(currentLocation,"Train");
+//    }
 }
