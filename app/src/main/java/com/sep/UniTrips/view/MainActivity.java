@@ -99,9 +99,6 @@ public class MainActivity extends AppCompatActivity {
                         e.printStackTrace();
                     }
                     return true;
-                case R.id.navigation_dashboard:
-                    mTextMessage.setText(R.string.title_dashboard);
-                    return true;
                 case R.id.navigation_setting:
                     SettingFragment settingFragment = new SettingFragment();
                     FragmentTransaction settingFragmentTransaction = getSupportFragmentManager().beginTransaction();
@@ -199,8 +196,6 @@ public class MainActivity extends AppCompatActivity {
         if (location != null) {
             setLocation( location );
         }
-//        //debug
-//        System.out.println("************* location provider is " + location + " *********");
 
         locationManager.requestLocationUpdates(locationProvider, 0, 0, mListener);
 

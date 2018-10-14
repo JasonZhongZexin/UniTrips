@@ -13,7 +13,15 @@
     tools:context=".view.AddEventActivity"
     android:orientation="vertical"
     android:background="@color/colorPrimary">
-
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:text="@string/New_Event"
+        android:textColor="@color/textColorWhite"
+        android:textSize="28dp"
+        android:textStyle="bold"
+        android:layout_margin="5dp"/>
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
@@ -26,7 +34,9 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp">
         <EditText
-            android:layout_margin="20dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginBottom="5dp"
             android:id="@+id/eventTitle_et"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -44,20 +54,22 @@
         android:layout_marginBottom="3dp"
         android:background="@color/black_overlay"/>
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:layout_margin="5dp"
-        android:textSize="25dp"
-        android:textColor="@color/textBlack"
-        android:text="@string/title_timePicker"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_margin="5dp"
+            android:textSize="19dp"
+            android:textStyle="bold"
+            android:textColor="@color/ColorSecondaryBtn"
+            android:text="@string/title_timePicker"/>
 
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
+        android:layout_marginBottom="5dp"
         android:id="@+id/eventStartTime_et"
         android:hint="@string/hint_event_start_time"/>
 
@@ -66,7 +78,7 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
-        android:layout_marginBottom="20dp"
+        android:layout_marginBottom="5dp"
         android:id="@+id/eventEndTime_et"
         android:hint="@string/hint_event_end_time"/>
 
@@ -76,20 +88,21 @@
         android:layout_marginBottom="3dp"
         android:background="@color/black_overlay"/>
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:layout_margin="5dp"
-        android:textSize="25dp"
-        android:textColor="@color/textBlack"
-        android:text="@string/title_eventLocation"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_margin="5dp"
+            android:textSize="19dp"
+            android:textStyle="bold"
+            android:textColor="@color/ColorSecondaryBtn"
+            android:text="@string/title_eventLocation"/>
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
-        android:layout_marginBottom="20dp"
+        android:layout_marginBottom="5dp"
         android:id="@+id/eventLocation_et"
         android:hint="@string/hint_event_location"/>
 
@@ -98,24 +111,33 @@
         android:layout_height="3dp"
         android:layout_marginBottom="3dp"
         android:background="@color/black_overlay"/>
-
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_margin="5dp"
+            android:textSize="19dp"
+            android:textStyle="bold"
+            android:textColor="@color/ColorSecondaryBtn"
+            android:text="@string/NotificationTime"/>
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="@string/hint_notification_time"
+        android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
-        android:layout_marginTop="15dp"
-        android:id="@+id/eventNotification_et"
-        android:layout_marginLeft="20dp"/>
+        android:layout_marginBottom="5dp"
+        android:id="@+id/eventNotification_et" />
 
     </LinearLayout>
     </ScrollView>
     <Button
         android:layout_width="match_parent"
-        android:layout_margin="25dp"
+        android:layout_margin="20dp"
         android:id="@+id/saveEvent_btn"
         android:text="@string/text_addEvent_save_btn"
-        android:textSize="25dp"
+        android:textSize="23dp"
+        android:textStyle="bold"
         android:textColor="@color/textColorWhite"
         android:background="@drawable/sign_up_btn_selector"
         android:layout_height="wrap_content" />

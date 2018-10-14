@@ -19,6 +19,7 @@
     <string name="title_home">Home</string>
     <string name="title_dashboard">Dashboard</string>
     <string name="title_setting">setting</string>
+    <string name="New_Event">New Event</string>
     <string name="transport_setting">Transport Setting</string>
     <string name="import_calendar">Add calendar</string>
     <string name="dialog_ok">OK</string>
@@ -53,10 +54,13 @@
     <string name="user_preference">My preference</string>
     <string name="title_notificationTime_setting">Notification Time: </string>
     <string name="title_preferred_arrival_time">Arrival: </string>
+    <string name="NotificationTime">Notification Time</string>
     <string name="hint_set_preference">Set your preference for transport and notification.</string>
     <string name="hint_notification_time_description">UniTrips will remind you before your schedule.</string>
+    <string name="hint_preferred_transport_description">UniTripS will provide the routes by the transportation.</string>
     <string name="hint_arrival_time_description">UniTrips will provide a public transport time that matching your preferred arrival time before your schedule time.</string>
     <string name="title_timeout">Connection Timeout</string>
+    <string name="welcome">Welcome to UniTripS!</string>
     <string name="hours">hrs</string>
     <string name="Course_Title">Course Detail</string>
     <string name="userSetting_success">Update user preference success !</string>
