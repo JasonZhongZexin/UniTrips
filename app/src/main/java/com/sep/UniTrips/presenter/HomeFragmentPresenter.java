@@ -34,40 +34,40 @@ public class HomeFragmentPresenter implements HomeFragmentInterface.Presenter{
 
     @Override
     public void showCourseData() {
-//        mTaskManager.readCalendars(new HomeFragmentInterface.CalendarDataCallBack() {
-//            @Override
-//            public void onCalendarCallBack(Calendar calendar) {
-//                if(calendar!=null){
-//                    java.util.Calendar androidCalendar = java.util.Calendar.getInstance();
-//                    int currentWeekNumber = androidCalendar.get(java.util.Calendar.WEEK_OF_YEAR);
-//                    for(Course course:calendar.getCourses()){
-//                        if((course.getWeek_pattern().charAt((currentWeekNumber)-1))=='1')
-//                            weeklyCourse.add(course);
-//                    }
-//                    for(int i=0;i<weeklyCourse.size();i++) {
-//                        String date = weeklyCourse.get(i).getDay_of_week();
-//                        int duration = Integer.parseInt(weeklyCourse.get(i).getDuration())/30;
-//                        String startTimeFormatted = (weeklyCourse.get(i).getStart_time()).replaceAll(":",".");
-//                        String startTime = startTimeFormatted.replaceAll(".30",".5");
-//                        Double tagDouble = Double.parseDouble(startTime);
-//                        String subjectDescriptionViewTag = date+tagDouble;
-//                        mHomeFragmentView.setSubjectDescription(subjectDescriptionViewTag,weeklyCourse.get(i)
-//                                .getSubject_description());
-//                        String locationViewTag = date+(tagDouble+0.5);
-//                        mHomeFragmentView.setLocation(locationViewTag,weeklyCourse.get(i).getLocation());
-//                        Random rnd = new Random();
-//                        int color = Color.argb(255, rnd.nextInt(256), rnd.nextInt(256), rnd.nextInt(256));
-//                        for(int j=0;j<duration;j++){
-//                            String viewTag = date+tagDouble;
-//                            mHomeFragmentView.showCourseTextView(viewTag,color);
-//                            //mHomeFragmentView.setOnClickListener(viewTag,weeklyCourse.get(i));
-//                            tagDouble = Double.parseDouble(startTime);
-//                            tagDouble += 0.50;
-//                            startTime = tagDouble.toString();
-//                        }
-//                    }
-//                }
-//            }
-//        });
+        mTaskManager.readCalendars(new HomeFragmentInterface.CalendarDataCallBack() {
+            @Override
+            public void onCalendarCallBack(Calendar calendar) {
+                if(calendar!=null){
+                    java.util.Calendar androidCalendar = java.util.Calendar.getInstance();
+                    int currentWeekNumber = androidCalendar.get(java.util.Calendar.WEEK_OF_YEAR);
+                    for(Course course:calendar.getCourses()){
+                        if((course.getWeek_pattern().charAt((currentWeekNumber)-1))=='1')
+                            weeklyCourse.add(course);
+                    }
+                    for(int i=0;i<weeklyCourse.size();i++) {
+                        String date = weeklyCourse.get(i).getDay_of_week();
+                        int duration = Integer.parseInt(weeklyCourse.get(i).getDuration())/30;
+                        String startTimeFormatted = (weeklyCourse.get(i).getStart_time()).replaceAll(":",".");
+                        String startTime = startTimeFormatted.replaceAll(".30",".5");
+                        Double tagDouble = Double.parseDouble(startTime);
+                        String subjectDescriptionViewTag = date+tagDouble;
+                        mHomeFragmentView.setSubjectDescription(subjectDescriptionViewTag,weeklyCourse.get(i)
+                                .getSubject_description());
+                        String locationViewTag = date+(tagDouble+0.5);
+                        mHomeFragmentView.setLocation(locationViewTag,weeklyCourse.get(i).getLocation());
+                        Random rnd = new Random();
+                        int color = Color.argb(255, rnd.nextInt(256), rnd.nextInt(256), rnd.nextInt(256));
+                        for(int j=0;j<duration;j++){
+                            String viewTag = date+tagDouble;
+                            mHomeFragmentView.showCourseTextView(viewTag,color);
+                            //mHomeFragmentView.setOnClickListener(viewTag,weeklyCourse.get(i));
+                            tagDouble = Double.parseDouble(startTime);
+                            tagDouble += 0.50;
+                            startTime = tagDouble.toString();
+                        }
+                    }
+                }
+            }
+        });
     }
 }
