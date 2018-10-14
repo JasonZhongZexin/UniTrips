@@ -6,8 +6,14 @@
 
 package com.sep.UniTrips.presenter;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
+import android.os.Build;
+import android.support.annotation.RequiresApi;
+import android.view.View;
 
+import com.sep.UniTrips.R;
 import com.sep.UniTrips.model.UserSetting.UserProfile;
 import com.sep.UniTrips.model.UserSetting.UserSettingInterface;
 import com.sep.UniTrips.model.UserSetting.UserSettingTaskManager;
@@ -34,6 +40,12 @@ public class UserSettingPresenter implements UserSettingInterface.presenter{
     @Override
     public void getUserProfile() {
         mTaskManager.getUserProfile();
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
+    @Override
+    public void updateUI(Boolean isSuccess) {
+        mUserSettingActivity.updateUI(isSuccess);
     }
 
     public void initialView(UserProfile userProfile){

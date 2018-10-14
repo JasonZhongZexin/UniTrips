@@ -10,8 +10,10 @@ public interface UserSettingInterface {
     interface presenter{
         void setUserProfile(UserProfile userProfile);
         void getUserProfile();
+        void updateUI(Boolean isSuccess);
     }
     interface view{
         void initialView(UserProfile userProfile);
+        void updateUI(Boolean isSuccess);
     }
 }

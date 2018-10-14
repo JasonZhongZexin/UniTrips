@@ -7,7 +7,10 @@
 package com.sep.UniTrips.model.UserSetting;
 
 import android.content.Context;
+import android.os.Build;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
+import android.support.annotation.RequiresApi;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -51,6 +54,16 @@ public class UserSettingTaskManager {
     public void setUserProfile(UserProfile userProfile){
         FirebaseUser currentUser = mAuth.getCurrentUser();
         DatabaseReference ref = mDatabase.child("users").child(currentUser.getUid()).child("User Profile");
-        ref.setValue(userProfile);
+        ref.setValue(userProfile, new DatabaseReference.CompletionListener() {
+            @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
+            @Override
+            public void onComplete(@Nullable DatabaseError databaseError, @NonNull DatabaseReference databaseReference) {
+                if (databaseError != null) {
+                    mPresenter.updateUI(false);
+                } else {
+                   mPresenter.updateUI(true);
+                }
+            }
+        });
     }
 }

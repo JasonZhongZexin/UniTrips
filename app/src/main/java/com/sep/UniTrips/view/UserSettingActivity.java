@@ -6,6 +6,11 @@
 
 package com.sep.UniTrips.view;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.os.Build;
+import android.support.annotation.RequiresApi;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -81,6 +86,25 @@ public class UserSettingActivity extends AppCompatActivity implements UserSettin
             mArrivalTimeHSpinner.setSelection(pos);
             pos = userProfile.getArrivalTimeM()/10+1;
             mArrivalTimeMSpinner.setSelection(pos);
+        }
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
+    @Override
+    public void updateUI(Boolean isSuccess) {
+        if(isSuccess){
+            Intent intent = new Intent(this,MainActivity.class);
+            startActivity(intent);
+        }else{
+            new AlertDialog.Builder(this).setTitle(R.string.title_asyncFail)
+                    .setMessage(R.string.async_fail)
+                    .setIcon(R.drawable.ic_error_outline_black_30dp)
+                    .setPositiveButton(R.string.title_tryAgain, new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.dismiss();
+                        }
+                    }).show();
         }
     }
 }

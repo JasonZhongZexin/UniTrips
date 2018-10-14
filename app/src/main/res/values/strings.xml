@@ -53,7 +53,8 @@
     <string name="hint_notification_time_description">UniTrips will remind you before your schedule.</string>
     <string name="hint_arrival_time_description">UniTrips will provide a public transport time that matching your preferred arrival time before your schedule time.</string>
     <string name="title_timeout">Connection Timeout</string>
-
+    <string name="async_fail">Fail to connection with server! Please try again!</string>
+    <string name="title_asyncFail">Update Fail</string>
     <!-- Strings related to error message -->
     <string name="error_invalid_email">Invalid email address!</string>
     <string name="error_field_required">This field is required</string>
