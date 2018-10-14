@@ -28,6 +28,9 @@ import com.google.firebase.auth.FirebaseUser;
 import com.sep.UniTrips.R;
 import com.sep.UniTrips.presenter.ResetPasswordPresenter;
 
+/**
+ * this is the reset password task manager which handle the reset password request
+ */
 public class ResetPasswordTaskManager {
 
     private FirebaseAuth mAuth;
@@ -40,10 +43,19 @@ public class ResetPasswordTaskManager {
         this.mContext = mContext;
     }
 
+    /**
+     * vaild the email address
+     * @param email
+     * @return
+     */
     private boolean isEmailValid(String email) {
         return email.contains("@");
     }
 
+    /**
+     * attempt to request an reset password link form the server
+     * @param email
+     */
     public void attemptRequestPassword(String email){
 
         //reset error
@@ -67,6 +79,10 @@ public class ResetPasswordTaskManager {
         }
     }
 
+    /**
+     * feedback user if an error happen when try to reset password
+     * @param email
+     */
     public void sendResetPasswordEmail(String email){
         mAuth.sendPasswordResetEmail(email)
                 .addOnCompleteListener(new OnCompleteListener<Void>() {

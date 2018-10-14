@@ -13,6 +13,10 @@ import com.sep.UniTrips.model.UserSetting.UserSettingInterface;
 import com.sep.UniTrips.model.UserSetting.UserSettingTaskManager;
 import com.sep.UniTrips.view.UserSettingActivity;
 
+/**
+ * This is the user setting presenter, it will communicate with model and return the data that view request to the view.
+ * it is the interface between the view and model
+ */
 public class UserSettingPresenter implements UserSettingInterface.presenter{
 
     private Context mConetxt;
@@ -20,27 +24,47 @@ public class UserSettingPresenter implements UserSettingInterface.presenter{
     private UserSettingTaskManager mTaskManager;
 
 
+    /**
+     * Thus is the constarct class of the view which will initial the presenter
+     * @param context
+     * @param userSettingActivity
+     */
     public UserSettingPresenter(Context context,UserSettingActivity userSettingActivity) {
         this.mConetxt = context;
         this.mUserSettingActivity = userSettingActivity;
         mTaskManager = new UserSettingTaskManager(this,mConetxt);
     }
 
+    /**
+     * this mehtopd will post the new user profile and update it into database
+     * @param userProfile
+     */
     @Override
     public void setUserProfile(UserProfile userProfile) {
         mTaskManager.setUserProfile(userProfile);
     }
 
+    /**
+     * this method will request the user setting from firebase
+     */
     @Override
     public void getUserProfile() {
         mTaskManager.getUserProfile();
     }
 
+    /**
+     * This method will update the view base ont he set user detail result
+     * @param isSuccess
+     */
     @Override
     public void updateView(Boolean isSuccess) {
         mUserSettingActivity.updateView(isSuccess);
     }
 
+    /**
+     * this methods will get the user setting from the server and use it to initial the view
+     * @param userProfile
+     */
     public void initialView(UserProfile userProfile){
         mUserSettingActivity.initialView(userProfile);}
 }

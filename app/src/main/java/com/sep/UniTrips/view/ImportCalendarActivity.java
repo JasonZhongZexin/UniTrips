@@ -28,6 +28,9 @@ import com.sep.UniTrips.presenter.ImportCalendarPresneter;
 
 import java.util.Calendar;
 
+/**
+ * This is the import calendar view. it allow the user to import a clendar from UTS my calendar web server by entering the student number and uts account password
+ */
 public class ImportCalendarActivity extends AppCompatActivity implements ImportCalendarInterface.View{
 
     private ImportCalendarPresneter mPresenter;

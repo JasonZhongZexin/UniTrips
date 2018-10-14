@@ -26,6 +26,10 @@ import com.sep.UniTrips.R;
 import com.sep.UniTrips.model.RestPassword.ResetPasswordInterface;
 import com.sep.UniTrips.presenter.ResetPasswordPresenter;
 
+/**
+ * This is the reset password view of the application. user can input an registered email address and
+ * get the request an reset password link from the server
+ */
 public class ResetPasswordActivity extends AppCompatActivity implements ResetPasswordInterface.view{
 
     private EditText mEmailEt;
@@ -59,22 +63,36 @@ public class ResetPasswordActivity extends AppCompatActivity implements ResetPas
         });
     }
 
+    /**
+     * display error message when getting an error
+     * @param errorMessage
+     */
     @Override
     public void showErrorMessage(String errorMessage) {
         Toast.makeText(this,errorMessage,Toast.LENGTH_LONG).show();
     }
 
+    /**
+     * reset the focus view and set the view  error to null
+     */
     @Override
     public void restError() {
         mEmailEt.setError(null);
     }
 
+    /**
+     * set the error message for hte email view
+     * @param errorMessage
+     */
     @Override
     public void setEmailError(String errorMessage) {
         mEmailEt.setError(errorMessage);
         mFocusView = mEmailEt;
     }
 
+    /**
+     * request to focus the view when they are any error message on the view
+     */
     @Override
     public void focusView() {
         if(mFocusView!=null){
@@ -82,6 +100,10 @@ public class ResetPasswordActivity extends AppCompatActivity implements ResetPas
         }
     }
 
+    /**
+     * update the user according to the reset password email request result and use a toast to feedback the user
+     * @param result
+     */
     @Override
     public void updateUI(Boolean result) {
         if(result==true){
@@ -99,6 +121,8 @@ public class ResetPasswordActivity extends AppCompatActivity implements ResetPas
 //            mDialog = mBuilder.create();
 //            mDialog.show();
             Toast.makeText(this,getString(R.string.resetPasswordSend),Toast.LENGTH_LONG).show();
+//            Intent intent = new Intent(this,SignInActivity.class);
+//            startActivity(intent);
         } else{
             //reset password link send successful
 //            AlertDialog.Builder mBuilder = new AlertDialog.Builder(this);
@@ -122,7 +146,7 @@ public class ResetPasswordActivity extends AppCompatActivity implements ResetPas
 //            mBuilder.setView(dialogView);
 //            mDialog = mBuilder.create();
 //            mDialog.show();
-            Toast.makeText(this,"Fail",Toast.LENGTH_SHORT).show();
+            Toast.makeText(this,getString(R.string.resetPassword_Error),Toast.LENGTH_SHORT).show();
         }
     }
 }

@@ -18,6 +18,9 @@ import com.sep.UniTrips.model.RestPassword.ResetPasswordInterface;
 import com.sep.UniTrips.model.RestPassword.ResetPasswordTaskManager;
 import com.sep.UniTrips.view.ResetPasswordActivity;
 
+/**
+ * this is the reset password presenter which connect the view and model and communication between these two
+ */
 public class ResetPasswordPresenter implements ResetPasswordInterface.Presenter {
 
     private Context mContext;

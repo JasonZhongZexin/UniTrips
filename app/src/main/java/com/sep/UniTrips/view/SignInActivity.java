@@ -99,7 +99,6 @@ public class SignInActivity extends AppCompatActivity implements LoginInterface.
                 return false;
             }
         });
-
         mLoginFormView = findViewById(R.id.signUp_form);
         mSignInBtn = findViewById(R.id.sign_in_button);
         mSignInBtn.setOnClickListener(new OnClickListener() {
@@ -120,7 +119,10 @@ public class SignInActivity extends AppCompatActivity implements LoginInterface.
         updateUI(currentUser);
     }
 
-    //UpdateUI according to the current user
+    /**
+     * update the UI base on the current user. launch the main activity if the current user is not null
+     * @param currentUser
+     */
     @Override
     public void updateUI(FirebaseUser currentUser){
         //check if user is signed in (non-null)
@@ -130,29 +132,48 @@ public class SignInActivity extends AppCompatActivity implements LoginInterface.
         }
     }
 
+    /**
+     * dispay the error message when sign up fail
+     *
+     */
     @Override
     public void showSignInError(String errorMessage) {
         Toast.makeText(this,errorMessage,Toast.LENGTH_LONG).show();
     }
 
+    /**
+     * dispay the error message when sign up fail
+     *
+     */
     @Override
     public void restError() {
         mEmailEt.setError(null);
         mPasswordEt.setError(null);
     }
 
+    /**
+     * set the error message to the view
+     * @param errorMessage
+     */
     @Override
     public void setEmailError(String errorMessage) {
         mEmailEt.setError(errorMessage);
         mFocusView = mEmailEt;
     }
 
+    /**
+     * set the error message to the view
+     * @param errorMessage
+     */
     @Override
     public void setPasswordError(String errorMessage) {
         mPasswordEt.setError(errorMessage);
         mFocusView = mPasswordEt;
     }
 
+    /**
+     * focus to the error view and reset the error message
+     */
     @Override
     public void focusView() {
         if(mFocusView!=null){

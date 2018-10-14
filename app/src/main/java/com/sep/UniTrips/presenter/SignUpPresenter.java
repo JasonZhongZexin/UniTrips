@@ -23,6 +23,9 @@ import com.sep.UniTrips.model.SignUpModel.SignUpInterface;
 import com.sep.UniTrips.model.SignUpModel.SignUpTaskManager;
 import com.sep.UniTrips.view.SignUpActivity;
 
+/**
+ * This is the sign up presenter which allow user will post user' s input to the model and attempt with the user's inpu /
+ */
 public class SignUpPresenter implements SignUpInterface.presenter {
 
     private Context mConetxt;
@@ -35,53 +38,91 @@ public class SignUpPresenter implements SignUpInterface.presenter {
         this.mTaskManager = new SignUpTaskManager(mConetxt,this);
     }
 
-
+    /**
+     * set the erroe message to the view when the error happen
+     * @param errorMessage
+     */
     @Override
     public void setEmailError(String errorMessage){
         mSignUpActivity.setEmailError(errorMessage);
     }
 
+
+    /**
+     * set password erroemessage to the view
+     * @param errorMessage
+     */
     @Override
     public void setPasswordError(String errorMessage){
         mSignUpActivity.setPasswordError(errorMessage);
     }
 
+    /**
+     * set confirm password error to the veiw
+     * @param errorMessage
+     */
     @Override
     public void setConfirmPasswordError(String errorMessage){
         mSignUpActivity.setConfirmPasswordError(errorMessage);
     }
 
+    /**
+     * request the focus to the error view
+     */
     @Override
     public void focusVies() {
         mSignUpActivity.focusView();
     }
 
+    /**
+     * update the UI base on the current user
+     * @param user
+     */
     @Override
     public void updateUI(FirebaseUser user) {
         mSignUpActivity.updateUI(user);
     }
 
+    /**
+     * reset the view error message
+     */
     @Override
     public void restError() {
         mSignUpActivity.restError();
     }
 
+    /**
+     * pos the login detail to the model and attempt sign up an new account
+     * @param email
+     * @param password
+     * @param confirmPassword
+     */
     @Override
     public void attemptCreateAccount(String email, String password, String confirmPassword) {
         restError();
         mTaskManager.attemptCreateAccount(email,password,confirmPassword);
     }
 
+    /**
+     * feedback the error message when sign up fail
+     * @param errorMessage
+     */
     @Override
     public void showSignUpError(String errorMessage) {
         mSignUpActivity.showSignUpError(errorMessage);
     }
 
+    /**
+     * display the progress bar
+     */
     @Override
     public void showProgressBar() {
         mSignUpActivity.showProgressBar();
     }
 
+    /**
+     * dispay the timeout dialog to feedback the user when it fail to connect with the server
+     */
     @Override
     public void showTimeoutDialog() {
         mSignUpActivity.showTimeoutDialog();

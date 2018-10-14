@@ -8,6 +8,9 @@ package com.sep.UniTrips.model.ImportCalendar;
 
 import java.util.ArrayList;
 
+/**
+ * this is the calendar model java class whcih allow to convert the json format timetable data to an calendar object
+ */
 public class Calendar {
 
     private ArrayList<Course> mCourses;

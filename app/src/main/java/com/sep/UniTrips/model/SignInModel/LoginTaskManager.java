@@ -31,6 +31,9 @@ import com.sep.UniTrips.R;
 import com.sep.UniTrips.presenter.LoginPresenter;
 import com.sep.UniTrips.view.SignInActivity;
 
+/**
+ * this is the login task manager which will provide the login function and for the wiew
+ */
 public class LoginTaskManager {
 
     private FirebaseAuth mAuth;
@@ -95,6 +98,11 @@ public class LoginTaskManager {
         }
     }
 
+    /**
+     * sign in the user base on the given email and password and return the sign in result if any error happen
+     * @param email
+     * @param password
+     */
     private void signIn(String email, String password) {
 
         mAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {

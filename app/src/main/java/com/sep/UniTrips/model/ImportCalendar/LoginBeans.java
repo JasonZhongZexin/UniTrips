@@ -14,12 +14,16 @@ package com.sep.UniTrips.model.ImportCalendar;
 
 import com.google.gson.annotations.SerializedName;
 
+/**
+ * this is the login bean of the uts server response body. which allow to conver the json format data to an object
+ */
 public class LoginBeans {
 
     @SerializedName("success")
     private String mSuccess;
     @SerializedName("token")
     private String mToken;
+
 
     public void setSuccess(String mSuccess) {
         this.mSuccess = mSuccess;

@@ -14,6 +14,9 @@
 package com.sep.UniTrips.model.ImportCalendar;
 
 
+/**
+ * this is the course java node of the calendar. which can convert the uts calendar json data format to the objects
+ */
 public class Course {
 
     private String mSubject_description;
@@ -29,6 +32,18 @@ public class Course {
     public Course() {
     }
 
+    /**
+     * this is the constact mehtod which will initial the field
+     * @param mSubject_description
+     * @param mSubject_code
+     * @param mActivity_group_code
+     * @param mActivity_code
+     * @param mDay_of_week
+     * @param mStart_time
+     * @param mLocation
+     * @param mWeek_pattern
+     * @param mDuration
+     */
     public Course(String mSubject_description, String mSubject_code, String mActivity_group_code, String mActivity_code, String mDay_of_week, String mStart_time, String mLocation, String mWeek_pattern, String mDuration) {
         this.mSubject_description = mSubject_description;
         this.mSubject_code = mSubject_code;

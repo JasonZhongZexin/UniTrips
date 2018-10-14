@@ -11,6 +11,9 @@ import android.os.Bundle;
 
 import com.sep.UniTrips.R;
 
+/**
+ * This is the FQA class which will display the FQA and the contact method of hte team.
+ */
 public class FAQ_Activity extends AppCompatActivity {
 
     @Override

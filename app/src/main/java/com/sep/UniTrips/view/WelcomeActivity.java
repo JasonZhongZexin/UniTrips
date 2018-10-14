@@ -47,6 +47,7 @@ public class WelcomeActivity extends AppCompatActivity {
             }
         });
 
+        //sign up button OnClick Listener
         mSignUpBtn = (Button) findViewById(R.id.signUpBtn);
         mSignUpBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -65,7 +66,11 @@ public class WelcomeActivity extends AppCompatActivity {
         updateUI(currentUser);
     }
 
-    //UpdateUI according to the current user
+    /**
+     * Update ui according to the current login user
+     * display the main activity if the current user is not null
+     * @param currentUser
+     */
     private void updateUI(FirebaseUser currentUser){
         //check if user is signed in (non-null)
         if(currentUser!=null){

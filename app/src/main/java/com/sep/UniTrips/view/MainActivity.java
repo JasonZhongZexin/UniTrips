@@ -47,15 +47,18 @@ import com.sep.UniTrips.model.UserSetting.UserSettingTaskManager;
 
 import java.util.List;
 
+/**
+ * This is the main activity of the application. It contains the home fragment and the setting fragment
+ */
 public class MainActivity extends AppCompatActivity {
 
     private TextView mTextMessage;
     //    private FloatingActionButton mAddEventButton;
-    // 交通方式
+    //preferred transport
     private String userTransport = null;
-    // 当前位置
+    // user's current location
     private Location location = null;
-    // 到达路径
+    // direction path
     private List<double[]> coords_double = null;
 
     private LocationManager locationManager = null;
@@ -64,6 +67,7 @@ public class MainActivity extends AppCompatActivity {
     private DatabaseReference mDatabase;
     private UserSettingTaskManager mTaskManager;
 
+    //this is the user location change listener
     LocationListener mListener = new LocationListener() {
         @Override
         public void onStatusChanged(String provider, int status, Bundle extras) {}
@@ -76,12 +80,15 @@ public class MainActivity extends AppCompatActivity {
 
         @Override
         public void onLocationChanged(Location location) {
-            location.getAccuracy();//精确度
+            location.getAccuracy();
             setLocation( location );
         }
     };
 
 
+    /**
+     * initial the bottom navigation view
+     */
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
 
@@ -138,7 +145,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     /**
-     * 检查获取地理位置的权限
+     * checking for hte location permission
      */
     public void checkLocationPermission () {
         // check permission
@@ -170,7 +177,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     /**
-     * 获取GPS实时地理位置
+     * getting the GPS location detail
      * @param context
      */
     public void getLocation (Context context) {

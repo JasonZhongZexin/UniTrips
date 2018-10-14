@@ -13,6 +13,7 @@ import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
@@ -27,6 +28,11 @@ public class UserSettingTaskManager {
     private FirebaseAuth mAuth;
     private DatabaseReference mDatabase;
 
+    /**
+     * this is the user setting task manager  which will get the user request from the model and process the request to the view by presenter.
+     * @param presenter
+     * @param context
+     */
     public UserSettingTaskManager(UserSettingPresenter presenter, Context context) {
         mPresenter = presenter;
         mContext = context;
@@ -34,10 +40,29 @@ public class UserSettingTaskManager {
         mDatabase = FirebaseDatabase.getInstance().getReference();
     }
 
+    /**
+     * this method will get the user profile form the firebase database and initial the view
+     */
     public void getUserProfile() {
         FirebaseUser currentUser = mAuth.getCurrentUser();
         DatabaseReference ref = mDatabase.child("users").child(currentUser.getUid()).child("User Profile");
+        ref.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                mPresenter.initialView(dataSnapshot.getValue(UserProfile.class));
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
     }
+
+    /**
+     * this mehod will allow user to set his own notification, arrival time and preferred transport.
+     * @param userProfile
+     */
 
     public void setUserProfile(UserProfile userProfile){
         FirebaseUser currentUser = mAuth.getCurrentUser();

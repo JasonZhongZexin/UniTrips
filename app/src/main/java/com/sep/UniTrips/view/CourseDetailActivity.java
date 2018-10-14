@@ -13,6 +13,9 @@ import android.widget.TextView;
 import com.sep.UniTrips.R;
 import com.sep.UniTrips.presenter.CourseDetailPresenter;
 
+/**
+ * This is the course detail activity, it will display the detail of the choosing course.
+ */
 public class CourseDetailActivity extends AppCompatActivity {
 
     private CourseDetailPresenter mCourseDetailPresent;

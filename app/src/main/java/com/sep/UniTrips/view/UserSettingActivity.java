@@ -24,6 +24,9 @@ import com.sep.UniTrips.model.UserSetting.UserSettingInterface;
 import com.sep.UniTrips.presenter.SignUpPresenter;
 import com.sep.UniTrips.presenter.UserSettingPresenter;
 
+/**
+ * This is the user setting activity class, it will allow the user to set their own  preferred setting
+ */
 public class UserSettingActivity extends AppCompatActivity implements UserSettingInterface.view {
 
     private Spinner mTranportSettingSpinner;
@@ -45,7 +48,9 @@ public class UserSettingActivity extends AppCompatActivity implements UserSettin
         mArrivalTimeHSpinner = findViewById(R.id.arrival_Time_hours_spinner);
         mArrivalTimeMSpinner = findViewById(R.id.arrival_time_min_spinner);
         mSaveBtn = findViewById(R.id.saveEvent_btn);
+        //call the user profile from the firebase database
         mPresenter.getUserProfile();
+        //save button listener
         mSaveBtn.setOnClickListener(new View.OnClickListener()  {
             @Override
             public void onClick(View v) throws NumberFormatException{
@@ -57,6 +62,7 @@ public class UserSettingActivity extends AppCompatActivity implements UserSettin
                             Integer.parseInt(mArrivalTimeMSpinner.getSelectedItem().toString()));
                     mPresenter.setUserProfile(newUserProfiel);
                 }catch(NumberFormatException e) {
+                    //catch the number format exception and feedback user
                     Toast.makeText(getApplicationContext(),getString(R.string.update_fail),Toast.LENGTH_LONG).show();
                     e.printStackTrace();
                     throw(e);
@@ -66,6 +72,10 @@ public class UserSettingActivity extends AppCompatActivity implements UserSettin
     }
 
 
+    /**
+     * This method will iniitial the user setting view base on the user profile
+     * @param userProfile
+     */
     @Override
     public void initialView(UserProfile userProfile) {
         if(userProfile!=null) {
@@ -94,6 +104,10 @@ public class UserSettingActivity extends AppCompatActivity implements UserSettin
         }
     }
 
+    /**
+     * Update the UI base on the user setting result. if save data false, feedback the user else launch the main activity
+     * @param isSuccess
+     */
     @Override
     public void updateView(Boolean isSuccess) {
         if(isSuccess){

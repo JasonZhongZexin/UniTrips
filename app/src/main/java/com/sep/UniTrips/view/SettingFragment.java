@@ -27,6 +27,9 @@ import android.widget.TextView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.sep.UniTrips.R;
 
+/**
+ * this is the setting fragment whcih allow user to set the preference transport and import an new calendar from uts mycalendar server
+ */
 public class SettingFragment extends Fragment {
 
     private TextView mUserPreferenceTv;
@@ -63,9 +66,10 @@ public class SettingFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getActivity(),UserSettingActivity.class);
-                startActivityForResult(intent, 0); // 此处设置了用于返回参数的intent
+                startActivityForResult(intent, 0);
             }
         });
+        //set the FQA view
         mFQATv = mView.findViewById(R.id.FQA_textView);
         mFQATv.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -108,8 +112,9 @@ public class SettingFragment extends Fragment {
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if(requestCode == 0){
-            if(resultCode == 1) { // 获取用户的transportation
-                userTransport = data.getStringExtra("userPrefernceTransport");
+            if(resultCode == 1) {
+                //getting the user preferencrce  userPrefernceç
+                userTransport = data.getStringExtra("userPrefernceç");
                 ((MainActivity) getActivity()).setUserTransport(userTransport);
             }
         }

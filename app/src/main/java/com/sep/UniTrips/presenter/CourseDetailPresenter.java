@@ -29,6 +29,8 @@ public class CourseDetailPresenter implements CourseDetailActivityInterface.pres
         mCourseDetailView = courseDetailActivity;
     }
 
+
+
     @Override
     public void showCourseDetail(){
         String subject_description = mIntent.getStringExtra(HomeFragmentPresenter.SUBJECT_DESCRIPTION);

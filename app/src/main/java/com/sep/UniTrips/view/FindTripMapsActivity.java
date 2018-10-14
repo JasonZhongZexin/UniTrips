@@ -17,6 +17,9 @@ import com.sep.UniTrips.presenter.Records;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * this class will draw the router from the user' location to the closest station.
+ */
 public class FindTripMapsActivity extends FragmentActivity implements OnMapReadyCallback {
 
     private GoogleMap mMap;
@@ -58,7 +61,7 @@ public class FindTripMapsActivity extends FragmentActivity implements OnMapReady
         //LatLng sydney = new LatLng(-33.9661,151.10307);
 
 
-        // 绘制路线图
+        // draw the router view
         PolylineOptions lineOptions = new PolylineOptions();
         List<LatLng> positions = new ArrayList<LatLng>();
         for (int i = 0; i < coords.size(); i++) {
@@ -68,7 +71,7 @@ public class FindTripMapsActivity extends FragmentActivity implements OnMapReady
             //System.out.println(position.toString());
             positions.add(position);
         }
-        // 放大以及定位到起点
+        // zoom in the map view
         float maxZoom = 16.0f;
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(positions.get(0), maxZoom));
 

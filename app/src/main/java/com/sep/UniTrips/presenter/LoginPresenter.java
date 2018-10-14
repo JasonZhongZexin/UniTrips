@@ -20,6 +20,9 @@ import com.sep.UniTrips.model.SignInModel.LoginInterface;
 import com.sep.UniTrips.model.SignInModel.LoginTaskManager;
 import com.sep.UniTrips.view.SignInActivity;
 
+/**
+ * this is the login listener which asllow user to login to the system
+ */
 public class LoginPresenter implements LoginInterface.presenter{
 
     private SignInActivity mSignInActivity;
@@ -32,37 +35,61 @@ public class LoginPresenter implements LoginInterface.presenter{
         this.mTaskManager = new LoginTaskManager(mContext,this);
     }
 
-
+    /**
+     * reset the error view.
+     */
     @Override
     public void restError() {
         mSignInActivity.restError();
     }
 
+    /**
+     * set the error message to the view when a error was happend
+     * @param errorMessage
+     */
     @Override
     public void setEmailError(String errorMessage) {
         mSignInActivity.setEmailError(errorMessage);
     }
 
+    /**
+     * set the error message to the view when a error was happend
+     * @param errorMessage
+     */
     @Override
     public void setPasswordError(String errorMessage) {
         mSignInActivity.setPasswordError(errorMessage);
     }
 
+    /**
+     * request to focus the view
+     */
     @Override
     public void focusView() {
         mSignInActivity.focusView();
     }
 
+    /**
+     * update ui base on the current user
+     * @param user
+     */
     @Override
     public void updateUI(FirebaseUser user) {
         mSignInActivity.updateUI(user);
     }
 
+    /**
+     * attempt login the suer with the input email and password
+     */
     @Override
     public void attemptLogin(String email, String password) {
         mTaskManager.attemptLogin(email,password);
     }
 
+    /**
+     * display the sign in error for the user
+     * @param errorMessage
+     */
     @Override
     public void showSignInError(String errorMessage) {
         mSignInActivity.showSignInError(errorMessage);

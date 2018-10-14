@@ -38,6 +38,9 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Locale;
 
+/**
+ * This is the view of the add event class. it allows user to add their own event and saved it into database
+ */
 public class AddEventActivity extends AppCompatActivity {
 
     private EditText mTitleEt;

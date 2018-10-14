@@ -69,7 +69,6 @@ public class SignUpActivity extends AppCompatActivity  implements SignUpInterfac
                 startActivity(getParentActivityIntent());
             }
         });
-
         mCreateAccountBtn = findViewById(R.id.sign_up_button);
         mCreateAccountBtn.setOnClickListener(new OnClickListener() {
             @Override
@@ -82,24 +81,40 @@ public class SignUpActivity extends AppCompatActivity  implements SignUpInterfac
         });
     }
 
+    /**
+     * set the error message and focus the error view
+     * @param errorMessage
+     */
     @Override
     public void setEmailError(String errorMessage) {
         mSignUpEmailEt.setError(errorMessage);
         mFocusView = mSignUpEmailEt;
     }
 
+    /**
+     * set the error message and focus the error view
+     * @param errorMessage
+     */
     @Override
     public void setPasswordError(String errorMessage) {
         mSignUpPasswordEt.setError(errorMessage);
         mFocusView = mSignUpPasswordEt;
     }
 
+    /**
+     * set the error message and focus the error view
+     * @param errorMessage
+     */
     @Override
     public void setConfirmPasswordError(String errorMessage) {
         mConfirmPasswordEt.setError(errorMessage);
         mFocusView = mConfirmPasswordEt;
     }
 
+    /**
+     * focus the error view if the error view is not null
+     *
+     */
     @Override
     public void focusView(){
         if(mFocusView!=null){
@@ -107,6 +122,9 @@ public class SignUpActivity extends AppCompatActivity  implements SignUpInterfac
         }
     }
 
+    /**
+     * reset all errorMessage to null and disable the focus view
+     */
     @Override
     public void restError() {
         mSignUpEmailEt.setError(null);
@@ -114,8 +132,12 @@ public class SignUpActivity extends AppCompatActivity  implements SignUpInterfac
         mConfirmPasswordEt.setError(null);
     }
 
+    /**
+     * UpdateUI according to the current user, launch the main activity if the user is login successful and
+     * current user is not null
+     * @param currentUser
+     */
     @Override
-    //UpdateUI according to the current user
     public void updateUI(FirebaseUser currentUser){
         //check if user is signed in (non-null)
         if(currentUser!=null){
@@ -126,13 +148,19 @@ public class SignUpActivity extends AppCompatActivity  implements SignUpInterfac
         }
     }
 
+    /**
+     * display the show progress bar
+     */
     @Override
     public void showProgressBar() {
         mSignUpFormView.setVisibility(View.GONE);
         mProgressBar.setVisibility(View.VISIBLE);
     }
 
-
+    /**
+     * dispay the error message when sign up fail
+     * @param errorMessage
+     */
     @Override
     public void showSignUpError(String errorMessage){
 //        new AlertDialog.Builder(this).setTitle("Error")
@@ -149,6 +177,9 @@ public class SignUpActivity extends AppCompatActivity  implements SignUpInterfac
         Toast.makeText(this,errorMessage,Toast.LENGTH_LONG).show();
     }
 
+    /**
+     * feedback error message when connection timeout
+     */
     @Override
     public void showTimeoutDialog(){
         new AlertDialog.Builder(this).setTitle(R.string.title_timeout)

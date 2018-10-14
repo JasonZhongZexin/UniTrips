@@ -25,6 +25,10 @@ import com.sep.UniTrips.view.ImportCalendarActivity;
 
 import java.util.ArrayList;
 
+/**
+ * this is the import calendar presenter view which will allow user to import the calendar to the web
+ * server
+ * */
 public class ImportCalendarPresneter implements ImportCalendarInterface.Presenter {
 
     private ImportCalendarTaskManager mImportCalendarTaskManager;
@@ -42,31 +46,52 @@ public class ImportCalendarPresneter implements ImportCalendarInterface.Presente
         mImportCalendarTaskManager.attemptGetCalendar(id,password,year);
     }
 
+    /**
+     * diaplay the error message int he toast
+     * @param message
+     */
     @Override
     public void showToast(String message) {
         mImportCalendarView.showToast(message);
     }
 
+    /**
+     * reset the view error to null
+     */
     @Override
     public void resetError() {
         mImportCalendarView.resetError();
     }
 
+    /**
+     * set error message to the password view
+     * @param errorMessage
+     */
     @Override
     public void setPasswordError(String errorMessage) {
         mImportCalendarView.setPasswordError(errorMessage);
     }
 
+    /**
+     * sert error message to the id
+     * @param errorMessage
+     */
     @Override
     public void setIDError(String errorMessage) {
         mImportCalendarView.setIDError(errorMessage);
     }
 
+    /**
+     * requet to focus the view
+     */
     @Override
     public void focusView() {
         mImportCalendarView.focusView();
     }
 
+    /**
+     * update ui base on the current user
+     */
     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
     @Override
     public void updateUI() {

@@ -133,7 +133,6 @@ public class FindPathToSchool {
             e.printStackTrace();
 
         }
-        System.out.println("[Debug in FindPathToSchool.findTrips]: "+ "*************" + line + "*********************");
 
         return line;
     }

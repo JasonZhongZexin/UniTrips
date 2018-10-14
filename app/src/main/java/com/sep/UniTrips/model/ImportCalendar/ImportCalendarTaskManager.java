@@ -46,6 +46,9 @@ import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 
+/**
+ * this is the important calendar class which will connect to UTS web timetable server and load calendar data from the server
+ */
 public class ImportCalendarTaskManager {
     private Context mContext;
     private String mStudentId;

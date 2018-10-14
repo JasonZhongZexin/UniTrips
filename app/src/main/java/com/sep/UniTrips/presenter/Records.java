@@ -4,8 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Records {
-    public String station_info; // 车站相关信息
-    public List<double[]> coords_double; // 到达车站的坐标路径
+    public String station_info; // station jnformatiuon
+    public List<double[]> coords_double; // path to the station
 
 
     public Records(String station_info, List<double[]> coords_double) {

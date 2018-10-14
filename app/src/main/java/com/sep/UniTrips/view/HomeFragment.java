@@ -48,7 +48,9 @@ import com.sep.UniTrips.R;
 import java.util.List;
 import java.util.Map;
 
-
+/**
+ * this is the home fragment of the main activity. it will display the user weekly calendar view and will also display the public transport detail for the user.
+ */
 public class HomeFragment extends Fragment implements HomeFragmentInterface.View {
     // this is used for update trip information in a new thread
     private static final int UPDATE_TRIP_INFORMATION = 1;
@@ -63,7 +65,7 @@ public class HomeFragment extends Fragment implements HomeFragmentInterface.View
     private HomeFragmentPresenter mPresenter;
 
     public HomeFragment() {
-        // Required empty public constructor
+
         mPresenter = new HomeFragmentPresenter(getActivity(),this);
     }
 
@@ -140,12 +142,22 @@ public class HomeFragment extends Fragment implements HomeFragmentInterface.View
         mPresenter.showCourseData();
     }
 
+    /**
+     * THis method will display user's weekly course detail in the calendar view
+     * @param viewTag
+     * @param color
+     */
     @Override
     public void showCourseTextView(String viewTag, int color) {
         TextView textView = mView.findViewWithTag(viewTag);
         textView.setBackgroundColor(color);
     }
 
+    /**
+     * this method will set the subject description in the calendar view
+     * @param viewSubjectDescriptionTag
+     * @param subject_description
+     */
     @Override
     public void setSubjectDescription(String viewSubjectDescriptionTag, String subject_description) {
         TextView textView_title = mView.findViewWithTag(viewSubjectDescriptionTag);
@@ -154,6 +166,11 @@ public class HomeFragment extends Fragment implements HomeFragmentInterface.View
         textView_title.setTypeface(null, Typeface.BOLD);
     }
 
+    /**
+     * This mehtod will set the location of hte event in the calendar view
+     * @param locationViewTag
+     * @param location
+     */
     @Override
     public void setLocation(String locationViewTag, String location) {
         TextView textView_location = mView.findViewWithTag(locationViewTag);
@@ -162,6 +179,11 @@ public class HomeFragment extends Fragment implements HomeFragmentInterface.View
         textView_location.setTypeface(null, Typeface.BOLD);
     }
 
+    /**
+     * THis is the onclick listener of the calendar view. it  allows user to view the detail of the event by click the view of the event
+     * @param viewTag
+     * @param course
+     */
     @Override
     public void setOnClickListener(String viewTag, final Course course) {
         TextView textView = mView.findViewWithTag(viewTag);

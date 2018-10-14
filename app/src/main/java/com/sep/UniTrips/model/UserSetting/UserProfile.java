@@ -6,6 +6,9 @@
 
 package com.sep.UniTrips.model.UserSetting;
 
+/**
+ * this is the user profile java node
+ */
 public class UserProfile {
 
     private String mPreferredTransport;
@@ -22,22 +25,39 @@ public class UserProfile {
         this.mPreferredTransport = "";
     }
 
+    /**
+     * this is the method of hte noptification time
+     * @param notificationTimeM
+     */
     public void setNotificationTimeM(int notificationTimeM) {
         mNotificationTimeM = notificationTimeM;
     }
 
+    /**
+     * this is the setting method of the arrival time
+     * @param arrivalTimeM
+     */
     public void setArrivalTimeM(int arrivalTimeM) {
         mArrivalTimeM = arrivalTimeM;
     }
 
+    /**
+     * this is the notification getter method
+     * @return
+     */
     public int getNotificationTimeM() {
 
         return mNotificationTimeM;
     }
 
+    /**
+     * this is the arrivcal tiome getter method
+     * @return
+     */
     public int getArrivalTimeM() {
         return mArrivalTimeM;
     }
+
 
     public UserProfile(String preferredTransport, int notificationTimeH, int notificationTimeM, int arrivalTimeH, int arrivalTimeM) {
         this.mPreferredTransport = preferredTransport;
@@ -48,23 +68,42 @@ public class UserProfile {
 
     }
 
+    /**
+     * this is nthe setperferred transoprt mehod
+     * @param preferredTransport
+     */
     public void setPreferredTransport(String preferredTransport) {
         this.mPreferredTransport = preferredTransport;
     }
 
+    /**
+     * this is th e set notification setter
+     * @param notificationTimeH
+     */
     public void setNotificationTimeH(int notificationTimeH) {
         this.mNotificationTimeH = notificationTimeH;
     }
 
+    /**
+     * this is the arrival setting setter
+     */
     public void setArrivalTimeH(int arrtivalTime) {
         this.mArrivalTimeH = arrtivalTime;
     }
 
+    /**
+     * this is th e getter of the mPreferredTransport
+     *
+     */
     public String getPreferredTransport() {
 
         return mPreferredTransport;
     }
 
+    /**
+     *  thi is the notification hours getter
+     * @return
+     */
     public int getNotificationTimeH() {
         return mNotificationTimeH;
     }

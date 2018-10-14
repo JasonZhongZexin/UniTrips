@@ -6,6 +6,9 @@
 
 package com.sep.UniTrips.model.AddEventModel;
 
+/**
+ * THIS IS the event java bean which allow user to Package the event detail into an object.
+ */
 public class Event {
 
     private String mTitle;

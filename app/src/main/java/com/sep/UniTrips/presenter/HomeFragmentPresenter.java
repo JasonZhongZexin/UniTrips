@@ -21,6 +21,9 @@ import com.sep.UniTrips.view.HomeFragment;
 import java.util.ArrayList;
 import java.util.Random;
 
+/**
+ * this is the home fragment which will called data from the web server and display it in the calendar view
+ */
 public class HomeFragmentPresenter implements HomeFragmentInterface.Presenter{
 
     private HomeFragment mHomeFragmentView;
@@ -42,6 +45,9 @@ public class HomeFragmentPresenter implements HomeFragmentInterface.Presenter{
         mTaskManager = new HomeFragmentTaskManager(this,mContext);
     }
 
+    /**
+     * get course data and dispaly the weekly data in the week veiw
+     */
     @Override
     public void showCourseData() {
         mTaskManager.readCalendars(new HomeFragmentInterface.CalendarDataCallBack() {
@@ -80,6 +86,12 @@ public class HomeFragmentPresenter implements HomeFragmentInterface.Presenter{
             }
         });
     }
+
+    /**
+     * diosplay the course detail in the course detail view
+     * @param course
+     * @param context
+     */
     @Override
     public void displayCourseDetail(Course course,Context context) {
         Intent intent = new Intent(context, CourseDetailActivity.class);
