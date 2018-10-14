@@ -86,41 +86,43 @@ public class ResetPasswordActivity extends AppCompatActivity implements ResetPas
     public void updateUI(Boolean result) {
         if(result==true){
             //reset password link send successful
-            AlertDialog.Builder mBuilder = new AlertDialog.Builder(this);
-            final View dialogView = getLayoutInflater().inflate(R.layout.dialog_email_success,null);
-            Button buttonOk = dialogView.findViewById(R.id.dialog_OkBtn);
-            buttonOk.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    mDialog.dismiss();
-                }
-            });
-            mBuilder.setView(dialogView);
-            mDialog = mBuilder.create();
-            mDialog.show();
+//            AlertDialog.Builder mBuilder = new AlertDialog.Builder(this);
+//            final View dialogView = getLayoutInflater().inflate(R.layout.dialog_email_success,null);
+//            Button buttonOk = dialogView.findViewById(R.id.dialog_OkBtn);
+//            buttonOk.setOnClickListener(new View.OnClickListener() {
+//                @Override
+//                public void onClick(View v) {
+//                    mDialog.dismiss();
+//                }
+//            });
+//            mBuilder.setView(dialogView);
+//            mDialog = mBuilder.create();
+//            mDialog.show();
+            Toast.makeText(this,getString(R.string.resetPasswordSend),Toast.LENGTH_LONG).show();
         } else{
             //reset password link send successful
-            AlertDialog.Builder mBuilder = new AlertDialog.Builder(this);
-            final View dialogView = getLayoutInflater().inflate(R.layout.dialog_email_wrong,null);
-            Button tryAgainBtn = dialogView.findViewById(R.id.dialog_TryAgain);
-            Button homeBtn = dialogView.findViewById(R.id.dialog_homeBtn);
-            tryAgainBtn.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    mDialog.dismiss();
-                }
-            });
-            homeBtn.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    FirebaseAuth.getInstance().signOut();
-                    Intent intent = new Intent(getApplication(),SignInActivity.class);
-                    startActivity(intent);
-                }
-            });
-            mBuilder.setView(dialogView);
-            mDialog = mBuilder.create();
-            mDialog.show();
+//            AlertDialog.Builder mBuilder = new AlertDialog.Builder(this);
+//            final View dialogView = getLayoutInflater().inflate(R.layout.dialog_email_wrong,null);
+//            Button tryAgainBtn = dialogView.findViewById(R.id.dialog_TryAgain);
+//            Button homeBtn = dialogView.findViewById(R.id.dialog_homeBtn);
+//            tryAgainBtn.setOnClickListener(new View.OnClickListener() {
+//                @Override
+//                public void onClick(View v) {
+//                    mDialog.dismiss();
+//                }
+//            });
+//            homeBtn.setOnClickListener(new View.OnClickListener() {
+//                @Override
+//                public void onClick(View v) {
+//                    FirebaseAuth.getInstance().signOut();
+//                    Intent intent = new Intent(getApplication(),SignInActivity.class);
+//                    startActivity(intent);
+//                }
+//            });
+//            mBuilder.setView(dialogView);
+//            mDialog = mBuilder.create();
+//            mDialog.show();
+            Toast.makeText(this,"Fail",Toast.LENGTH_SHORT).show();
         }
     }
 }

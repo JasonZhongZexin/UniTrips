@@ -135,17 +135,18 @@ public class SignUpActivity extends AppCompatActivity  implements SignUpInterfac
 
     @Override
     public void showSignUpError(String errorMessage){
-        new AlertDialog.Builder(this).setTitle("Error")
-                .setMessage(errorMessage)
-                .setIcon(R.drawable.ic_error_outline_black_30dp)
-                .setPositiveButton(R.string.title_tryAgain, new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        dialog.dismiss();
-                        mSignUpFormView.setVisibility(View.VISIBLE);
-                        mProgressBar.setVisibility(View.GONE);
-                    }
-                }).show();
+//        new AlertDialog.Builder(this).setTitle("Error")
+//                .setMessage(errorMessage)
+//                .setIcon(R.drawable.ic_error_outline_black_30dp)
+//                .setPositiveButton(R.string.title_tryAgain, new DialogInterface.OnClickListener() {
+//                    @Override
+//                    public void onClick(DialogInterface dialog, int which) {
+//                        dialog.dismiss();
+//                        mSignUpFormView.setVisibility(View.VISIBLE);
+//                        mProgressBar.setVisibility(View.GONE);
+//                    }
+//                }).show();
+        Toast.makeText(this,errorMessage,Toast.LENGTH_LONG).show();
     }
 
     @Override

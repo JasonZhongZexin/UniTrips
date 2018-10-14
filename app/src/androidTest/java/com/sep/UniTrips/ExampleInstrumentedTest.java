@@ -145,7 +145,7 @@ public class ExampleInstrumentedTest extends TestCase {
 
     /*Test for inputcheck, errorhint and page jump*/
     @Test
-    public void test002_LoginAndForget() throws UiObjectNotFoundException {
+    public void test002_LoginAndForget() throws UiObjectNotFoundException, InterruptedException {
         Intent myIntent = mContext.getPackageManager().getLaunchIntentForPackage(APP);  //启动app
         mContext.startActivity(myIntent);
         mUIDevice.waitForWindowUpdate(APP, 5 * 1000);
@@ -167,6 +167,7 @@ public class ExampleInstrumentedTest extends TestCase {
         Assert.assertNotNull("Not give hint to invalid email address", emailHintf);
 
         emailf.setText("SS@S.S");
+//        UiObject subBtn = mUIDevice.findObject(new UiSelector().text("CANCEL"));
         buttonf.click();
         long startTimeMillis = SystemClock.uptimeMillis();
         boolean isSuccessfulCatchToast;
@@ -179,7 +180,7 @@ public class ExampleInstrumentedTest extends TestCase {
                 break;
             }
             if (toastOccurTime > startTimeMillis) {
-                isSuccessfulCatchToast = "fail".equals(toastMessage);
+                isSuccessfulCatchToast = "Fail".equals(toastMessage);
                 break;
             }
         }
@@ -197,7 +198,7 @@ public class ExampleInstrumentedTest extends TestCase {
                 break;
             }
             if (toastOccurTime > startTimeMillis) {
-                isSuccessfulCatchToast = "email send".equals(toastMessage);
+                isSuccessfulCatchToast = "A reset password link has been sent to your email address! Please check your email!".equals(toastMessage);
                 break;
             }
         }

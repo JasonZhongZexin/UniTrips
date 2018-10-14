@@ -236,6 +236,8 @@ public class FindPathToSchool {
                 String departsTime = departsLeg.getJSONObject("origin").getString("departureTimePlanned");
                 String [] departMinSec = departsTime.split("T")[1].split(":");
                 int departMinSec_syd = Integer.parseInt(departMinSec[0]) + 11;
+                if(departMinSec_syd>=24)
+                    departMinSec_syd -=24;
                 String departMinSec_syds = Integer.toString(departMinSec_syd);
                 String departsTimeInfo = departMinSec_syds + ":" + departMinSec[1];
 
@@ -243,6 +245,8 @@ public class FindPathToSchool {
                 String arriveTime = arriveLeg.getJSONObject("destination").getString("arrivalTimeEstimated");
                 String [] arriveMinSec = arriveTime.split("T")[1].split(":");
                 int arriveMinSec_syd = Integer.parseInt(arriveMinSec[0]) + 11;
+                if(arriveMinSec_syd>=24)
+                    arriveMinSec_syd -= 24;
                 String arriveMinSec_syds = Integer.toString(arriveMinSec_syd);
                 String arriveTimeInfo = arriveMinSec_syds + ":" + arriveMinSec[1];
 
