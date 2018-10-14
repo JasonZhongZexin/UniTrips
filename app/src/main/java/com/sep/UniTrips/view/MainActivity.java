@@ -93,11 +93,6 @@ public class MainActivity extends AppCompatActivity {
                     FragmentTransaction homeFragmentTransaction = getSupportFragmentManager().beginTransaction();
                     homeFragmentTransaction.replace(R.id.fragment_container,homeFragment,"HomeFragment");
                     homeFragmentTransaction.commit();
-                    try {
-                        Thread.sleep(1000);
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
                     return true;
                 case R.id.navigation_dashboard:
                     mTextMessage.setText(R.string.title_dashboard);
