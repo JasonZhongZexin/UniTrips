@@ -8,10 +8,9 @@
     <uses-permission android:name="android.permission.READ_CONTACTS" />
     <uses-permission android:name="android.permission.ACCESS_GPS" />
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
-    <uses-permission android:name="android.permission.ACCESS_GPS"/>
-
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_GPS" />
 
     <application
         android:allowBackup="true"
@@ -47,7 +46,7 @@
         <activity android:name=".view.Database_tester" />
         <activity
             android:name=".view.ImportCalendarActivity"
-            android:parentActivityName=".view.MainActivity"></activity>
+            android:parentActivityName=".view.MainActivity" />
         >
         <activity android:name=".view.ResetPasswordActivity" />
         <activity android:name=".view.AddEventActivity" />
@@ -64,14 +63,15 @@
         -->
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="@string/google_maps_key"/>
+            android:value="@string/google_maps_key" />
 
         <activity
             android:name=".view.FindTripMapsActivity"
-            android:label="@string/title_activity_find_trip_maps"></activity>
+            android:label="@string/title_activity_find_trip_maps" />
         <activity
             android:name=".view.CourseDetailActivity"
-            android:label="@string/Course_Title"></activity>
+            android:label="@string/Course_Title" />
+        <activity android:name=".view.FAQ_Activity"></activity>
     </application>
 
 </manifest>

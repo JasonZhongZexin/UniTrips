@@ -12,14 +12,17 @@
     <string name="action_sign_in_short">Sign in</string>
     <string name="confirmedPassword">Confirm Password</string>
     <string name="title_email">Email</string>
-    <string name="createAccount">Create UniTripS \n account</string>
+    <string name="createAccount">Create Your UniTripS account</string>
     <string name="forgotPassword">Forgot your password?</string>
     <string name="title_activity_main">MainActivity</string>
+    <string name="action_Retry">Try Again</string>
     <string name="title_home">Home</string>
     <string name="title_dashboard">Dashboard</string>
     <string name="title_setting">setting</string>
     <string name="transport_setting">Transport Setting</string>
     <string name="import_calendar">Add calendar</string>
+    <string name="dialog_ok">OK</string>
+    <string name="action_back_home">Home</string>
     <string name="import_description">From UTS myTimetable</string>
     <string name="prompt_StudentId">Student ID </string>
     <string name="prompt_password">Password</string>
@@ -50,12 +53,13 @@
     <string name="user_preference">My preference</string>
     <string name="title_notificationTime_setting">Notification Time: </string>
     <string name="title_preferred_arrival_time">Arrival: </string>
+    <string name="hint_set_preference">Set your preference for transport and notification.</string>
     <string name="hint_notification_time_description">UniTrips will remind you before your schedule.</string>
     <string name="hint_arrival_time_description">UniTrips will provide a public transport time that matching your preferred arrival time before your schedule time.</string>
     <string name="title_timeout">Connection Timeout</string>
     <string name="hours">hrs</string>
     <string name="Course_Title">Course Detail</string>
-    <string name= "userSetting_success">Update user preference success !</string>
+    <string name="userSetting_success">Update user preference success !</string>
     <string name="title_settingFail">Update Fail</string>
     <string name="update_fail">Oops! Fail to update your setting. Please try again !</string>
 
@@ -144,5 +148,6 @@
     <string name="answer_one">You can reset your password in login page, there is a link to reset password page.When you submit the email you used to login, you will received an email which have a link to set the new password.</string>
     <string name="answer_two">When you changed your UTS timetable and you want to import the new one to view the transport information, you can just import the calendar again to cover the old calendar, the App will save the new calendar to database and show it on the homepage.</string>
     <string name="answer_three">Press the home button, the home page and the google map page will refresh, so that you can get the station and time you need.</string>
-    <string name="answer_four">Email:</string>
+    <string name="answer_four">Contact us via Email: sep.project.database@gmail.com</string>
+    <string name="title_FQA">FQA</string>
 </resources>

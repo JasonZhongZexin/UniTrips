@@ -12,6 +12,7 @@
 
 package com.sep.UniTrips.view;
 
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -20,6 +21,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.google.firebase.auth.FirebaseAuth;
 import com.sep.UniTrips.R;
 import com.sep.UniTrips.model.RestPassword.ResetPasswordInterface;
 import com.sep.UniTrips.presenter.ResetPasswordPresenter;
@@ -30,6 +32,7 @@ public class ResetPasswordActivity extends AppCompatActivity implements ResetPas
     private View mFocusView;
     private Button submitBtn;
     private Button cancelBtn;
+    private AlertDialog mDialog;
     private ResetPasswordPresenter mPresenter;
 
     @Override
@@ -83,10 +86,41 @@ public class ResetPasswordActivity extends AppCompatActivity implements ResetPas
     public void updateUI(Boolean result) {
         if(result==true){
             //reset password link send successful
-            Toast.makeText(this,"email send",Toast.LENGTH_LONG).show();
-        }else{
-            //fail to send the reset password link show error
-            Toast.makeText(this,"fail",Toast.LENGTH_LONG).show();
+            AlertDialog.Builder mBuilder = new AlertDialog.Builder(this);
+            final View dialogView = getLayoutInflater().inflate(R.layout.dialog_email_success,null);
+            Button buttonOk = dialogView.findViewById(R.id.dialog_OkBtn);
+            buttonOk.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    mDialog.dismiss();
+                }
+            });
+            mBuilder.setView(dialogView);
+            mDialog = mBuilder.create();
+            mDialog.show();
+        } else{
+            //reset password link send successful
+            AlertDialog.Builder mBuilder = new AlertDialog.Builder(this);
+            final View dialogView = getLayoutInflater().inflate(R.layout.dialog_email_wrong,null);
+            Button tryAgainBtn = dialogView.findViewById(R.id.dialog_TryAgain);
+            Button homeBtn = dialogView.findViewById(R.id.dialog_homeBtn);
+            tryAgainBtn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    mDialog.dismiss();
+                }
+            });
+            homeBtn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    FirebaseAuth.getInstance().signOut();
+                    Intent intent = new Intent(getApplication(),SignInActivity.class);
+                    startActivity(intent);
+                }
+            });
+            mBuilder.setView(dialogView);
+            mDialog = mBuilder.create();
+            mDialog.show();
         }
     }
 }

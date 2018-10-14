@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright (c) 2018. Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License. You may obtain a copy of the License at
+  ~      http://www.apache.org/licenses/LICENSE-2.0
+  ~  Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the specific language governing permissions an limitations under the License.
+  -->
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".view.FAQ_Activity"
+    android:orientation="vertical"
+    android:background="@color/textColorWhite">
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_margin="5dp"
+        android:textSize="32dp"
+        android:textStyle="bold"
+        android:textColor="@color/textBlack"
+        android:text="@string/title_FQA"/>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="3dp"
+                android:layout_marginBottom="5dp"
+                android:background="@color/black_overlay"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="left"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginBottom="5dp"
+                android:textSize="19dp"
+                android:textStyle="bold"
+                android:textColor="@color/ColorSecondaryBtn"
+                android:text="@string/question_one"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginBottom="5dp"
+                android:textSize="17dp"
+                android:id="@+id/answer_one"
+                android:text="@string/answer_one"/>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="3dp"
+                android:layout_marginBottom="5dp"
+                android:background="@color/black_overlay"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="left"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginBottom="5dp"
+                android:textSize="19dp"
+                android:textStyle="bold"
+                android:textColor="@color/ColorSecondaryBtn"
+                android:text="@string/question_two"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginBottom="5dp"
+                android:textSize="17dp"
+                android:id="@+id/answer_two"
+                android:text="@string/answer_two"/>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="3dp"
+                android:layout_marginBottom="5dp"
+                android:background="@color/black_overlay"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="left"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginBottom="5dp"
+                android:textSize="19dp"
+                android:textStyle="bold"
+                android:textColor="@color/ColorSecondaryBtn"
+                android:text="@string/question_three"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/answer_three"
+                android:layout_marginRight="20dp"
+                android:layout_marginBottom="5dp"
+                android:textSize="17dp"
+                android:id="@+id/answer_three"
+                android:layout_marginLeft="20dp"/>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="3dp"
+                android:layout_marginBottom="3dp"
+                android:background="@color/black_overlay"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="left"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginBottom="5dp"
+                android:textSize="19dp"
+                android:textStyle="bold"
+                android:textColor="@color/ColorSecondaryBtn"
+                android:text="@string/question_four"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/answer_four"
+                android:layout_marginRight="20dp"
+                android:layout_marginBottom="5dp"
+                android:textSize="17dp"
+                android:id="@+id/ContactUS"
+                android:layout_marginLeft="20dp"
+                android:paddingBottom="20dp"/>
+
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>

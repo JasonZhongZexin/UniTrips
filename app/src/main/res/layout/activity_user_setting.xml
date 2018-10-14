@@ -8,6 +8,26 @@
     tools:context=".view.UserSettingActivity"
     android:orientation="vertical"
     android:background="@color/colorPrimary">
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:text="@string/user_preference"
+        android:textSize="28dp"
+        android:textStyle="bold"
+        android:textColor="@color/textColorWhite"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:text="@string/hint_set_preference"
+        android:textSize="16dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginBottom="10dp"/>
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
