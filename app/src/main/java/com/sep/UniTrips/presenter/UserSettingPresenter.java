@@ -19,12 +19,12 @@ public class UserSettingPresenter implements UserSettingInterface.presenter{
     private UserSettingActivity mUserSettingActivity;
     private UserSettingTaskManager mTaskManager;
 
+
     public UserSettingPresenter(Context context,UserSettingActivity userSettingActivity) {
         this.mConetxt = context;
         this.mUserSettingActivity = userSettingActivity;
         mTaskManager = new UserSettingTaskManager(this,mConetxt);
     }
-
 
     @Override
     public void setUserProfile(UserProfile userProfile) {
@@ -42,6 +42,5 @@ public class UserSettingPresenter implements UserSettingInterface.presenter{
     }
 
     public void initialView(UserProfile userProfile){
-        mUserSettingActivity.initialView(userProfile);
-    }
+        mUserSettingActivity.initialView(userProfile);}
 }
